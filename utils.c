@@ -6,11 +6,12 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:54:33 by hchairi           #+#    #+#             */
-/*   Updated: 2023/06/22 15:55:40 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/06/27 15:41:06 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 void	ft_lstaddback(t_nodes *node, t_nodes *new)
 {
@@ -20,8 +21,6 @@ void	ft_lstaddback(t_nodes *node, t_nodes *new)
 		node = node->next;
 	node->next = new;
 }
-
-
 
 // char	*ft_strjoin(char *s1, char c)
 // {
@@ -93,3 +92,4 @@ void	ft_lstaddback(t_nodes *node, t_nodes *new)
 // 	char *s = "  1337 future is loading";
 // 	printf("%s\n", string(s));
 // }
+

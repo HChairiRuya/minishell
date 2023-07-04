@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:46:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/06/24 14:35:02 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/04 17:31:06 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,32 @@ void   single_quotes(char **s)
     (*s)++;
 }
 
+void    redirections(char **s)
+{
+    char    *valeur;
+    int len;
 
+    printf("redirection\n");
+    if (**s == '<' || **s == '>')
+    {
+        len = 0; 
+        while (**s && (**s == '<' || **s == '>'))
+        {
+            len++;
+            (*s)++;   
+        }
+        if (len)
+        {
+            valeur = ft_substr(*s - len, 0, len);
+            create_list(valeur, REDIRECT);
+        }
+    }
+}
+
+// void    syntax_err()
+// {
+    
+// }
 
 void    string(char **s)
 {
@@ -85,7 +110,7 @@ void    string(char **s)
     {
         printf("str : %s\n", *s - len);
         valeur = ft_substr(*s - len, 0, len);
-        printf("string %s\n", valeur);
+        // printf("string %s\n", valeur);
         create_list(valeur, STRING);
     }
 }
@@ -108,11 +133,13 @@ void    split_function()
             double_quotes(&s);
         else if (*s == '\'')
             single_quotes(&s);
+        else if (*s == '<' || *s == '>')
+            redirections(&s);
         else
             string(&s);
     }
     check_nodes();
+    chenge_type();
+    // test_expand();
     voir_nodes();
 }
-
-

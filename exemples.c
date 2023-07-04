@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:35:10 by hchairi           #+#    #+#             */
-/*   Updated: 2023/06/24 12:40:23 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/04 19:56:15 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    voir_nodes()
     head = g_all.head;
     while (head != NULL)
 	{
-		printf("valuer = %s, quotes %d\n", head->valeur, head->quotes);
+		printf("value = %s, quotes %d\n", head->valeur, head->quotes);
 		head = head->next;
 	}
     
@@ -55,6 +55,47 @@ void	check_nodes()
 			}			
 		}
 		// if (head->next)
+		head = head->next;
+	}
+}
+
+void	chenge_type()
+{
+	t_nodes *head;
+
+	head = g_all.head;
+	while (head != NULL)
+	{	
+		if (head->next && (!ft_strcmp(head->valeur, "|")))
+		{
+			printf("avant changement %d\n", head->type);
+			if (head->quotes != 0)
+			{
+				head->type = STRING;
+				printf("apres type  | %d\n", head->type);
+			}
+		}
+		if (head->next && (!ft_strcmp(head->valeur, "<") || !ft_strcmp(head->valeur, "<<") 
+			|| !ft_strcmp(head->valeur, ">") || !ft_strcmp(head->valeur, ">>")))
+		{
+			printf("avant change %d\n", head->type);
+			if (head->quotes != 0)
+			{
+				head->type = FILE;
+				printf("apres type < %d\n", head->type);
+			}
+		}
+		//  
+		if (head->next && (ft_strcmp(head->valeur, "<>| $") && ft_strcmp(head->valeur, "\'") &&  ft_strcmp(head->valeur, "\"") ))
+		{
+			printf("avant (type string) %d\n", head->type);
+			if (head->quotes != 0)
+			{
+				head->type = CMD;
+				printf("apres type cmd < %d\n", head->type);
+			}
+		}
+			
 		head = head->next;
 	}
 }
