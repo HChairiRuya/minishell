@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/04 22:02:51 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/07 21:46:19 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ typedef struct  s_nodes
     struct s_nodes *next;
 } t_nodes;
 
-typedef struct s_node 
+// env list
+typedef struct s_env
 {
     char*           s;
-    struct s_node* next;
-} t_node;
+    struct s_env* next;
+} t_env;
 
 
 // typedef struct s_cmd
@@ -68,20 +69,20 @@ typedef struct s_node
 t_all g_all;
 
 void    split_function();
-t_node	*lstnew(char *content);
+t_env	*lstnew(char *content);
 void	ft_lstaddback(t_nodes *node, t_nodes *new);
-void   creer_nodes(t_node **node, char **envr);
+void	save_env(t_env **node, char **envr);
 void    create_list(char *valeur, int type);
 void    voir_nodes();
 void	check_nodes();
 void	chenge_type();
-void	test_expand();
 
 // expand
 int	ft_strncmp(const char *str1, const char *str2, size_t n);
-char* get_node_value(t_node* head, char* var);
+char* get_node_value(t_env* head, char* var);
 
-char    *global_expand();
-
-void	ft_lstaddback2(t_node **node, t_node *new);
+char    *global_expand(t_env *env);
+void	ft_lstaddback2(t_env **node, t_env *new);
+void	g_all_clear();
+int    char_special(int c);
 #endif

@@ -6,17 +6,17 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:20:01 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/04 18:05:44 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/06 14:51:04 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_node	*ft_lstnew(char *content)
+t_env	*ft_lstnew(char *content)
 {
-	t_node *node;
+	t_env *node;
 
-	node = malloc(sizeof(t_node));
+	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
 	node->s = ft_strdup(content);
@@ -25,7 +25,7 @@ t_node	*ft_lstnew(char *content)
 }
 
 
-void	ft_lstaddback2(t_node **node, t_node *new)
+void	ft_lstaddback2(t_env **node, t_env *new)
 {
 	if (*node == NULL)
 	{
@@ -37,7 +37,7 @@ void	ft_lstaddback2(t_node **node, t_node *new)
 	(*node)->next = new;
 }
 
-void	creer_nodes(t_node **node, char **envr)
+void	save_env(t_env **node, char **envr)
 {
 	int i;
 
@@ -49,30 +49,10 @@ void	creer_nodes(t_node **node, char **envr)
 		i++;
 	}
 	// pour voir env in linked list
-	// t_node *curr = node;
+	// t_env *curr = node;
 	// while (curr)
 	// {
 	// 	 printf("[%s]\n", curr->s);
 	// 	 curr = curr->next;
 	// }
 }
-
-// char* getNodeValue(t_node* head, char* var) 
-// {
-//     t_node* current = head;
-    
-//     while (current != NULL) 
-//     {
-//         if (ft_strcmp(current->s, var) == 0)
-//             return (current->s);
-//         current = current->next;
-//     }
-//     return (NULL);
-// }
-
-
-
-// void    save_env(t_node *node)
-// {
-    
-// }

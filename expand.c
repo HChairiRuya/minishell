@@ -6,20 +6,20 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:07:44 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/04 22:23:39 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/07 21:58:10 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-char* get_node_value(t_node* head, char* var) 
+char* get_node_value(t_env* head, char* var) 
 {
-    t_node* curr;
+    t_env* curr;
     
     // pour ne segfault pas si var est NULL 
-    // if (!var)
-    //     return (NULL);
+    if (!var)
+        return (NULL);
     curr = head;
     while (curr != NULL) 
     {
@@ -33,72 +33,52 @@ char* get_node_value(t_node* head, char* var)
     return (NULL);
 }
 
-
-// void    dollar_solo(t_node *node)
-// {
-//     if (node)
-//     {
-//         while (node->s)
-//     }
-// }
-
 int check_node(t_nodes *node)
 {
     int i;
 
     i = 0;
-    while (node->valeur[i])
-    {
-        if (node->valeur && node->valeur[0] == '$' /* && (node->valeur[i + 1] == '_' || node->valeur[ft_isalpha(i + 1)]) 
-            && (node->valeur[ft_isalnum(i)] || node->valeur[i] == '_') */)
-            return (1);
-        i++;
-    }
-    return (0);
+    if (node->valeur && (node->valeur[i] == '_' || ft_isalpha(node->valeur[i])))
+        while(node->valeur && (node->valeur[++i] == '_' || ft_isalnum(node->valeur[i])))
+            ;
+    else
+        i = 1;
+    return (i);
 }
 
-char    *global_expand()
+void    free_node(t_nodes *head)
 {
-    t_nodes *head = g_all.head;
-    
-    printf("check\n");
+    t_nodes   *tmp;
+
+    tmp = head->next; // node qui existe apres $ 
+    head->next = head->next->next;
+    free(tmp->valeur);
+    free(tmp);
+}
+
+char    *global_expand(t_env *env)
+{
+    t_nodes *head;
+    char    *expand_val;
+    int i;
+    int len;
+
+    head = g_all.head;
     while (head != NULL)
-    {  
-      
-        if (head->type == DOLLAR && check_node(head))
+    {
+        if (head->type == DOLLAR && head->quotes != 1 && !char_special(head->next->valeur[0]))
         {
-        //   dollar_solo(head);
-            // printf("----->>>%s\n", head->next->valeur);
-            return (head->next->valeur);
+            printf("dollar node ----->>> %s\n", head->valeur);
+            len = ft_strlen(head->next->valeur);
+            i = check_node(head->next);
+            expand_val = get_node_value(env, ft_substr(head->next->valeur, 0, i));
+            head->valeur = ft_strjoin(expand_val, ft_substr(head->next->valeur, i, len));
+            printf("after----->>>  %s\n", head->valeur);   
+            free_node(head); // exp "$@USER" -> @USER pour free node qui est apres dollar
         }
-        // if (head->type == DOUBLES_QUOTES && head->next->type == DOLLAR)
-        // {
-        //     return (head->next->valeur);
-        // }
+            // printf("node %s\n", head->valeur);
         head = head->next;
     }
     return (NULL);
 }
-
-
-
-// void test_expand()
-// {
-//     t_nodes *head = g_all.head;
-
-//     while (head != NULL)
-//     {
-//         if (head->type == DOLLAR && head->next != NULL)
-//         {
-//             char* variable = head->next->valeur + 1; // Skip the '$' symbol
-//             char* value = getenv(variable);
-            
-//             if (value != NULL)
-//             {
-//                 printf("Expanded %s: %s\n", variable, value);
-//                 // Do something with the expanded value
-//             }
-//         }
-//         head = head->next;
-//     }
-// }
+//   

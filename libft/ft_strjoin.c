@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:13:44 by hchairi           #+#    #+#             */
-/*   Updated: 2022/10/29 15:11:24 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/06 19:20:44 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	str2;
 	char	*dst;
 
+	if (!s1)
+		return ((char*)s2);
+	if (!s2)
+		return ((char *)s1);
 	str1 = ft_strlen(s1);
 	str2 = ft_strlen(s2) + str1 + 1;
 	dst = (char *) malloc(str2);

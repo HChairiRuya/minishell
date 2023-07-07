@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:35:10 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/04 19:56:15 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/07 15:40:32 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,15 @@ void	chenge_type()
 			}
 		}
 		//  
-		if (head->next && (ft_strcmp(head->valeur, "<>| $") && ft_strcmp(head->valeur, "\'") &&  ft_strcmp(head->valeur, "\"") ))
-		{
-			printf("avant (type string) %d\n", head->type);
-			if (head->quotes != 0)
-			{
-				head->type = CMD;
-				printf("apres type cmd < %d\n", head->type);
-			}
-		}
+		// if (head->next && (ft_strcmp(head->valeur, "<>| $") && ft_strcmp(head->valeur, "\'") &&  ft_strcmp(head->valeur, "\"") ))
+		// {
+		// 	printf("avant (type string) %d\n", head->type);
+		// 	if (head->quotes != 0)
+		// 	{
+		// 		head->type = CMD;
+		// 		printf("apres type cmd < %d\n", head->type);
+		// 	}
+		// }
 			
 		head = head->next;
 	}

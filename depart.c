@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:46:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/04 17:31:06 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/07 19:27:42 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,56 +16,55 @@
 void    create_list(char *valeur, int type)
 {
     t_nodes *node;
-    static int i;
 
     node = malloc(sizeof(t_nodes));
     node->next = NULL;
     node->quotes = 0;
     node->type = type;
-    node->valeur = valeur;
+    node->valeur = ft_strdup(valeur);
     if (!node)
         return ;
-    if (i == 0)
+    if (!g_all.head)
        g_all.head = node;
     else
         ft_lstaddback(g_all.head, node);
-    i++;
+    free(valeur);
 }
 
 void    spaces(char **s)
 {
     while (**s == ' ' && **s)
         (*s)++;
-    printf("space\n");
-    create_list(" ", SPACES);
+    // printf("space\n");
+    create_list(ft_strdup(" "), SPACES);
 }
 
 void    dollar(char **s)
 {
-    printf("dollar\n");
-    create_list("$", DOLLAR);
+    // printf("dollar\n");
+    create_list(ft_strdup("$"), DOLLAR);
     (*s)++;
 }
 
 
 void    pipes(char **s)
 {
-    printf("pipe\n");
-    create_list("|", PIPES);
+    // printf("pipe\n");
+    create_list(ft_strdup("|"), PIPES);
     (*s)++;
 }
 
 void    double_quotes(char **s)
 {
-    printf("double_quotes\n");
-    create_list("\"", DOUBLES_QUOTES);
+    // printf("double_quotes\n");
+    create_list(ft_strdup("\""), DOUBLES_QUOTES);
     (*s)++;
 }
 
 void   single_quotes(char **s)
 {
-    printf("single_quotes\n");
-    create_list("\'", SINGLE_QUOTES);
+    // printf("single_quotes\n");
+    create_list(ft_strdup("\'"), SINGLE_QUOTES);
     (*s)++;
 }
 
@@ -74,7 +73,7 @@ void    redirections(char **s)
     char    *valeur;
     int len;
 
-    printf("redirection\n");
+    // printf("redirection\n");
     if (**s == '<' || **s == '>')
     {
         len = 0; 
@@ -108,7 +107,7 @@ void    string(char **s)
     }
     if (len)
     {
-        printf("str : %s\n", *s - len);
+        // printf("str : %s\n", *s - len);
         valeur = ft_substr(*s - len, 0, len);
         // printf("string %s\n", valeur);
         create_list(valeur, STRING);
