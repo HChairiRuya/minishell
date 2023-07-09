@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:46:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/07 19:27:42 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/09 20:06:04 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,14 @@ void    create_list(char *valeur, int type)
 
 void    spaces(char **s)
 {
-    while (**s == ' ' && **s)
-        (*s)++;
-    // printf("space\n");
+    // while (**s == ' ' && **s)
+    //     (*s)++;
     create_list(ft_strdup(" "), SPACES);
+        (*s)++;
 }
 
 void    dollar(char **s)
 {
-    // printf("dollar\n");
     create_list(ft_strdup("$"), DOLLAR);
     (*s)++;
 }
@@ -49,23 +48,37 @@ void    dollar(char **s)
 
 void    pipes(char **s)
 {
-    // printf("pipe\n");
     create_list(ft_strdup("|"), PIPES);
     (*s)++;
 }
 
 void    double_quotes(char **s)
 {
-    // printf("double_quotes\n");
     create_list(ft_strdup("\""), DOUBLES_QUOTES);
     (*s)++;
 }
 
 void   single_quotes(char **s)
 {
-    // printf("single_quotes\n");
     create_list(ft_strdup("\'"), SINGLE_QUOTES);
     (*s)++;
+}
+
+
+int check_redirect(char *valeur)
+{
+    if (!ft_strcmp(valeur, "<"))
+       return (RED_IN);
+    else if (!ft_strcmp(valeur, "<<"))
+       return (HERDOC);
+    else if (!ft_strcmp(valeur, ">"))
+       return (RED_OUT);
+    else if (!ft_strcmp(valeur, ">>"))
+       return (APPEND);
+    // else if (!ft_strcmp(valeur, "<>"))
+    //     return ()
+    else
+        return (S_ERR);
 }
 
 void    redirections(char **s)
@@ -73,7 +86,6 @@ void    redirections(char **s)
     char    *valeur;
     int len;
 
-    // printf("redirection\n");
     if (**s == '<' || **s == '>')
     {
         len = 0; 
@@ -85,15 +97,10 @@ void    redirections(char **s)
         if (len)
         {
             valeur = ft_substr(*s - len, 0, len);
-            create_list(valeur, REDIRECT);
+            create_list(valeur, check_redirect(valeur));
         }
     }
 }
-
-// void    syntax_err()
-// {
-    
-// }
 
 void    string(char **s)
 {
@@ -109,8 +116,41 @@ void    string(char **s)
     {
         // printf("str : %s\n", *s - len);
         valeur = ft_substr(*s - len, 0, len);
-        // printf("string %s\n", valeur);
         create_list(valeur, STRING);
+    }
+}
+
+void    free_space(t_nodes **head)
+{
+    t_nodes   *tmp;
+
+    tmp = g_all.head;
+    g_all.head = g_all.head->next;
+    free(tmp->valeur);
+    free(tmp);
+    *head = g_all.head;
+}
+
+void    rm_spaces()
+{
+    t_nodes *node;
+
+    node = g_all.head;
+    while (node != NULL)
+    {
+        if (node == g_all.head && node->type == SPACES && node->quotes == 0)
+        {
+            while (node && node->type == SPACES)
+                free_space(&node); 
+        }
+        if ((node && node->next && node->next->type == SPACES && node->next->quotes == 0))
+        {  
+            node = node->next; //node = " "
+            while (node->next && node->next->type == SPACES)
+                free_node(node);
+        }
+        if (node)
+            node = node->next;
     }
 }
 
@@ -138,7 +178,6 @@ void    split_function()
             string(&s);
     }
     check_nodes();
-    chenge_type();
-    // test_expand();
-    voir_nodes();
+    change_type();
+    rm_spaces();
 }

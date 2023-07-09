@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/07 21:46:19 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/09 20:06:19 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@
 #define SINGLE_QUOTES 4
 #define STRING 5
 #define DOLLAR 6
-// #define RED_SORT 7
-// #define RED_ENT 8
-// #define D_RED_SORT 9
-// #define D_RED_ENT 10
-#define REDIRECT 10
+#define RED_OUT 7
+#define RED_IN 8
+#define APPEND 9
+#define HERDOC 10
 #define FILE 11
 #define CMD 12
+#define ARG 13
+#define S_ERR 404
 
 
 typedef struct s_all
 {
     char            *line;
-    char            *s;
-    int             *p;
+    int             status_val;
     struct s_nodes *head;
 } t_all ;
 
@@ -75,14 +75,20 @@ void	save_env(t_env **node, char **envr);
 void    create_list(char *valeur, int type);
 void    voir_nodes();
 void	check_nodes();
-void	chenge_type();
+void	change_type();
 
 // expand
-int	ft_strncmp(const char *str1, const char *str2, size_t n);
-char* get_node_value(t_env* head, char* var);
-
+int     ft_strncmp(const char *str1, const char *str2, size_t n);
+char    *get_node_value(t_env* head, char* var);
 char    *global_expand(t_env *env);
 void	ft_lstaddback2(t_env **node, t_env *new);
 void	g_all_clear();
-int    char_special(int c);
+int     char_special(int c);
+void    free_node(t_nodes *head);
+void    rm_spaces();
+void    ft_link();
+
+// 
+int syntaxe_err();
+// void removeDoubleQuoteNodes(t_nodes **head); 
 #endif

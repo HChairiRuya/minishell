@@ -1,7 +1,7 @@
 NAME= minishell
 CC= CC
 FLAGS= -Wall -Wextra -Werror -lreadline 
-SRC= minishell.c utils.c depart.c exemples.c env.c expand.c
+SRC= minishell.c utils.c depart.c change_type.c env.c expand.c
 
 HEADERS_DIRECTORY = ./
 HEADERS_LIST = minishell.h
