@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:07:44 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/09 20:06:29 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/10 20:01:45 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char    *global_expand(t_env *env)
         printf("node %s\n", head->valeur); 
         head = head->next;
     }
-    // ft_link();
-    voir_nodes();
+    ft_link();
+    pipe_node();
     return (NULL);
 }

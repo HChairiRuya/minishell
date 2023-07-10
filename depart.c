@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:46:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/09 20:06:04 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/10 22:44:25 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ int check_redirect(char *valeur)
        return (RED_OUT);
     else if (!ft_strcmp(valeur, ">>"))
        return (APPEND);
-    // else if (!ft_strcmp(valeur, "<>"))
-    //     return ()
     else
         return (S_ERR);
 }
@@ -154,7 +152,6 @@ void    rm_spaces()
     }
 }
 
-
 void    split_function()
 {
     char    *s;
@@ -178,6 +175,6 @@ void    split_function()
             string(&s);
     }
     check_nodes();
-    change_type();
+   
     rm_spaces();
 }

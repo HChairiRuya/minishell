@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/09 20:06:49 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/10 22:51:45 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,22 @@ void    ft_readline(char **env)
     while (1)
     {
         g_all.line = readline("minishell> ");
-        // if (g_all.line == NULL)
+        if (g_all.line == NULL)
+            return ;
         add_history(g_all.line);
         split_function();
-        if (syntaxe_err() /*|| head->type == S_ERR*/)
+        if (syntaxe_err())
         {
             printf("syntaxe err \n");
             g_all_clear();
             continue;
         }
+        change_type();
         save_env(&env_n, env);
         global_expand(env_n);
+        // segfault 
+       
+        // voir_nodes();
         g_all_clear(); // chaque fois clear nodes => (prb quand tu refaire cmd il ajoute une node (space)
     }
 }
@@ -40,7 +45,6 @@ int main(int ac, char **av, char **env)
     (void)ac;
     (void)av;
     // (void)env;
-
     ft_readline(env);
     return 0;
 }

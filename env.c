@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:20:01 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/06 14:51:04 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/10 12:48:50 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_env	*ft_lstnew(char *content)
 }
 
 
-void	ft_lstaddback2(t_env **node, t_env *new)
+void	lstaddback_env(t_env **node, t_env *new)
 {
 	if (*node == NULL)
 	{
@@ -45,7 +45,7 @@ void	save_env(t_env **node, char **envr)
 	// node = NULL;
 	while (envr[i])
 	{
-		ft_lstaddback2(node, ft_lstnew(envr[i]));
+		lstaddback_env(node, ft_lstnew(envr[i]));
 		i++;
 	}
 	// pour voir env in linked list

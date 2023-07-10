@@ -6,14 +6,11 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:35:10 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/09 19:41:24 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/10 19:45:30 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//  Voici un exemple de code en C qui divise la commande shell sans utiliser la fonction strtok 
-
 
 // focntion pour voir list create (nodes)
 void    voir_nodes()
@@ -23,11 +20,11 @@ void    voir_nodes()
     head = g_all.head;
     while (head != NULL)
 	{
-		printf("\t\t------\n");
+		printf("\t\t----------\n");
 		printf("type : [%d]\n", head->type);
 		printf("valeur : [%s]\n", head->valeur);
 		printf("quote : [%d]\n", head->quotes);
-		printf("\t\t------\n");
+		printf("\t\t----------\n");
 		head = head->next;
 	}
     
@@ -70,15 +67,23 @@ void	change_type()
 	head = g_all.head;
 	while (head != NULL)
 	{	
-		if (head->next && (!ft_strcmp(head->valeur, "|") || !ft_strcmp(head->valeur, "<<") || !ft_strcmp(head->valeur, "<<") 
+		if (head->next && head->quotes != 0 && (!ft_strcmp(head->valeur, "|") 
+			|| !ft_strcmp(head->valeur, "<<") || !ft_strcmp(head->valeur, "<<") 
 			|| !ft_strcmp(head->valeur, ">") || !ft_strcmp(head->valeur, ">>")))
-		{
-			// printf("avant change %d\n", head->type);
-			if (head->quotes != 0)
-			{
 				head->type = STRING;
-				// printf("apres change %d\n", head->type);
-			}
+		if (head->next && (!ft_strcmp(head->valeur, "<") && head->quotes == 0))
+		{
+			if (head->next->type == SPACES && head->next->next)
+				head->next->next->type = IN_FILE;
+			else
+				head->next->type = IN_FILE;
+		}
+		if (head->next && (!ft_strcmp(head->valeur, ">") && head->quotes == 0))
+		{	
+			if (head->next->type == SPACES && head->next->next)
+				head->next->next->type = OUT_FILE;
+			else
+				head->next->type = OUT_FILE;
 		}
 		// if (head->next && (ft_strcmp(head->valeur, "<>| $") && ft_strcmp(head->valeur, "\'") &&  ft_strcmp(head->valeur, "\"") ))
 		// {

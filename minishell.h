@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/09 20:06:19 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/10 22:36:52 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@
 #define RED_IN 8
 #define APPEND 9
 #define HERDOC 10
-#define FILE 11
-#define CMD 12
-#define ARG 13
+#define IN_FILE 11
+#define OUT_FILE 12
+// #define CMD 13
+// #define ARG 14
 #define S_ERR 404
 
 
@@ -40,6 +41,7 @@ typedef struct s_all
     char            *line;
     int             status_val;
     struct s_nodes *head;
+    struct s_cmd *cmd;
 } t_all ;
 
 typedef struct  s_nodes
@@ -47,24 +49,24 @@ typedef struct  s_nodes
     int             quotes;
     int             type;
     char            *valeur;
-    struct s_nodes *next;
+    struct s_nodes  *next;
 } t_nodes;
 
 // env list
 typedef struct s_env
 {
-    char*           s;
+    char            *s;
     struct s_env* next;
 } t_env;
 
-
-// typedef struct s_cmd
-// {
-//     char *cmd;
-//     char *arg;
-//     char **array;
-//     char *file;
-// } t_cmd;
+typedef struct s_cmd
+{
+    char    **data;
+    char    *str;
+    int     in;
+    int     out;
+    struct s_cmd *next;
+} t_cmd;
 
 t_all g_all;
 
@@ -81,12 +83,13 @@ void	change_type();
 int     ft_strncmp(const char *str1, const char *str2, size_t n);
 char    *get_node_value(t_env* head, char* var);
 char    *global_expand(t_env *env);
-void	ft_lstaddback2(t_env **node, t_env *new);
+void	lstaddback_env(t_env **node, t_env *new);
 void	g_all_clear();
 int     char_special(int c);
 void    free_node(t_nodes *head);
 void    rm_spaces();
 void    ft_link();
+void    pipe_node();
 
 // 
 int syntaxe_err();
