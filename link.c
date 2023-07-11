@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 11:35:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/10 22:52:25 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/11 22:51:30 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,37 @@
 
 void    ft_link()
 {
-    int i;
     t_nodes *node;
     t_nodes *first;
 
-    i = 0;
     node = g_all.head;
     while (node != NULL)
     {
         if (node->quotes != 0)
         {
-            if (!i)
-                first = node;            
-            else
-            {
+            first = node;
+            first->type = STRING;
+            node = node->next;
+            while (node && node->quotes != 0)
+            {  
                 first->valeur = ft_strjoin(first->valeur, node->valeur);
                 first->next = node->next;
                 free(node->valeur);
                 free(node);
-                node = first;
+                node = first->next;
             }
-            i++;
+            // if (node->next && node->next->type != SPACES)
+            // {
+            //     first->valeur = ft_strjoin(first->valeur, node->valeur);
+            //     first->next = node->next;
+            //     free(node->valeur);
+            //     free(node);
+            //     node = first->next;
+            // }
         }
-        node = node->next;
+        if (node)
+            node = node->next;
     }
-    // printf("\tfirst val : %s\n", first->valeur);
 }
 
 
@@ -76,7 +82,7 @@ int ft_count(t_nodes *node)
     count = 0;
     while (node && node->type != PIPES)
     {
-        if (node && node->type < 7)
+        if (node && node->type < 7 && node->valeur[0])
             count++;
         node = node->next;
     }
@@ -95,24 +101,42 @@ void    pipe_node()
     node = g_all.head;
     while (node)
     {
-        i = -1;
+        i = 0;
         count = ft_count(node);
-        printf("couuuunt %d\n", count);
+        if (!count)
+            return ;
         data = malloc(sizeof(char **) * (count + 1));
         if (!data)
             return ;
         while (node && node->type != PIPES)
         {
-            if (node && node->type < 7)
-                data[++i] = ft_strdup(node->valeur);
-            printf("iii%d\n", i);
+            if (node && node->type < 7 && node->valeur[0])
+                data[i++] = ft_strdup(node->valeur);
             node = node->next;
         }
-        printf("waach\n");
+        data[i] = NULL;
         lstaddback_cmd(lstnew_cmd(data));
-        printf("helllloooo\n");
         if (node && node->next)
             node = node->next;
-        
     }
+}
+
+void    print_data()
+{
+    t_cmd *node;
+    int i;
+    
+
+    node = g_all.cmd;
+    while(node)
+    {
+        i = 0;
+        while (node->data[i])
+        {
+            printf("\tdata[%d] : %s\n", i, node->data[i]);
+            i++;
+        }
+        node = node->next;
+    }
+    g_all_clear_cmd();
 }

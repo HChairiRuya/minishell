@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:07:44 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/10 20:01:45 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/11 20:48:14 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,44 @@ void    free_node(t_nodes *head)
 {
     t_nodes   *tmp;
 
+    
     tmp = head->next; // node qui existe apres $ 
     head->next = head->next->next;
     free(tmp->valeur);
     free(tmp);
 }
 
-void    free_node2(t_nodes *head)
-{
-    t_nodes   *tmp;
+// void    free_node_q(t_nodes *head)
+// {
+//     t_nodes   *tmp;
 
-    tmp = head; 
-    tmp = tmp->next;
-    free(head->valeur);
-    free(head);
+//     tmp = head; 
+//     tmp = tmp->next;
+//     free(head->valeur);
+//     free(head);
+// }
+
+void    rm_quotes()
+{
+    t_nodes *node;
+
+    node = g_all.head;
+    if (node && (node->type == DOUBLES_QUOTES || node->type == SINGLE_QUOTES))
+    {
+        node = g_all.head->next;
+        free(g_all.head->valeur);
+        free(g_all.head);
+        g_all.head = node;
+    }
+    while (node)
+    {
+        if (node->next && (node->next->type == DOUBLES_QUOTES || node->next->type == SINGLE_QUOTES))
+        {
+            free_node(node);
+        }
+        else
+            node = node->next;
+    }
 }
 
 char    *global_expand(t_env *env)
@@ -88,10 +112,12 @@ char    *global_expand(t_env *env)
             // printf("after----->>>  %s\n", head->valeur);   
             free_node(head); // exp "$@USER" -> @USER pour free node qui est apres dollar
         }
-        printf("node %s\n", head->valeur); 
+        // printf("node %s\n", head->valeur);
         head = head->next;
     }
+    rm_quotes();
     ft_link();
     pipe_node();
+    print_data();
     return (NULL);
 }

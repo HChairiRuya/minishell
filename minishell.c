@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/10 22:51:45 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/11 20:42:14 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ void    ft_readline(char **env)
         change_type();
         save_env(&env_n, env);
         global_expand(env_n);
-        // segfault 
-       
-        // voir_nodes();
+        voir_nodes();
         g_all_clear(); // chaque fois clear nodes => (prb quand tu refaire cmd il ajoute une node (space)
     }
 }

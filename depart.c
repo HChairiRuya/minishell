@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:46:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/10 22:44:25 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/11 11:08:46 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,5 @@ void    split_function()
             string(&s);
     }
     check_nodes();
-   
     rm_spaces();
 }

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:35:10 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/10 19:45:30 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/11 20:08:16 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void    voir_nodes()
 		printf("\t\t----------\n");
 		head = head->next;
 	}
-    
 }
 
 void	check_nodes()
@@ -68,32 +67,27 @@ void	change_type()
 	while (head != NULL)
 	{	
 		if (head->next && head->quotes != 0 && (!ft_strcmp(head->valeur, "|") 
-			|| !ft_strcmp(head->valeur, "<<") || !ft_strcmp(head->valeur, "<<") 
+			|| !ft_strcmp(head->valeur, "<<") || !ft_strcmp(head->valeur, "<") 
 			|| !ft_strcmp(head->valeur, ">") || !ft_strcmp(head->valeur, ">>")))
 				head->type = STRING;
-		if (head->next && (!ft_strcmp(head->valeur, "<") && head->quotes == 0))
+		if (head->next && ((!ft_strcmp(head->valeur, "<") || !ft_strcmp(head->valeur, "<<")) && head->quotes == 0))
 		{
 			if (head->next->type == SPACES && head->next->next)
 				head->next->next->type = IN_FILE;
+			else if (head->next->type == SPACES && !head->next->next)
+				head->next->type = S_ERR;
 			else
 				head->next->type = IN_FILE;
 		}
-		if (head->next && (!ft_strcmp(head->valeur, ">") && head->quotes == 0))
+		if (head->next && ((!ft_strcmp(head->valeur, ">") || !ft_strcmp(head->valeur, ">>")) && head->quotes == 0))
 		{	
 			if (head->next->type == SPACES && head->next->next)
 				head->next->next->type = OUT_FILE;
+			else if (head->next->type == SPACES && !head->next->next)
+				head->next->type = S_ERR;
 			else
 				head->next->type = OUT_FILE;
 		}
-		// if (head->next && (ft_strcmp(head->valeur, "<>| $") && ft_strcmp(head->valeur, "\'") &&  ft_strcmp(head->valeur, "\"") ))
-		// {
-		// 	printf("avant (change) %d\n", head->type);
-		// 	if (head->quotes != 0)
-		// 	{
-		// 		head->type = CMD;
-		// 		printf("apres type (cmd) %d\n", head->type);
-		// 	}
-		// }
 		head = head->next;
 	}
 }
