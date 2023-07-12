@@ -6,13 +6,13 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 11:35:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/11 22:51:30 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/12 13:28:23 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    ft_link()
+void    link_strings()
 {
     t_nodes *node;
     t_nodes *first;
@@ -41,6 +41,32 @@ void    ft_link()
             //     free(node);
             //     node = first->next;
             // }
+        }
+        if (node)
+            node = node->next;
+    }
+}
+
+void    link_tous()
+{
+    t_nodes *node;
+    t_nodes *first;
+    
+    node = g_all.head;
+    while (node != NULL)
+    {
+        if (!(node->type >= 7 && node->type <= 13))
+        {
+            first = node;
+            node = node->next;
+            while (node && (!(node->type >= 7 && node->type <= 13)))
+            {
+                first->valeur = ft_strjoin(first->valeur, node->valeur);
+                first->next = node->next;
+                free(node->valeur);
+                free(node);
+                node = first->next;
+            }
         }
         if (node)
             node = node->next;

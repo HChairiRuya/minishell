@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/11 13:22:05 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/12 13:13:56 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	g_all_clear_cmd();
 int     char_special(int c);
 void    free_node(t_nodes *head);
 void    rm_spaces();
-void    ft_link();
+void    link_strings();
+void    link_tous();
 void    pipe_node();
 void    print_data();
 
 // 
 int syntaxe_err();
-// void removeDoubleQuoteNodes(t_nodes **head); 
 #endif

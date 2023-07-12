@@ -1,5 +1,5 @@
 NAME= minishell
-CC= CC
+CC= cc
 FLAGS= -Wall -Wextra -Werror -fsanitize=address -g
 SRC= minishell.c utils.c depart.c change_type.c env.c expand.c link.c syntaxe_err.c
 
