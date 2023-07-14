@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 11:35:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/12 13:28:23 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/14 15:31:49 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void    link_tous()
     node = g_all.head;
     while (node != NULL)
     {
-        if (!(node->type >= 7 && node->type <= 13))
+        if ((!(node->type >= 4 && node->type <= 9) && node->type != PIPES))
         {
             first = node;
             node = node->next;
-            while (node && (!(node->type >= 7 && node->type <= 13)))
+            while (node && ((!(node->type >= 4 && node->type <= 9) && node->type != PIPES)))
             {
                 first->valeur = ft_strjoin(first->valeur, node->valeur);
                 first->next = node->next;
@@ -108,7 +108,7 @@ int ft_count(t_nodes *node)
     count = 0;
     while (node && node->type != PIPES)
     {
-        if (node && node->type < 7 && node->valeur[0])
+        if (node && node->type < 5 && node->valeur[0])
             count++;
         node = node->next;
     }
@@ -129,20 +129,18 @@ void    pipe_node()
     {
         i = 0;
         count = ft_count(node);
-        if (!count)
-            return ;
         data = malloc(sizeof(char **) * (count + 1));
         if (!data)
             return ;
         while (node && node->type != PIPES)
         {
-            if (node && node->type < 7 && node->valeur[0])
+            if (node && node->type < 5 && node->valeur[0])
                 data[i++] = ft_strdup(node->valeur);
             node = node->next;
         }
         data[i] = NULL;
         lstaddback_cmd(lstnew_cmd(data));
-        if (node && node->next)
+        if (node)
             node = node->next;
     }
 }

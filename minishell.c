@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/12 12:58:37 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/14 15:33:43 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void    ft_readline(char **env)
 {
-    t_env *env_n = NULL;
+    t_env   *env_n;
 
+    env_n = NULL;
     g_all.status_val = 0;
     while (1)
     {
@@ -33,10 +34,15 @@ void    ft_readline(char **env)
         change_type();
         save_env(&env_n, env);
         global_expand(env_n);
+        pipe_node();
+        print_data();
         // voir_nodes();
+        free(g_all.line);
         g_all_clear();
+        // system("leaks minishell");
     }
 }
+
 
 int main(int ac, char **av, char **env)
 {
@@ -46,22 +52,3 @@ int main(int ac, char **av, char **env)
     ft_readline(env);
     return 0;
 }
-
-
-
-
-
-//---------? print nodes env
-        // t_node *curr = node;
-
-        // while (curr)
-        // {
-        //     printf("%s\n", curr->s);
-        //     curr = curr->next;
-        // }
-// -------> print env
-    // while (env[i] != NULL)
-    // {
-    //     printf("%s\n", env[i]);
-    //     i++;
-    // }

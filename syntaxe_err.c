@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 13:06:01 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/11 20:10:35 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/13 19:18:12 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int   next_node(t_nodes *node)
         return(0);
     if (node->type == SPACES && !node->next)
         return (1);
-    node = node->next;
+    // node = node->next;
     if (node && (node->type == RED_IN || node->type == RED_OUT 
         || node->type == APPEND || node->type == HERDOC
         || node->type == PIPES))

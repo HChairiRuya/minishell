@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:54:33 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/11 15:18:30 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/13 19:59:47 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ void	ft_lstaddback(t_nodes *node, t_nodes *new)
 	while (node->next)
 		node = node->next;
 	node->next = new;
+}
+
+
+void	lstaddback_save(t_nodes **node, t_nodes *new)
+{
+	if (!node || !new)
+		return ;
+	if(*node)
+		ft_lstlast(*node)->next = new;
+	else
+		*node = new;
 }
 
 void	g_all_clear_cmd()
@@ -69,4 +80,13 @@ int    char_special(int c)
         || c == '%' || c == '.' || c == ',' || c == '=')
         return (1);
     return (0);
+}
+
+t_nodes	*ft_lstlast(t_nodes *lst)
+{
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }
