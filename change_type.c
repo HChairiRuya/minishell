@@ -6,13 +6,12 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:35:10 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 16:15:42 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/15 22:45:27 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// focntion pour voir list create (nodes)
 void	voir_nodes(void)
 {
 	t_nodes	*head;
@@ -94,7 +93,11 @@ void	change_type(void)
 				|| !ft_strcmp(head->valeur, "<")
 				|| !ft_strcmp(head->valeur, ">")
 				|| !ft_strcmp(head->valeur, ">>")))
+				{
+						// while (1);
 				head->type = STRING;
+				}
+	
 		type_red(head);
 		head = head->next;
 	}

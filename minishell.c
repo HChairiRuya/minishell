@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 16:08:16 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/15 22:45:16 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	suite_parsing(char **env)
 
 	env_n = NULL;
 	change_type();
+	// while(1);
 	save_env(&env_n, env);
 	global_expand(env_n);
 	pipe_node();
@@ -25,6 +26,8 @@ void	suite_parsing(char **env)
 	// voir_nodes();
 	free(g_all.line);
 	g_all_clear();
+	// lstclear_env(env_n);
+	// g_all_clear_cmd();
 	// system("leaks minishell");
 }
 
