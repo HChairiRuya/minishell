@@ -6,12 +6,11 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:54:33 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/13 19:59:47 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/14 18:53:04 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	ft_lstaddback(t_nodes *node, t_nodes *new)
 {
@@ -22,33 +21,31 @@ void	ft_lstaddback(t_nodes *node, t_nodes *new)
 	node->next = new;
 }
 
-
 void	lstaddback_save(t_nodes **node, t_nodes *new)
 {
 	if (!node || !new)
 		return ;
-	if(*node)
+	if (*node)
 		ft_lstlast(*node)->next = new;
 	else
 		*node = new;
 }
 
-void	g_all_clear_cmd()
+void	g_all_clear_cmd(void)
 {
 	t_cmd	*tmp;
-	int i;
+	int		i;
 	t_cmd	*tmp_next;
 
 	if (!g_all.cmd)
 		return ;
-	
 	tmp = g_all.cmd;
 	while (tmp)
 	{
 		i = -1;
 		tmp_next = tmp->next;
 		while (tmp->data[++i])
-			free (tmp->data[i]); // ??
+			free (tmp->data[i]);
 		free (tmp->data);
 		free (tmp);
 		tmp = tmp_next;
@@ -56,7 +53,7 @@ void	g_all_clear_cmd()
 	g_all.cmd = NULL;
 }
 
-void	g_all_clear()
+void	g_all_clear(void)
 {
 	t_nodes	*tmp;
 	t_nodes	*tmp_next;
@@ -72,14 +69,6 @@ void	g_all_clear()
 		tmp = tmp_next;
 	}
 	g_all.head = NULL;
-}
-
-int    char_special(int c)
-{
-    if (c == '-' || c == '+' || c == '/' || c == '^'
-        || c == '%' || c == '.' || c == ',' || c == '=')
-        return (1);
-    return (0);
 }
 
 t_nodes	*ft_lstlast(t_nodes *lst)

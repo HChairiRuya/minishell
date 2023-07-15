@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:13:44 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/09 11:56:16 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/15 15:33:39 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*dst;
 
 	if (!s1)
-		return ((char*)s2);
+		return ((char *)s2);
 	if (!s2)
 		return ((char *)s1);
 	str1 = ft_strlen(s1);

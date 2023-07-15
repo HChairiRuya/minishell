@@ -1,7 +1,7 @@
 NAME= minishell
 CC= cc
-FLAGS= -Wall -Wextra -Werror -fsanitize=address -g
-SRC= minishell.c utils.c depart.c change_type.c env.c expand.c link.c syntaxe_err.c division.c suite_div.c ft_free.c
+FLAGS= -Wall -Wextra -Werror #-fsanitize=address -g
+SRC= minishell.c utils.c depart.c change_type.c env.c expand.c link.c syntaxe_err.c division.c suite_div.c ft_free.c s_expand.c redirect.c final_list.c
 
 HEADERS_DIRECTORY = ./
 HEADERS_LIST = minishell.h
