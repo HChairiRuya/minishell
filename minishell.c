@@ -26,8 +26,8 @@ void	suite_parsing(char **env)
 	// while(27052000);
 	free(g_all.line);
 	g_all_clear();
-	// lstclear_env(env_n);
-	// g_all_clear_cmd();
+	lstclear_env(env_n);
+	g_all_clear_cmd();
 	// system("leaks minishell");
 }
 

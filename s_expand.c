@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:48:13 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/16 12:00:05 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/16 20:06:15 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ void	save_list(t_nodes **node, char *val)
 		i++;
 	}
 	i = 0;
-	while (tab[i])
-	{
+	while (tab[i++])
 	    free(tab[i]);
-		i++;
-	}
 	free(tab);
 }
 

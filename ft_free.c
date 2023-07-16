@@ -39,7 +39,11 @@ void	delete_node_expanded(t_nodes *del, t_nodes *save)
 
 	tmp = g_all.head;
 	if (del == tmp)
+	{
 		g_all.head = save;
+		free(tmp->valeur);
+		free(tmp);
+	}
 	else
 	{
 		while (tmp->next != del)
