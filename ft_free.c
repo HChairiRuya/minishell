@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:58:43 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/13 21:31:04 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/16 18:54:40 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	delete_node_expanded(t_nodes *del, t_nodes *save)
 		tmp->next = save;
 	}
 	if (del->next)
+	{
+		free(del->next->valeur);
 		free(del->next);
+	}
+	free(del->valeur);
 	free(del);
 }

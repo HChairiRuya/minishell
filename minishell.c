@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 22:45:16 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/16 15:15:50 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	suite_parsing(char **env)
 
 	env_n = NULL;
 	change_type();
-	// while(1);
 	save_env(&env_n, env);
 	global_expand(env_n);
 	pipe_node();
 	print_data();
 	// voir_nodes();
+	// while(27052000);
 	free(g_all.line);
 	g_all_clear();
 	// lstclear_env(env_n);
@@ -42,9 +42,6 @@ void	ft_readline(void)
 
 void	parsing(char **env)
 {
-	t_env	*env_n;
-
-	env_n = NULL;
 	g_all.status_val = 0;
 	while (1)
 	{
@@ -52,6 +49,7 @@ void	parsing(char **env)
 		if (syntaxe_err())
 		{
 			printf("syntaxe err \n");
+			free(g_all.line);
 			g_all_clear();
 			continue ;
 		}

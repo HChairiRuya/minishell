@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:46:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 16:15:33 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/16 18:24:01 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ void	create_list(char *valeur, int type)
 	t_nodes	*node;
 
 	node = malloc(sizeof(t_nodes));
+	if (!node)
+	{
+		// free(node);
+		free(valeur);
+		return ;
+	}
 	node->next = NULL;
 	node->quotes = 0;
 	node->type = type;
 	node->valeur = ft_strdup(valeur);
-	if (!node)
-	{
-		free(node);
-		return ;
-	}
 	if (!g_all.head)
 		g_all.head = node;
 	else

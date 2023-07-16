@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:35:10 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 22:45:27 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/16 11:10:10 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,7 @@ void	change_type(void)
 				|| !ft_strcmp(head->valeur, "<")
 				|| !ft_strcmp(head->valeur, ">")
 				|| !ft_strcmp(head->valeur, ">>")))
-				{
-						// while (1);
 				head->type = STRING;
-				}
-	
 		type_red(head);
 		head = head->next;
 	}
