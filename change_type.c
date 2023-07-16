@@ -93,11 +93,7 @@ void	change_type(void)
 				|| !ft_strcmp(head->valeur, "<")
 				|| !ft_strcmp(head->valeur, ">")
 				|| !ft_strcmp(head->valeur, ">>")))
-				{
-						// while (1);
 				head->type = STRING;
-				}
-	
 		type_red(head);
 		head = head->next;
 	}

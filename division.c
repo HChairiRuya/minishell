@@ -28,12 +28,14 @@ void	pipes(char **s)
 {
 	create_list(ft_strdup("|"), PIPES);
 	(*s)++;
+
 }
 
 void	double_quotes(char **s)
 {
 	create_list(ft_strdup("\""), DOUBLES_QUOTES);
 	(*s)++;
+
 }
 
 void	single_quotes(char **s)

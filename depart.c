@@ -17,15 +17,15 @@ void	create_list(char *valeur, int type)
 	t_nodes	*node;
 
 	node = malloc(sizeof(t_nodes));
+	if (!node)
+	{
+		free(valeur);
+		return ;
+	}
 	node->next = NULL;
 	node->quotes = 0;
 	node->type = type;
 	node->valeur = ft_strdup(valeur);
-	if (!node)
-	{
-		free(node);
-		return ;
-	}
 	if (!g_all.head)
 		g_all.head = node;
 	else

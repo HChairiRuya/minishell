@@ -27,7 +27,7 @@ void	link_strings(void)
 			node = node->next;
 			while (node && node->quotes != 0)
 			{
-				first->valeur = ft_strjoin(first->valeur, node->valeur);
+				first->valeur = ft_strjoin(first->valeur, node->valeur, 1);
 				first->next = node->next;
 				free(node->valeur);
 				free(node);
@@ -54,7 +54,7 @@ void	link_tous(void)
 			while (node && ((!(node->type >= 4 && node->type <= 9)
 						&& node->type != PIPES)))
 			{
-				first->valeur = ft_strjoin(first->valeur, node->valeur);
+				first->valeur = ft_strjoin(first->valeur, node->valeur, 1);
 				first->next = node->next;
 				free(node->valeur);
 				free(node);
@@ -84,5 +84,4 @@ void	print_data(void)
 		printf("\tCMD OUT : %d\n", node->out);
 		node = node->next;
 	}
-	g_all_clear_cmd();
 }

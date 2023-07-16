@@ -18,7 +18,6 @@ void	suite_parsing(char **env)
 
 	env_n = NULL;
 	change_type();
-	// while(1);
 	save_env(&env_n, env);
 	global_expand(env_n);
 	pipe_node();
@@ -26,8 +25,8 @@ void	suite_parsing(char **env)
 	// voir_nodes();
 	free(g_all.line);
 	g_all_clear();
-	// lstclear_env(env_n);
-	// g_all_clear_cmd();
+	lstclear_env(env_n);
+	g_all_clear_cmd();
 	// system("leaks minishell");
 }
 
@@ -42,9 +41,6 @@ void	ft_readline(void)
 
 void	parsing(char **env)
 {
-	t_env	*env_n;
-
-	env_n = NULL;
 	g_all.status_val = 0;
 	while (1)
 	{
