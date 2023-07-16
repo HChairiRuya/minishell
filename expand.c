@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:07:44 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/16 20:05:28 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/16 22:49:19 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	cas_expand(t_nodes *head, char *expand_val, t_nodes *save, int i)
 	{
 		len = ft_strlen(head->next->valeur);
 		s = ft_substr(head->next->valeur, i, len);
+		free(head->valeur);
 		head->valeur = ft_strjoin(expand_val, s, 2);
 		free_node_exp(head); // free node qui est apres dollar
 	}
@@ -124,6 +125,7 @@ char	*global_expand(t_env *env)
 		if (head)
 			head = head->next;
 	}
+	while(1);
 	rm_quotes();
 	link_strings();
 	link_tous();

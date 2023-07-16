@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/16 15:15:50 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/16 20:07:21 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	suite_parsing(char **env)
 	pipe_node();
 	print_data();
 	// voir_nodes();
-	// while(27052000);
 	free(g_all.line);
 	g_all_clear();
 	lstclear_env(env_n);
