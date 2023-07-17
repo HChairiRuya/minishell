@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:07:44 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/16 22:49:19 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/17 11:32:33 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ char	*global_expand(t_env *env)
 		if (head)
 			head = head->next;
 	}
-	while(1);
 	rm_quotes();
 	link_strings();
 	link_tous();
