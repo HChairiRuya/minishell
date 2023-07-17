@@ -1,7 +1,11 @@
 NAME= minishell
 CC= cc
 FLAGS= -Wall -Wextra -Werror #-fsanitize=address -g
-SRC= minishell.c utils.c depart.c change_type.c env.c expand.c link.c syntaxe_err.c division.c suite_div.c ft_free.c s_expand.c redirect.c final_list.c
+
+SRC = ./parsing/minishell.c ./parsing/utils.c ./parsing/depart.c ./parsing/change_type.c ./parsing/env.c ./parsing/expand.c \
+	./parsing/link.c ./parsing/syntaxe_err.c ./parsing/division.c ./parsing/suite_div.c ./parsing/ft_free.c ./parsing/s_expand.c \
+	./parsing/redirect.c ./parsing/final_list.c \
+	./execution/exec.c ./execution/exec_utils.c
 
 HEADERS_DIRECTORY = ./
 HEADERS_LIST = minishell.h
@@ -14,7 +18,7 @@ OBJ = $(SRC:.c=.o)
 all : lib $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(INCLUDES) $(FLAGS) $(OBJ) ./libft/libft.a -o $@ -lreadline 
+	$(CC) $(INCLUDES) $(FLAGS) $(OBJ) ./libft/libft.a  -o $@ -lreadline 
 
 %.o : %.c $(HEADERS)
 	$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ 
