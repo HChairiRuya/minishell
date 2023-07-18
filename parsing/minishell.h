@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/17 13:06:18 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:48:42 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,5 @@ void	save_list(t_nodes **node, char *val);
 int		check_space(char *value);
 void	redirect(t_cmd *cmd);
 void	lstclear_env(t_env *node);
+t_nodes	*get_next(t_nodes *node);
 #endif

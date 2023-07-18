@@ -40,8 +40,8 @@ void	save_list(t_nodes **node, char *val)
 		lstaddback_save(node, lstnew_expand(tab[i]));
 		i++;
 	}
-	i = 0;
-	while (tab[i++])
+	i = -1;
+	while (tab[++i])
 	    free(tab[i]);
 	free(tab);
 }
