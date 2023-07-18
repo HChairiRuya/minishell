@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/17 12:08:47 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/17 20:34:12 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	parsing(char **env)
 		ft_readline();
 		if (syntaxe_err())
 		{
+			g_all.status_val = 258;
 			printf("syntaxe err \n");
 			free(g_all.line);
 			g_all_clear();
