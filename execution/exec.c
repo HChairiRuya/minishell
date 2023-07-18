@@ -6,34 +6,19 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 22:26:34 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/17 15:07:53 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:49:00 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_.h"
 
-int check_com(char *path, char *cmd)
+int check_com(char *path)
 {
-	DIR *dir;
-
-	dir = opendir(path);
-	struct dirent *entry;
-
-	if (dir == NULL)
+	if (!access(path, F_OK))
 	{
-		perror("opendir");
-		return (0);
-	}
-
-	while ((entry = readdir(dir)) != NULL)
-	{
-		if (ft_strcmp(entry->d_name, cmd) == 0)
-		{
-			closedir(dir);
+		if (!access(path, X_OK))
 			return (1);
-		}
 	}
-	closedir(dir);
 	return (0);
 }
 
@@ -49,16 +34,15 @@ int iterate(t_path *path, char *args)
 	token = path->splitted;
 	while (token[i] != NULL)
 	{
-		if (access(token[i], R_OK) == 0)
+		full_path = get_full_path(token[i], args);
+		if (check_com(full_path) == 1)
 		{
-			if (check_com(token[i], args) == 1)
-			{
-				full_path = get_full_path(token[i], args);
-				path->found = full_path;
-				flag = 1;
-				break;
-			}
+			path->found = full_path;
+			flag = 1;
+			break;
 		}
+		else
+			path->found = NULL;
 		i++;
 	}
 	return (flag);
@@ -88,7 +72,6 @@ int forking(const char *cmd, char **args)
 int executin(t_cmd *cmd, char **argv)
 {
 	t_path *pt;
-	// char *args[] = {"ls", NULL};
 	char *path;
 
 	pt = NULL;

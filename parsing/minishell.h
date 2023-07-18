@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/17 13:06:18 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/18 21:02:28 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_all
 	int				status_val;
 	struct s_nodes	*head;
 	struct s_cmd	*cmd;
+	pid_t 			*child;
 }	t_all;
 
 typedef struct s_nodes

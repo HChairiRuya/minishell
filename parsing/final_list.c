@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:22:49 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 20:36:24 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/18 11:36:33 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ft_count(t_nodes *node)
 			count++;
 		node = node->next;
 	}
+	// printf("cc %d\n", count);
 	return (count);
 }
 
