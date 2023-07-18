@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 22:26:34 by fbelahse          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/18 21:49:00 by fbelahse         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/18 16:54:41 by hchairi          ###   ########.fr       */
+>>>>>>> 7ae2bcd6248835a8a020d12f7f2ac4f8e0b1618d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +79,6 @@ int executin(t_cmd *cmd, char **argv)
 	char *path;
 
 	pt = NULL;
-	printf("cmd  %s\n", cmd->data[0]);
 	pt = malloc(sizeof(t_path));
 	if (pt == NULL)
 		return (1);

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/18 23:40:17 by fbelahse         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/18 16:56:12 by hchairi          ###   ########.fr       */
+>>>>>>> 7ae2bcd6248835a8a020d12f7f2ac4f8e0b1618d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +110,15 @@ void	parsing(int argc, char **env)
 
 int	main(int ac, char **av, char **env)
 {
+<<<<<<< HEAD
 	// (void)ac;
 	// (void)av;
 	parsing(ac, env);
+=======
+	(void)ac;
+	(void)av;
+	parsing(env);
+	
+>>>>>>> 7ae2bcd6248835a8a020d12f7f2ac4f8e0b1618d
 	return (0);
 }

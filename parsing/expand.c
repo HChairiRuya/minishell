@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:07:44 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/17 11:32:33 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/18 15:27:09 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ void	rm_quotes(void)
 	}
 }
 
-void	cas_expand(t_nodes *head, char *expand_val, t_nodes *save, int i)
+t_nodes	*cas_expand(t_nodes *head, char *expand_val, t_nodes *save, int i)
 {
 	int		len;
 	char	*s;
 
 	if (head->type == DOLLAR && !head->next)
-		return ;
-	if (head->type == DOLLAR && head->quotes == 0 && head->next && head)
+		return (head);
+	if (head && head->next && head->type == DOLLAR && head->quotes == 0)
 	{
 		if (check_space(expand_val))
 		{
@@ -90,7 +90,6 @@ void	cas_expand(t_nodes *head, char *expand_val, t_nodes *save, int i)
 				ft_lstlast(save)->next = head->next->next;
 			delete_node_expanded(head, save);
 			head = save;
-			free(save);
 		}
 	}
 	if (head && head->next && head->type == DOLLAR
@@ -102,6 +101,7 @@ void	cas_expand(t_nodes *head, char *expand_val, t_nodes *save, int i)
 		head->valeur = ft_strjoin(expand_val, s, 2);
 		free_node_exp(head); // free node qui est apres dollar
 	}
+	return (head);
 }
 
 char	*global_expand(t_env *env)
@@ -119,7 +119,7 @@ char	*global_expand(t_env *env)
 		i = check_node(head->next);
 		value = ft_substr(head->next->valeur, 0, i);
 		expand_val = get_node_value(env, value);
-		cas_expand(head, expand_val, save, i);
+		head = cas_expand(head, expand_val, save, i);
 		free(expand_val);
 		free(value);
 		if (head)

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:35:10 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/16 11:10:10 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/18 13:54:32 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,18 @@ void	type_red(t_nodes *head)
 	if (head->next && ((!ft_strcmp(head->valeur, "<")
 				|| !ft_strcmp(head->valeur, "<<")) && head->quotes == 0))
 	{
-		if (head->next->type == SPACES && head->next->next)
-			head->next->next->type = IN_FILE;
-		else if (head->next->type == SPACES && !head->next->next)
+		if (head->next->type == SPACES && !head->next->next)
 			head->next->type = S_ERR;
 		else
-			head->next->type = IN_FILE;
+			get_next(head->next)->type = IN_FILE;
 	}
 	if (head->next && ((!ft_strcmp(head->valeur, ">")
 				|| !ft_strcmp(head->valeur, ">>")) && head->quotes == 0))
 	{	
-		if (head->next->type == SPACES && head->next->next)
-			head->next->next->type = OUT_FILE;
-		else if (head->next->type == SPACES && !head->next->next)
+		if (head->next->type == SPACES && !head->next->next)
 			head->next->type = S_ERR;
 		else
-			head->next->type = OUT_FILE;
+			get_next(head->next)->type = OUT_FILE;
 	}
 }
 
