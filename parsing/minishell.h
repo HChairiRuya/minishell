@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/18 21:02:28 by fbelahse         ###   ########.fr       */
-=======
-/*   Updated: 2023/07/18 16:48:42 by hchairi          ###   ########.fr       */
->>>>>>> 7ae2bcd6248835a8a020d12f7f2ac4f8e0b1618d
+/*   Updated: 2023/07/19 11:13:57 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
