@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/19 11:10:32 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/20 20:24:36 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_all
 
 typedef struct s_nodes
 {
+	int				check;
 	int				quotes;
 	int				type;
 	char			*valeur;
@@ -95,7 +96,7 @@ void	free_node_exp(t_nodes *head);
 void	rm_spaces(void);
 void	link_strings(void);
 void	link_tous(void);
-void	pipe_node(void);
+void	pipe_node(t_env *env);
 void	print_data(void);
 void	free_space(t_nodes **head);
 t_nodes	*lstnew_expand(char *content);
@@ -106,7 +107,8 @@ t_nodes	*ft_lstlast(t_nodes *lst);
 void	free_space(t_nodes **head);
 void	save_list(t_nodes **node, char *val);
 int		check_space(char *value);
-void	redirect(t_cmd *cmd);
+void	redirect(t_cmd *cmd, t_env *env);
 void	lstclear_env(t_env *node);
 t_nodes	*get_next(t_nodes *node);
+void	expand_herdoc(void);
 #endif

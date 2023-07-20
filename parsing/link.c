@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 11:35:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 16:40:26 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/20 15:35:34 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	link_strings(void)
 		if (node->quotes != 0)
 		{
 			first = node;
-			first->type = STRING;
+			if (first->type != IN_FILE && first->type != OUT_FILE)
+				first->type = STRING;
 			node = node->next;
 			while (node && node->quotes != 0)
 			{

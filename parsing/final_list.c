@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:22:49 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/18 11:36:33 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:23:06 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	fill_data(t_nodes **node, char **data)
 	lstaddback_cmd(lstnew_cmd(data));
 }
 
-void	pipe_node(void)
+void	pipe_node(t_env *env)
 {
 	t_nodes	*node;
 	char	**data;
@@ -89,5 +89,5 @@ void	pipe_node(void)
 		if (node)
 			node = node->next;
 	}
-	redirect(g_all.cmd);
+	redirect(g_all.cmd, env);
 }

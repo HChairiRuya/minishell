@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:46:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/16 20:04:30 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/20 11:47:31 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	create_list(char *valeur, int type)
 	}
 	node->next = NULL;
 	node->quotes = 0;
+	node->check = 0;
 	node->type = type;
 	node->valeur = ft_strdup(valeur);
 	if (!g_all.head)
@@ -81,4 +82,5 @@ void	split_function(void)
 	}
 	check_nodes();
 	rm_spaces();
+	expand_herdoc();
 }
