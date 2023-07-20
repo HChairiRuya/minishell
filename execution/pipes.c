@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/18 23:14:09 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:56:06 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int cr_pipes(t_path *path)
     int i;
 
     i = 0;
-    path->pipes_fd = malloc(path->n_pipes * sizeof(int[2]));
+    path->pipes_fd = malloc(path->n_pipes * sizeof(int *) * 2);
     if (path->pipes_fd == NULL)
         return (1);
     while (i < path->n_pipes)
@@ -64,7 +64,7 @@ void close_pipes(t_path *path)
 	}
 }
 
-void dupps(int fd, t_path *path)
+void dupps(int fd, t_path *path, t_cmd *cmd)
 {
 	if (fd == 0 && fd != path->n_args - 1)
 	{
@@ -103,31 +103,26 @@ void dupps(int fd, t_path *path)
 		close(path->pipes_fd[fd - 1][0]);
 		close(path->pipes_fd[fd - 1][1]);
 	}
+	if (cmd->in != 0)
+		dup2(cmd->in, STDIN_FILENO);
+	if (cmd->out != 1)
+		dup2(cmd->out, STDOUT_FILENO);
 }
 
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
-	g_all.child[i] = fork();	
+	g_all.child[i] = fork();
 	if (g_all.child[i] == 0)
 	{
-		dupps(i, pt);
+		dupps(i, pt, cmd);
+		close_pipes(pt);
+		// printf ("%s\n", cmd->data[0]);
 		execve(pt->found, cmd->data, NULL);
-		perror("execve");
+		errno = ENOENT;
+   		perror("command not found");
 		exit (0);
 	}
 	return (0);
-}
-void	close_o(t_path *path, int fd)
-{
-	if (fd == 0 && fd != path->n_args - 1)
-		close(path->pipes_fd[fd][0]);
-	if (fd > 0 && fd <  path->n_args - 1)
-	{
-		close(path->pipes_fd[fd][0]);
-		close(path->pipes_fd[fd][1]);
-	}
-	if (fd == path->n_args - 1 && fd != 0)
-		close(path->pipes_fd[fd][1]);
 }
 
 int start(t_path *pt)
@@ -157,7 +152,7 @@ int start(t_path *pt)
 	i = -1;
 	close_pipes(pt);
 	while (++i < pt->n_args)
-	{waitpid(g_all.child[i], NULL, 0);}
+		waitpid(g_all.child[i], NULL, 0);
 	free(pt);
 	return (0);
 }

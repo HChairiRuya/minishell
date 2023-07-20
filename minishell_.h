@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/18 20:50:44 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:20:40 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
+#include <errno.h>
 #include "./parsing/minishell.h"
 // #include "./libft/libft.h"
 
@@ -48,5 +49,14 @@ int forking_for_pipe(t_path *pt, t_cmd *cmd, int i);
 int pipin(int argc);
 int start(t_path *pt);
 int	ft_count(t_nodes *node);
+void ft_env();
+t_env *save_env_b();
+void	save_env(t_env **node, char **envr);
+t_env	*ft_lstnew(char *content);
+int	count_ac();
+void builtins(int argc, char **argv);
+int if_bt_found(char **argv);
+void ft_cd(char **argv);
+void ft_export(int argc, char **argv);
 
 #endif

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   depart.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:46:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/16 20:04:30 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/19 18:02:27 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell_.h"
 
 void	create_list(char *valeur, int type)
 {

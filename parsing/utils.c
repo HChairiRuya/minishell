@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:54:33 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 18:06:36 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/19 18:02:01 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell_.h"
 
 void	ft_lstaddback(t_nodes *node, t_nodes *new)
 {

@@ -6,26 +6,28 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:04:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/17 15:45:14 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:45:13 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell_.h"
 
-void ft_cd(char **argv) 
+void ft_cd(char **argv)
 {
-    if (chdir(argv[2]) != 0)
+    char *get_h;
+
+    if (argv[1] == NULL)
+    {
+        get_h = getenv("HOME");
+        if (chdir(get_h) != 0)
+        {
+            perror ("chdipr");
+            return ;
+        }  
+    }
+    else if (chdir(argv[1]) != 0)
 	{
         perror("chdir");
-        return;
+        return ;
     }
-    printf("yeaa\n");
-    if (argv[3] != NULL)
-	{
-        char *arg[] = {argv[3], NULL};
-        execve(arg[0], arg, NULL);
-        perror("execvp");
-        return;
-    }
-	ft_pwd();
 }

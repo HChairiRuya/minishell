@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/19 11:12:50 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:52:44 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ int	count_ac()
 
 	count = 0;
 	node = g_all.head;
-	while (node)
+	while (node && node->type != PIPES)
 	{
-		count++;
+		if (node && node->type == STRING)
+			count++;
 		node = node->next;
 	}
 	// printf(" count %d\n", count);
@@ -58,14 +59,6 @@ int	count_nd()
 	return (count);
 }
 
-void builtinss(int argc, char **argv)
-{
-	if (ft_strcmp(argv[0], "pwd") == 0)
-		ft_pwd();
-	else if (ft_strcmp(argv[0], "echo") == 0)
-		ft_echo(argc, argv);
-}
-
 void	ft_readline(void)
 {
 	g_all.line = readline("minishell> ");
@@ -77,8 +70,6 @@ void	ft_readline(void)
 
 void	parsing(int argc, char **env)
 {
-	// int count;
-
 	g_all.status_val = 0;
 	while (1)
 	{
@@ -91,23 +82,19 @@ void	parsing(int argc, char **env)
 			continue ;
 		}
 		suite_parsing(env);
-		// count = count_ac();
-		// printf ("counntt: %d\n", count);
-		builtinss(argc, g_all.cmd->data);
-		pipin(count_nd());
-		// executin(g_all.cmd, env);
-		// print_data();
+		if (count_nd() == 1 && if_bt_found(g_all.cmd->data) == 1)
+			builtins(count_ac(), g_all.cmd->data);
+		else
+			pipin(count_nd());
 		free(g_all.line);
 		g_all_clear();
 		g_all_clear_cmd();
-		// count = 0;
 	}
 }
 
 int	main(int ac, char **av, char **env)
 {
-	// (void)ac;
-	// (void)av;
+	(void)av;
 	parsing(ac, env);
 	return (0);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:20:01 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/14 16:56:31 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/19 17:55:50 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell_.h"
 
 t_env	*ft_lstnew(char *content)
 {
