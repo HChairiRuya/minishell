@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/21 10:15:17 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/21 11:15:38 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,11 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
+	if (count_ac() == 1 && if_bt_found(cmd->data))
+	{
+        builtins(count_ac(), cmd->data);
+        return 0;
+    }
     g_all.child[i] = fork();
     if (g_all.child[i] == 0)
     {

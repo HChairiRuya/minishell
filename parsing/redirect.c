@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 22:11:25 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/20 15:39:50 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/21 10:47:32 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env)
 		perror("pipe");
 		return ;
 	}
-	cmd->in = pipefd[1];
+	cmd->in = pipefd[0];
 	while (1)
 	{
 		i = 0;
@@ -99,7 +99,7 @@ void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env)
 		}
 		free(l);
 	}
-	close(pipefd[0]); // Close the read end of the pipe
+	close(pipefd[1]); // Close the read end of the pipe
 }
 
 void	redirect_cases(t_nodes *node, t_cmd *cmd, t_env *env)

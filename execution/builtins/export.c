@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:49:21 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/20 20:29:11 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:52:28 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void ft_export(int argc, char **argv)
         while (*env_ != NULL)
         {
             curr = *env_;
-            char *stt = ft_strchr(argv[i], '=');
-            printf ("HERE!!!%s\n", stt);
+            printf ("HERE!!!%s\n", curr);
             if ((ft_strncmp(curr, argv[i], ft_strlen(argv[i])) == 0))
             {
                 found = 1;
