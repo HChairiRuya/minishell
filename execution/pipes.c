@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/20 15:56:06 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:34:01 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,15 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 		close(path->pipes_fd[fd - 1][1]);
 	}
 	if (cmd->in != 0)
+	{
 		dup2(cmd->in, STDIN_FILENO);
+		close(cmd->in);
+	}
 	if (cmd->out != 1)
+	{
 		dup2(cmd->out, STDOUT_FILENO);
+		close(cmd->out);
+	}
 }
 
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)

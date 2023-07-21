@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 22:11:25 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/20 15:39:50 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/21 10:40:40 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	wr_expand(char *l, t_nodes *node, t_env	*env, int fd)
 		else
 			write(fd, &l[i], 1);
 	}
+	write(fd, "\n", 1);
 }
 
 void	expand_herdoc(void)
@@ -86,20 +87,20 @@ void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env)
 		perror("pipe");
 		return ;
 	}
-	cmd->in = pipefd[1];
+	cmd->in = pipefd[0];
 	while (1)
 	{
 		i = 0;
 		l = readline(">");
-		wr_expand(l, node, env, pipefd[1]);
 		if (!ft_strcmp(l, del))
 		{
 			free(l);
-			return ;
+			break ;
 		}
+		wr_expand(l, node, env, pipefd[1]);
 		free(l);
 	}
-	close(pipefd[0]); // Close the read end of the pipe
+	close(pipefd[1]); // Close the read end of the pipe
 }
 
 void	redirect_cases(t_nodes *node, t_cmd *cmd, t_env *env)
@@ -125,7 +126,11 @@ void	redirect_cases(t_nodes *node, t_cmd *cmd, t_env *env)
 		cmd->in = open(get_next(node->next)->valeur, O_RDWR, 0664);
 	}
 	if (node->type == HERDOC)
+	{
+		if (cmd->in != 0)
+			close(cmd->in);
 		herdoc(node, cmd, get_next(node->next)->valeur, env);
+	}
 }
 
 void	redirect(t_cmd *cmd, t_env *env)
