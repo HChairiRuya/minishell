@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/20 21:55:48 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:14:41 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	suite_parsing(char **env)
 	// lstclear_env(env_n);
 	// system("leaks minishell");
 }
-
 int	count_ac()
 {
 	t_nodes	*node;
@@ -82,10 +81,7 @@ void	parsing(int argc, char **env)
 			continue ;
 		}
 		suite_parsing(env);
-		if (count_nd() == 1 && if_bt_found(g_all.cmd->data) == 1)
-			builtins(count_ac(), g_all.cmd->data);
-		else
-			pipin(count_nd());
+		pipin(count_nd());
 		free(g_all.line);
 		g_all_clear();
 		g_all_clear_cmd();

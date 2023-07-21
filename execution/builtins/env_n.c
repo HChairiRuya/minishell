@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:30:58 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/19 18:08:47 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/21 09:26:25 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void pr_env(t_env *env)
         tmp = tmp->next;
     }
 }
-
 t_env *save_env_b()
 {
     extern char **environ;
@@ -56,4 +55,3 @@ void ft_env()
 
     free_env(env_l);
 }
-
