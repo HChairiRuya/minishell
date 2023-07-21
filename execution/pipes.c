@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/21 10:34:01 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/21 11:01:43 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,26 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
-	g_all.child[i] = fork();
-	if (g_all.child[i] == 0)
-	{
-		dupps(i, pt, cmd);
-		close_pipes(pt);
-		// printf ("%s\n", cmd->data[0]);
-		execve(pt->found, cmd->data, NULL);
-		errno = ENOENT;
-   		perror("command not found");
-		exit (0);
-	}
-	return (0);
+    g_all.child[i] = fork();
+    if (g_all.child[i] == 0)
+    {
+        if (if_bt_found(cmd->data) == 1)
+		{
+            dupps(i, pt, cmd);
+            close_pipes(pt);
+            builtins(count_ac(), g_all.cmd->data);
+			exit (0);
+        }
+		else 
+		{
+            dupps(i, pt, cmd);
+            close_pipes(pt);
+            execve(pt->found, cmd->data, NULL);
+            write(0, "command not found\n", 19);
+            exit(0);
+        }
+    }
+    return 0;
 }
 
 int start(t_path *pt)
@@ -147,7 +155,7 @@ int start(t_path *pt)
 		return (1);
 	}
 	while (cmd)
-	{
+	{	
 		iterate(pt, cmd->data[0]);
 		forking_for_pipe(pt, cmd, i);
 		if (g_all.child[i] == 0)
