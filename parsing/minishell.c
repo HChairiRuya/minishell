@@ -6,16 +6,16 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 16:24:01 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 18:08:02 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_.h"
 
-int	count_ac()
+int	count_ac(void)
 {
 	t_nodes	*node;
-	int	count;
+	int		count;
 
 	count = 0;
 	node = g_all.head;
@@ -28,10 +28,10 @@ int	count_ac()
 	return (count);
 }
 
-int	count_nd()
+int	count_nd(void)
 {
 	t_cmd	*node;
-	int	count;
+	int		count;
 
 	count = 0;
 	node = g_all.cmd;
@@ -59,7 +59,6 @@ void	parsing(int argc, char **envr)
 		}
 		suite_parsing();
 		pipin(count_nd());
-		// executin(g_all.cmd->data[0], env);
 		free_all();
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 16:00:44 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 18:13:09 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-#include <signal.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
@@ -38,17 +38,17 @@
 
 typedef struct s_all
 {
-	char			*line;
-	int				status_val;
-	int				k;
-	int				h;
-	int				dup_z;
-	int				dup_o;
-	struct sigaction act;
-	struct s_nodes	*head;
-	struct s_env	*env;
-	struct s_cmd	*cmd;
-	pid_t 			*child;
+	char				*line;
+	int					status_val;
+	int					k;
+	int					h;
+	int					dup_z;
+	int					dup_o;
+	struct sigaction	act;
+	struct s_nodes		*head;
+	struct s_env		*env;
+	struct s_cmd		*cmd;
+	pid_t				*child;
 }	t_all;
 
 typedef struct s_nodes
@@ -115,13 +115,13 @@ void	free_space(t_nodes **head);
 void	save_list(t_nodes **node, char *val);
 int		check_space(char *value);
 void	redirect(t_cmd *cmd, t_env *env);
-void	lstclear_env();
+void	lstclear_env(void);
 t_nodes	*get_next(t_nodes *node);
 void	expand_herdoc(void);
-void    depart_seg();
+void	depart_seg(void);
 void	initial(char **envr);
 void	ft_readline(void);
 void	suite_parsing(void);
 void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env);
-void	free_all();
+void	free_all(void);
 #endif

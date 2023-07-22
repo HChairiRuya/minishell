@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:22:49 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/20 20:23:06 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 18:15:52 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	ft_count(t_nodes *node)
 			count++;
 		node = node->next;
 	}
-	// printf("cc %d\n", count);
 	return (count);
 }
 

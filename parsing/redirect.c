@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 22:11:25 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 15:56:29 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 18:11:39 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 t_nodes	*get_next(t_nodes *node)
 {
 	while (node && (node->type == SPACES
-		|| node->type == D_Q || node->type == S_Q))
+			|| node->type == D_Q || node->type == S_Q))
 		node = node->next;
 	return (node);
 }
 
 void	redirect_cases(t_nodes *node, t_cmd *cmd, t_env *env)
 {
-	(void)env;
 	if (node->type == RED_OUT)
 	{
 		if (cmd->out != 1)
