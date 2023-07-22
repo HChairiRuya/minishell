@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:07:44 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/18 15:27:09 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 15:45:33 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,8 @@ void	rm_quotes(void)
 	t_nodes	*node;
 
 	node = g_all.head;
-	if (node && node->quotes == 0
-		&& (node->type == DOUBLES_QUOTES || node->type == SINGLE_QUOTES)
-		&& node->next)
+	if (node && node->next && node->quotes == 0
+		&& (node->type == D_Q || node->type == S_Q))
 	{
 		node = g_all.head->next;
 		free(g_all.head->valeur);
@@ -66,8 +65,7 @@ void	rm_quotes(void)
 	while (node && node->next)
 	{
 		if (node && node->next && node->next->quotes == 0
-			&& (node->next->type == DOUBLES_QUOTES
-				|| node->next->type == SINGLE_QUOTES))
+			&& (node->next->type == D_Q || node->next->type == S_Q))
 			free_node_exp(node);
 		else if (node->next)
 			node = node->next;

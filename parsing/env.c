@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:20:01 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/19 17:55:50 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:21:30 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_.h"
+
+void	lstclear_env()
+{
+	t_env	*tmp;
+	t_env	*tmp_next;
+
+	if (!g_all.env)
+		return ;
+	tmp = g_all.env;
+	while (tmp)
+	{
+		tmp_next = tmp->next;
+		free (tmp->s);
+		free (tmp);
+		tmp = tmp_next;
+	}
+	g_all.env = NULL;
+}
 
 t_env	*ft_lstnew(char *content)
 {

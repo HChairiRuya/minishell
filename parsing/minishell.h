@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 12:10:50 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 16:00:44 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define SPACES 9
 # define OUT_FILE 10
 # define IN_FILE 11
-# define DOUBLES_QUOTES 12
-# define SINGLE_QUOTES 13
+# define D_Q 12
+# define S_Q 13
 # define S_ERR 404
 
 typedef struct s_all
@@ -46,6 +46,7 @@ typedef struct s_all
 	int				dup_o;
 	struct sigaction act;
 	struct s_nodes	*head;
+	struct s_env	*env;
 	struct s_cmd	*cmd;
 	pid_t 			*child;
 }	t_all;
@@ -76,7 +77,7 @@ typedef struct s_cmd
 t_all	g_all;
 
 void	split_function(void);
-t_env	*lstnew(char *content);
+t_env	*ft_lstnew(char *content);
 void	ft_lstaddback(t_nodes *node, t_nodes *new);
 void	save_env(t_env **node, char **envr);
 void	create_list(char *valeur, int type);
@@ -114,8 +115,13 @@ void	free_space(t_nodes **head);
 void	save_list(t_nodes **node, char *val);
 int		check_space(char *value);
 void	redirect(t_cmd *cmd, t_env *env);
-void	lstclear_env(t_env *node);
+void	lstclear_env();
 t_nodes	*get_next(t_nodes *node);
 void	expand_herdoc(void);
 void    depart_seg();
+void	initial(char **envr);
+void	ft_readline(void);
+void	suite_parsing(void);
+void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env);
+void	free_all();
 #endif

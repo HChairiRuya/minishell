@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 18:50:14 by hchairi           #+#    #+#             */
-/*   Updated: 2022/10/28 16:51:23 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 16:08:59 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strchr(const char *s, int c)
 	char	*str;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	c1 = (char )c;
 	str = (char *)s;
 	while (str[i])

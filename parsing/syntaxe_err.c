@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 13:06:01 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 18:29:20 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 15:45:59 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	quotes(t_nodes *node)
 	s = 0;
 	while (node)
 	{
-		if (node && node->quotes == 0 && node->type == DOUBLES_QUOTES)
+		if (node && node->quotes == 0 && node->type == D_Q)
 			d++;
-		if (node && node->quotes == 0 && node->type == SINGLE_QUOTES)
+		if (node && node->quotes == 0 && node->type == S_Q)
 			s++;
 		node = node->next;
 	}

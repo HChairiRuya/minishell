@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:54:33 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/19 18:02:01 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:21:24 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,6 @@ void	g_all_clear(void)
 	}
 	g_all.head = NULL;
 }
-
-
-void	lstclear_env(t_env *node)
-{
-	t_env	*tmp;
-	t_env	*tmp_next;
-
-	if (!node)
-		return ;
-	tmp = node;
-	while (tmp)
-	{
-		tmp_next = tmp->next;
-		free (tmp->s);
-		free (tmp);
-		tmp = tmp_next;
-	}
-	node = NULL;
-}
-
 
 t_nodes	*ft_lstlast(t_nodes *lst)
 {

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:58:43 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/16 18:54:40 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 16:23:43 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,11 @@ void	delete_node_expanded(t_nodes *del, t_nodes *save)
 	}
 	free(del->valeur);
 	free(del);
+}
+
+void	free_all()
+{
+	g_all_clear();
+	g_all_clear_cmd();
+	free(g_all.line);
 }

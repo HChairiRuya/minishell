@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:35:24 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/15 16:43:13 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 16:12:04 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n)
 	size_t			i;	
 
 	i = 0;
+	if (!str1 || !str2)
+		return (1);
 	while ((str1[i] || str2[i]) && i < n)
 	{
 		if (str1[i] != str2[i])
