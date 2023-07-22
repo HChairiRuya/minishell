@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/21 10:14:41 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:01:36 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	count_ac()
 			count++;
 		node = node->next;
 	}
-	// printf(" count %d\n", count);
 	return (count);
 }
 
@@ -67,11 +66,21 @@ void	ft_readline(void)
 	split_function();
 }
 
-void	parsing(int argc, char **env)
+void	initial(void)
 {
 	g_all.status_val = 0;
+	g_all.k = 0;
+	g_all.h = 0;
+	g_all.dup_z = dup(0);
+	g_all.dup_o = dup(1);
+}
+
+void	parsing(int argc, char **env)
+{
+	initial();
 	while (1)
 	{
+		depart_seg();
 		ft_readline();
 		if (syntaxe_err())
 		{

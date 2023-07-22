@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/20 21:56:53 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 12:10:50 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+#include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
@@ -39,6 +40,11 @@ typedef struct s_all
 {
 	char			*line;
 	int				status_val;
+	int				k;
+	int				h;
+	int				dup_z;
+	int				dup_o;
+	struct sigaction act;
 	struct s_nodes	*head;
 	struct s_cmd	*cmd;
 	pid_t 			*child;
@@ -111,4 +117,5 @@ void	redirect(t_cmd *cmd, t_env *env);
 void	lstclear_env(t_env *node);
 t_nodes	*get_next(t_nodes *node);
 void	expand_herdoc(void);
+void    depart_seg();
 #endif
