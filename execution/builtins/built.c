@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:12:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/22 12:28:14 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 12:45:26 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void builtins(int argc, char **argv)
 		ft_unset(argc, argv);
 	else if (ft_strcmp(argv[0], "exit") == 0 && argc == 1)
 		exit(0);
-
 }
 
 int if_bt_found(char **argv)

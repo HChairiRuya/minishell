@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:49:21 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/22 09:53:37 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 12:32:15 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void add_n_env(char ***env, char *argv)
     *env = n_env;
 }
 
-int check_d(char **environ, char *argv)
+int check_if_ex(char **environ, char *argv)
 {
     char **existing;
     int j;
@@ -84,7 +84,7 @@ void ft_export(int argc, char **argv)
             i++;
             continue;
         }
-        if (check_d(environ, argv[i]) == 1) //check if it already exists
+        if (check_if_ex(environ, argv[i]) == 1) //check if it already exists
         {
             i++;
             continue;

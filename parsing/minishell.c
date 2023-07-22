@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/21 10:14:41 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 12:50:10 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	parsing(int argc, char **env)
 		}
 		suite_parsing(env);
 		pipin(count_nd());
+		// executin(g_all.cmd->data[0], env);
 		free(g_all.line);
 		g_all_clear();
 		g_all_clear_cmd();
