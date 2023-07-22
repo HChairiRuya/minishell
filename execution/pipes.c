@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/21 11:15:38 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 09:37:11 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 	{
 		if (dup2(path->pipes_fd[fd][1], STDOUT_FILENO) == -1)
 		{
-			perror("dup2-");
+			perror("dup2");
 			return;
 		}
 		close(path->pipes_fd[fd][0]);
@@ -104,38 +104,44 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 		close(path->pipes_fd[fd - 1][1]);
 	}
 	if (cmd->in != 0)
+	{
 		dup2(cmd->in, STDIN_FILENO);
+		close(cmd->in);
+	}
 	if (cmd->out != 1)
+	{
 		dup2(cmd->out, STDOUT_FILENO);
+		close(cmd->out);
+	}
 }
 
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
-	if (count_ac() == 1 && if_bt_found(cmd->data))
+	if (if_bt_found(cmd->data) && count_nd() == 1)
 	{
         builtins(count_ac(), cmd->data);
-        return 0;
-    }
-    g_all.child[i] = fork();
-    if (g_all.child[i] == 0)
-    {
-        if (if_bt_found(cmd->data) == 1)
+		return (0);
+	}
+	g_all.child[i] = fork();
+	if (g_all.child[i] == 0)
+	{
+		if (if_bt_found(cmd->data) == 1)
 		{
-            dupps(i, pt, cmd);
-            close_pipes(pt);
-            builtins(count_ac(), g_all.cmd->data);
+			dupps(i, pt, cmd);
+			close_pipes(pt);
+			builtins(count_ac(), g_all.cmd->data);
 			exit (0);
-        }
+		}
 		else 
 		{
-            dupps(i, pt, cmd);
-            close_pipes(pt);
-            execve(pt->found, cmd->data, NULL);
-            write(0, "command not found\n", 19);
-            exit(0);
-        }
+			dupps(i, pt, cmd);
+			close_pipes(pt);
+			execve(pt->found, cmd->data, NULL);
+			write(0, "command not found\n", 19);
+			exit (0);
+		}
     }
-    return 0;
+    return (0);
 }
 
 int start(t_path *pt)
