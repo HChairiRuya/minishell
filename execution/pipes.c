@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/21 11:01:43 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 12:56:37 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 	{
 		if (dup2(path->pipes_fd[fd][1], STDOUT_FILENO) == -1)
 		{
-			perror("dup2-");
+			perror("dup2");
 			return;
 		}
 		close(path->pipes_fd[fd][0]);
@@ -117,26 +117,31 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
-    g_all.child[i] = fork();
-    if (g_all.child[i] == 0)
-    {
-        if (if_bt_found(cmd->data) == 1)
+	if (if_bt_found(cmd->data) && count_nd() == 1)
+	{
+        builtins(count_ac(), cmd->data);
+		return (0);
+	}
+	g_all.child[i] = fork();
+	if (g_all.child[i] == 0)
+	{
+		if (if_bt_found(cmd->data) == 1)
 		{
-            dupps(i, pt, cmd);
-            close_pipes(pt);
-            builtins(count_ac(), g_all.cmd->data);
+			dupps(i, pt, cmd);
+			close_pipes(pt);
+			builtins(count_ac(), g_all.cmd->data);
 			exit (0);
-        }
+		}
 		else 
 		{
-            dupps(i, pt, cmd);
-            close_pipes(pt);
-            execve(pt->found, cmd->data, NULL);
-            write(0, "command not found\n", 19);
-            exit(0);
-        }
+			dupps(i, pt, cmd);
+			close_pipes(pt);
+			execve(pt->found, cmd->data, NULL);
+			write(0, "command not found\n", 19);
+			exit (0);
+		}
     }
-    return 0;
+    return (0);
 }
 
 int start(t_path *pt)

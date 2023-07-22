@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 22:26:34 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/21 09:50:57 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:31:50 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,26 @@ int iterate(t_path *path, char *args)
 	i = 0;
 	flag = 0;
 	token = path->splitted;
-	while (token[i] != NULL)
+	if (ft_strchr(args, '/') != NULL)
+    {
+        path->found = args;
+        return (1);
+    }
+	while (token && token[i] != NULL)
 	{
 		full_path = get_full_path(token[i], args);
-		if (check_com(full_path) == 1)
+		if (check_com(full_path) == 1
+			&& ft_strncmp(token[i], args, ft_strlen(token[i])))
 		{
 			path->found = full_path;
 			flag = 1;
 			break;
 		}
 		else
+		{
 			path->found = NULL;
+			free(full_path);
+		}
 		i++;
 	}
 	return (flag);

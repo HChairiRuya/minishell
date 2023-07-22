@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/20 15:20:40 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/22 09:31:14 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ t_env *save_env_b();
 void	save_env(t_env **node, char **envr);
 t_env	*ft_lstnew(char *content);
 int	count_ac();
+int	count_nd();
 void builtins(int argc, char **argv);
 int if_bt_found(char **argv);
 void ft_cd(char **argv);
 void ft_export(int argc, char **argv);
+void ft_unset(int argc, char **argv);
 
 #endif

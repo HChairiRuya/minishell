@@ -9,7 +9,8 @@ SRC = ./parsing/minishell.c ./parsing/utils.c ./parsing/depart.c ./parsing/chang
 	./execution/pipes.c ./execution/pipe_utils.c \
 	./execution/builtins/echo.c ./execution/builtins/pwd.c \
 	./execution/builtins/env_n.c ./execution/builtins/built.c \
-	./execution/builtins/cd.c ./execution/builtins/export.c
+	./execution/builtins/cd.c ./execution/builtins/export.c \
+	./execution/builtins/unset.c
 
 HEADERS_DIRECTORY = ./
 HEADERS_LIST = minishell.h
