@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:12:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 16:58:16 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/24 22:44:57 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void builtins(int argc, char **argv)
 	else if (ft_strcmp(argv[0], "export") == 0)
 		ft_export(argc, argv, g_all.env);
 	else if(ft_strcmp(argv[0], "unset") == 0)
-		ft_unset(argc, argv);
+		ft_unset(argc, argv, &g_all.env);
 	else if (ft_strcmp(argv[0], "exit") == 0 && argc == 1)
 		exit(0);
 }

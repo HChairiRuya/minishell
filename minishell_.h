@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 16:59:15 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/24 22:44:03 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void builtins(int argc, char **argv);
 int if_bt_found(char **argv);
 void ft_cd(char **argv);
 void ft_export(int argc, char **argv, t_env *env);
-void ft_unset(int argc, char **argv);
+void ft_unset(int argc, char **argv, t_env **env_list);
 void add_node_to_env(t_env *env, char *s);
 void _pr_exp(t_env *env);
 void pr_env(t_env *env);

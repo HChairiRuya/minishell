@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:49:21 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 17:01:38 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/24 22:05:45 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int check_if_ex(t_env *env, char *argv)
             exist->s = ft_strdup(argv);
             return 1;
         }
+        //     // Free the memory for the entry we are delet
         //     free(exist->s);
         //     free(exist);
         exist = exist->next;
@@ -88,18 +89,13 @@ int check_if_ex(t_env *env, char *argv)
 
 void _pr_exp(t_env *env)
 {
-    t_env *tmp;
-    
-    tmp = env;
-	if (!env)
-		return ;
-    while (tmp != NULL)
+    while (env != NULL)
     {
-		if(!egal_val(tmp))
-			print_n(tmp);
+		if(!egal_val(env))
+			print_n(env);
 		else
-        	printf("declare -x %s\n", tmp->s);
-        tmp = tmp->next;
+        	printf("declare -x %s\n", env->s);
+        env = env->next;
     }
 }
 
@@ -116,9 +112,9 @@ void ft_export(int argc, char **argv, t_env *env)
 		while (i < argc)
 		{
             if (is_valid(argv[i]))
-                return ;
+                ;
 			else if (check_if_ex(env, argv[i]) == 1) // check if it already exists
-				return ;
+				;
 			else
 				add_node_to_env(env, argv[i]);
 			i++;

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:30:58 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 17:03:51 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/24 22:07:05 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void add_node_to_env(t_env *env, char *s)
     if (new_node)
     {
         if (env == NULL)
-            env = new_node;
+            g_all.env = new_node;
         else
         {
             last = env;
