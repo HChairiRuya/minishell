@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/22 12:56:37 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:27:19 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,14 @@ int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 		{
 			dupps(i, pt, cmd);
 			close_pipes(pt);
-			execve(pt->found, cmd->data, NULL);
-			write(0, "command not found\n", 19);
-			exit (0);
+			if (execve(pt->found, cmd->data, NULL) == -1)
+			{
+				set_ex_s(0);
+				write(0, "command not found\n", 19);
+				exit (0);
+			}
+			else
+				set_ex_s(1);
 		}
     }
     return (0);
@@ -160,7 +165,7 @@ int start(t_path *pt)
 		return (1);
 	}
 	while (cmd)
-	{	
+	{
 		iterate(pt, cmd->data[0]);
 		forking_for_pipe(pt, cmd, i);
 		if (g_all.child[i] == 0)

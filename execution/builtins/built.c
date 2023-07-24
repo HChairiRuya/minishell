@@ -6,15 +6,22 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:12:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/22 12:45:26 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:27:33 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell_.h"
 
+void set_ex_s(int val)
+{
+	if (val == 0)
+		printf("boooo\n");
+	if (val == 1)
+		printf("yaay\n");
+}
+
 void builtins(int argc, char **argv)
 {
-	extern char **environ; 
 	if (ft_strcmp(argv[0], "pwd") == 0 && argc == 1)
 		ft_pwd();
 	else if (ft_strcmp(argv[0], "echo") == 0)
@@ -27,8 +34,8 @@ void builtins(int argc, char **argv)
 		ft_export(argc, argv);
 	else if(ft_strcmp(argv[0], "unset") == 0)
 		ft_unset(argc, argv);
-	else if (ft_strcmp(argv[0], "exit") == 0 && argc == 1)
-		exit(0);
+	else if (ft_strcmp(argv[0], "exit") == 0)
+		ft_exit_e(argc, argv);
 }
 
 int if_bt_found(char **argv)

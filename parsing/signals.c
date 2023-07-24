@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:51:12 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 11:56:10 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 17:58:08 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-
 
 void    sig_ctrl(int sig)
 {
@@ -26,7 +23,7 @@ void    sig_ctrl(int sig)
     {
         if (!g_all.k)
         {
-            rl_replace_line("", 0);
+            // rl_replace_line("", 0);
             printf("\n");
             rl_on_new_line();
             rl_redisplay();

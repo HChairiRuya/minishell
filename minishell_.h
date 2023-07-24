@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/22 09:31:14 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:25:58 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <dirent.h>
 #include <errno.h>
 #include "./parsing/minishell.h"
 // #include "./libft/libft.h"
+
+#define SUCCESS 0
+#define FAILURE 127
 
 typedef struct s_path
 {
@@ -28,8 +30,8 @@ typedef struct s_path
 	int (*pipes_fd)[2];
 	int n_pipes;
 	int n_args;
+	int r_val;
 }t_path;
-
 
 char	*ft_strcat(char *dst, const char *src);
 char	*get_full_path(char *token, char *args);
@@ -44,7 +46,7 @@ void	for_last(t_path *path, int fd);
 void for_last(t_path *path, int fd);
 int cr_pipes(t_path *path);
 void close_pipes(t_path *path);
-void duplicate(int fd, t_path *path, int last);
+// void duplicate(int fd, t_path *path, int last);
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i);
 int pipin(int argc);
 int start(t_path *pt);
@@ -60,5 +62,7 @@ int if_bt_found(char **argv);
 void ft_cd(char **argv);
 void ft_export(int argc, char **argv);
 void ft_unset(int argc, char **argv);
+void ft_exit_e(int argc, char **argv);
+void set_ex_s(int val);
 
 #endif

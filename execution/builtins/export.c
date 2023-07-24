@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:49:21 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/22 12:32:15 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:57:17 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int if_valid(char *arg)
     j = 0;
     if (!ft_isalpha(arg[0]))
         return (0);
-
     while (arg[j])
     {
         if (arg[j] == '=')
@@ -75,8 +74,25 @@ void ft_export(int argc, char **argv)
     char **existing;
     int env_len;
     int i;
+    int j;
 
     i = 1;
+    j = 1;
+    if (argc == 1)
+    {
+        while (environ[j])
+        {
+            printf("declare -x %s\n", environ[j]);
+            j++;
+        }
+        return ;
+    }
+    while (argv[j] && argc > 2)
+    {
+        if (!if_valid(argv[j]))
+            printf ("declare -x %s\n", argv[j]);
+        j++;
+    }
     while (i < argc)
     {
         if (!if_valid(argv[i])) //check if it's valid to add
@@ -94,3 +110,4 @@ void ft_export(int argc, char **argv)
         i++;
     }
 }
+//
