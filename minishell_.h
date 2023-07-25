@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 15:25:58 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:47:28 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ int	count_ac();
 int	count_nd();
 void builtins(int argc, char **argv);
 int if_bt_found(char **argv);
-void ft_cd(char **argv);
-void ft_export(int argc, char **argv);
+void ft_cd(char **argv, t_env *env);
+void ft_export(int argc, char **argv, t_env *env);
 void ft_unset(int argc, char **argv);
 void ft_exit_e(int argc, char **argv);
-void set_ex_s(int val);
-
+int set_ex_s(int val);
+void add_node_to_env(t_env *env, char *s);
+void _pr_exp(t_env *env);
+void pr_env(t_env *env);
 #endif

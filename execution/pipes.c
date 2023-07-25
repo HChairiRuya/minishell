@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 15:27:19 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:27:38 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,15 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 	}
 }
 
+void print_err(t_cmd *cmd)
+{
+	write(0, "minishell", ft_strlen("minishell"));
+	write(0, ": ", 2);
+	write(0, cmd->data[0], ft_strlen(cmd->data[0]));
+	write(0, ": ", 2);
+	write(0, "command not found\n", ft_strlen("command not found\n"));
+}
+
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
 	if (if_bt_found(cmd->data) && count_nd() == 1)
@@ -138,12 +147,9 @@ int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 			close_pipes(pt);
 			if (execve(pt->found, cmd->data, NULL) == -1)
 			{
-				set_ex_s(0);
-				write(0, "command not found\n", 19);
+				print_err(cmd);
 				exit (0);
 			}
-			else
-				set_ex_s(1);
 		}
     }
     return (0);
@@ -153,9 +159,11 @@ int start(t_path *pt)
 {
 	t_cmd *cmd;
 	int i;
+	int status;
 	char *path;
 
 	i = 0;
+	status = 0;
 	cmd = g_all.cmd;
 	path = getenv("PATH");
 	pt->splitted = ft_split(path, ':');
@@ -176,7 +184,12 @@ int start(t_path *pt)
 	i = -1;
 	close_pipes(pt);
 	while (++i < pt->n_args)
-		waitpid(g_all.child[i], NULL, 0);
+		waitpid(g_all.child[i], &status, 0);
+	if (WIFEXITED(status))
+	{
+        int exit_status = WEXITSTATUS(status);
+        set_ex_s(exit_status);
+    }
 	free(pt);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:58:43 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 16:23:43 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 18:07:40 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_node_exp(t_nodes *head)
 {
 	t_nodes	*tmp;
 
-	tmp = head->next; // node qui existe apres $ 
+	tmp = head->next;
 	head->next = head->next->next;
 	free(tmp->valeur);
 	free(tmp);
@@ -55,7 +55,7 @@ void	delete_node_expanded(t_nodes *del, t_nodes *save)
 	free(del);
 }
 
-void	free_all()
+void	free_all(void)
 {
 	g_all_clear();
 	g_all_clear_cmd();

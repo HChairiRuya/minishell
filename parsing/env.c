@@ -6,13 +6,13 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:20:01 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 16:21:30 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 18:16:33 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_.h"
 
-void	lstclear_env()
+void	lstclear_env(void)
 {
 	t_env	*tmp;
 	t_env	*tmp_next;

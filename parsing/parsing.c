@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:16:23 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/23 09:49:29 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:06:10 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_exit(void)
 {
 	free(g_all.line);
 	g_all_clear();
-	lstclear_env(g_all.env);
+	lstclear_env();
 	g_all_clear_cmd();
 	exit(0); // Ctrl+D (EOF) is detected when readline returns NULL,
 }

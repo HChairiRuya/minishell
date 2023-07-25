@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:04:05 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 15:46:13 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/22 18:18:17 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,12 @@ void	pipes(char **s)
 {
 	create_list(ft_strdup("|"), PIPES);
 	(*s)++;
-
 }
 
 void	double_quotes(char **s)
 {
 	create_list(ft_strdup("\""), D_Q);
 	(*s)++;
-
 }
 
 void	single_quotes(char **s)
