@@ -14,6 +14,7 @@
 # define MINISHELL_HE
 
 # include <stdio.h>
+#include <sys/wait.h>
 # include <string.h>
 # include <dirent.h>
 # include <errno.h>
