@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 18:13:09 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/25 10:08:38 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,4 +124,5 @@ void	ft_readline(void);
 void	suite_parsing(void);
 void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env);
 void	free_all(void);
+int		is_valid(char *s);
 #endif

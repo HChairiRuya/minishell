@@ -6,51 +6,53 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:30:58 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 22:07:05 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/25 10:09:17 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell_.h"
 
-void add_node_to_env(t_env *env, char *s)
+int	is_valid(char *s)
 {
-    t_env   *new_node;
-    t_env   *last;
-    
-    new_node = ft_lstnew(s);
-    if (new_node)
-    {
-        if (env == NULL)
-            g_all.env = new_node;
-        else
-        {
-            last = env;
-            while (last->next != NULL)
-                last = last->next;
-            last->next = new_node;
-        }
-    }
+	int	i;
+
+	i = 0;
+	if (s[i] != '_' && !ft_isalpha(s[i]))
+		return (1);
+	while (s[++i] && s[i] != '=')
+	{
+		if (s[i] != '_' && !ft_isalnum(s[i]))
+			return (1);
+	}
+	return (0);
 }
 
-void pr_env(t_env *env)
+void	add_node_to_env(t_env *env, char *s)
 {
-    while (env != NULL)
-    {
-        if (ft_strchr(env->s, '='))
-            printf("%s\n", env->s);
-        env = env->next;
-    }
+	t_env	*new_node;
+	t_env	*last;
+
+	new_node = ft_lstnew(s);
+	if (new_node)
+	{
+		if (env == NULL)
+			g_all.env = new_node;
+		else
+		{
+			last = env;
+			while (last->next != NULL)
+				last = last->next;
+			last->next = new_node;
+		}
+	}
 }
 
-// void free_env(t_env *node)
-// {
-//     t_env *curr;
-//     while (node != NULL)
-//     {
-//         curr = node;
-//         node = node->next;
-//         free(curr->s);
-//         free(curr);
-//     }
-// }
-
+void	pr_env(t_env *env)
+{
+	while (env != NULL)
+	{
+		if (ft_strchr(env->s, '='))
+			printf("%s\n", env->s);
+		env = env->next;
+	}
+}
