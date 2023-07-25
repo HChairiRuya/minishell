@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 22:26:34 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/22 13:31:50 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:13:12 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int iterate(t_path *path, char *args)
 		if (check_com(full_path) == 1
 			&& ft_strncmp(token[i], args, ft_strlen(token[i])))
 		{
+			// free(path->found); // test free cas "$USER" $USER $@kee
 			path->found = full_path;
 			flag = 1;
 			break;
