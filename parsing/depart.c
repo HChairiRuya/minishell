@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:46:21 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 18:18:32 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 09:43:49 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	split_function(void)
 	s = g_all.line;
 	while (*s)
 	{
-		if (*s == ' ')
+		if (*s == ' ' || *s == '\t')
 			spaces(&s);
 		else if (*s == '$')
 			dollar(&s);

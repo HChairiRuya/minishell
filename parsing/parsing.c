@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:16:23 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/25 09:51:23 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 15:33:09 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	suite_parsing(void)
 	pipe_node(g_all.env);
 	// print_data();
 	// voir_nodes();
-	// system("leaks minishell");
 }
 
 void	ft_exit(void)

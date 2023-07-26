@@ -6,53 +6,11 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 22:16:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/25 11:50:22 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 10:47:35 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell_.h"
-
-// void	remove_nodes(t_env **node, char **argv, int i, t_env **env_list)
-// {
-// 	t_env	*head;
-	
-// 	while (node != NULL)
-// 	{
-// 		if (ft_strncmp((*node)->s, argv[i], ft_strlen(argv[i])) == 0 /* (*node)->s[ft_strlen(argv[i])] == '='*/)
-// 		{
-// 			if ((*node) == *env_list) // (*Node) to remove is the first one
-// 			{
-// 				*env_list = (*node)->next;
-// 				free((*node)->s);
-// 				free((*node));
-// 				(*node) = *env_list;
-// 			}
-// 			else
-// 			{
-// 				head = (*node)->next;
-// 				free((*node)->s);
-// 				free(*node);
-// 				(*node) = head;
-// 			}
-// 			break; // No need to continue searching for this argument
-// 		}
-// 		(*node) = (*node)->next;
-// 	}
-// }
-
-// void	ft_unset(char **argv, t_env **env_list)
-// {
-// 	t_env	*node;
-// 	int		i;
-
-// 	i = 1;
-// 	while (argv[i])
-// 	{
-// 		node = *env_list;
-// 		remove_nodes(&node, argv, i, env_list);
-// 		i++;
-// 	}
-// }
 
 t_env	*to_unset(t_env *env_list, char *arg)
 {

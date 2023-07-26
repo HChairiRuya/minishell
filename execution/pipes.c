@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/25 12:16:01 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 16:06:57 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void free_pipes(t_path *path)
 		{
 			if (path->pipes_fd[i])
 				free(path->pipes_fd[i]);
+			i++;
 		}
-		i++;
 		free(path->pipes_fd);
 		path->pipes_fd = NULL;
 	}
@@ -137,7 +137,7 @@ int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 			dupps(i, pt, cmd);
 			close_pipes(pt);
 			execve(pt->found, cmd->data, NULL);
-			write(0, "command not found\n", 19);
+			write(2, "command not found\n", 19);
 			exit (0);
 		}
     }
@@ -171,13 +171,14 @@ int start(t_path *pt)
 	if (cr_pipes(pt) == 1)
 	{
 		perror("cr_pipes");
-		// ft_free_split(pt->splitted); //free test split
+		ft_free_split(pt->splitted); //free test split
 		return (1);
 	}
 	while (cmd)
 	{	
 		iterate(pt, cmd->data[0]);
 		forking_for_pipe(pt, cmd, i);
+		free(pt->found); // free test
 		if (g_all.child[i] == 0)
 			break ;
 		i++;
@@ -187,8 +188,8 @@ int start(t_path *pt)
 	close_pipes(pt);
 	while (++i < pt->n_args)
 		waitpid(g_all.child[i], NULL, 0);
-	// ft_free_split(pt->splitted); //free test split
-	free(pt);
+	ft_free_split(pt->splitted); //free test split
+	// free(pt);
 	return (0);
 }
 
@@ -202,14 +203,16 @@ int pipin(int argc)
 		return (0);
 	path->n_args = argc;
 	path->n_pipes = path->n_args - 1;
-	g_all.child = malloc(sizeof(int) * path->n_pipes);
-	// if (!g_all.child)// free test
-	// {
-	// 	free(path); // Free path in case of allocation failure
-	// 	return (0);
-	// }
+	g_all.child = malloc(sizeof(int) * (path->n_pipes + 1 ));
+	if (!g_all.child)// free test
+	{
+		free(path); // Free path in case of allocation failure
+		return (0);
+	}
 	start(path);
-	// free(g_all.child); // Free the memory allocated for g_all.child  // free test
+	free(g_all.child); // Free the memory allocated for g_all.child  // free test
+	free_t_path(path);
 	// free(path); // Free the memory allocated for path // free test
+	// while (1);
 	return (0);
 }

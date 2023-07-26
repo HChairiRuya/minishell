@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 18:08:02 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 11:33:53 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	parsing(int argc, char **envr)
 		suite_parsing();
 		pipin(count_nd());
 		free_all();
+		// system("leaks minishell | tail -2");
 	}
 }
 
@@ -67,5 +68,6 @@ int	main(int ac, char **av, char **envr)
 {
 	(void)av;
 	parsing(ac, envr);
+	lstclear_env();
 	return (0);
 }
