@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 22:11:25 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 18:11:39 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 11:27:53 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	redirect_cases(t_nodes *node, t_cmd *cmd, t_env *env)
 	{
 		if (cmd->out != 1)
 			close(cmd->out);
-		cmd->out = open(get_next(node->next)->valeur, O_RDWR | O_CREAT, 0664);
+		cmd->out = open(get_next(node->next)->valeur, O_RDWR | O_CREAT | O_TRUNC , 0664);
 	}
 	if (node->type == APPEND)
 	{

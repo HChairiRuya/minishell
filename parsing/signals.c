@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:51:12 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/24 18:05:50 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:33:30 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sig_ctrl(int sig)
 {
 	if (sig == SIGQUIT)
 	{
-		rl_on_new_line();
+		// rl_on_new_line();
 		rl_redisplay();
 	}
 	else if (sig == SIGINT)

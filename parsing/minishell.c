@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/24 18:03:29 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:38:50 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ void	parsing(int argc, char **envr)
 		ft_readline();
 		if (syntaxe_err())
 		{
+			g_all.status_val = 258;
 			printf("syntaxe err \n");
 			free(g_all.line);
 			g_all_clear();
 			continue ;
 		}
 		suite_parsing();
-		pipin(count_nd());
+		int exit_status = pipin(count_nd());
 		free_all();
 	}
 }

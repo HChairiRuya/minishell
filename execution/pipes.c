@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 19:27:38 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:24:45 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ void free_pipes(t_path *path)
 		{
 			if (path->pipes_fd[i])
 				free(path->pipes_fd[i]);
+			i++;
 		}
-		i++;
 		free(path->pipes_fd);
 		path->pipes_fd = NULL;
 	}
 }
+
 
 int cr_pipes(t_path *path)
 {
@@ -54,13 +55,23 @@ int cr_pipes(t_path *path)
 void close_pipes(t_path *path)
 {
 	int i;
+	t_cmd *tmp;
 	
 	i = 0;
+	tmp = g_all.cmd;
 	while (i < path->n_pipes)
 	{
 		close(path->pipes_fd[i][0]);
 		close(path->pipes_fd[i][1]);
 		i++;
+	}
+	while (tmp)
+	{
+		if (tmp->in != 0)
+			close(tmp->in);
+		if (tmp->out != 1)
+			close(tmp->out);
+		tmp = tmp->next;
 	}
 }
 
@@ -115,13 +126,22 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 	}
 }
 
-void print_err(t_cmd *cmd)
+void print_err(t_cmd *cmd, char *args)
 {
 	write(0, "minishell", ft_strlen("minishell"));
 	write(0, ": ", 2);
-	write(0, cmd->data[0], ft_strlen(cmd->data[0]));
-	write(0, ": ", 2);
-	write(0, "command not found\n", ft_strlen("command not found\n"));
+	if (check_com(args) == 2)
+	{
+		perror(cmd->data[0]);
+		exit (126);
+	}
+	else
+	{
+		write (0, cmd->data[0], ft_strlen(cmd->data[0]));
+		write (0, ": ", 2);
+		write (0, "command not found\n", ft_strlen("command not found\n"));
+		exit (127);
+	}
 }
 
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
@@ -141,15 +161,12 @@ int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 			builtins(count_ac(), g_all.cmd->data);
 			exit (0);
 		}
-		else 
+		else
 		{
 			dupps(i, pt, cmd);
 			close_pipes(pt);
-			if (execve(pt->found, cmd->data, NULL) == -1)
-			{
-				print_err(cmd);
-				exit (0);
-			}
+			if (execve(pt->found, cmd->data, g_all.envr) == -1)
+				print_err(cmd, pt->found);
 		}
     }
     return (0);
@@ -160,18 +177,16 @@ int start(t_path *pt)
 	t_cmd *cmd;
 	int i;
 	int status;
+	int ex_code;
 	char *path;
 
 	i = 0;
 	status = 0;
+	ex_code = 0;
 	cmd = g_all.cmd;
 	path = getenv("PATH");
 	pt->splitted = ft_split(path, ':');
-	if (cr_pipes(pt) == 1)
-	{
-		perror("cr_pipes");
-		return (1);
-	}
+	cr_pipes(pt);
 	while (cmd)
 	{
 		iterate(pt, cmd->data[0]);
@@ -185,26 +200,30 @@ int start(t_path *pt)
 	close_pipes(pt);
 	while (++i < pt->n_args)
 		waitpid(g_all.child[i], &status, 0);
+	g_all.status_val = 0;
 	if (WIFEXITED(status))
 	{
-        int exit_status = WEXITSTATUS(status);
-        set_ex_s(exit_status);
-    }
+		ex_code = WEXITSTATUS(status);
+		if (ex_code != 0)
+			g_all.status_val = ex_code;
+	}
 	free(pt);
-	return (0);
+	return (g_all.status_val);
 }
 
 int pipin(int argc)
 {
 	t_path *path;
+	int ex_st;
 
 	path = NULL;
+	ex_st = 0;
 	path = malloc(sizeof(t_path));
 	if (!path)
 		return (0);
 	path->n_args = argc;
 	path->n_pipes = path->n_args - 1;
 	g_all.child = malloc(sizeof(int) * path->n_pipes);
-	start(path);
-	return (0);
+	ex_st = start(path);
+	return (ex_st);
 }

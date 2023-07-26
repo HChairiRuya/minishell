@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/24 19:17:42 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:15:20 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ typedef struct s_all
 	int					h;
 	int					dup_z;
 	int					dup_o;
-	int					exit_st; //for exit status
 	struct sigaction	act;
 	struct s_nodes		*head;
 	struct s_env		*env;
 	struct s_cmd		*cmd;
+	char				**envr;
 	pid_t				*child;
 }	t_all;
 
@@ -126,3 +126,11 @@ void	suite_parsing(void);
 void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env);
 void	free_all(void);
 #endif
+
+// void print_err(t_cmd *cmd)
+// {
+// 	write(0, "minishell", ft_strlen("minishell"));
+// 	write(0, ": ", 2);
+// 	perror(cmd->data[0]);
+// 	exit (127);
+// }

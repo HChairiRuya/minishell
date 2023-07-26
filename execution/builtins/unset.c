@@ -3,42 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 22:16:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/22 11:08:20 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/24 22:43:38 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell_.h"
 
-void ft_unset(int argc, char **argv)
+void ft_unset(int argc, char **argv, t_env **env_list)
 {
-    extern char **environ;
-    char **env_ = environ;
-    char **next = NULL;
-    char *curr = NULL;
+    t_env *head;
+    t_env *node;
     int i = 1;
 
     while (i < argc)
     {
-        env_ = environ;
-        while (*env_ != NULL)
+        head = NULL;
+        node = *env_list;
+        while (node != NULL)
         {
-            curr = *env_;
-            if (ft_strncmp(curr, argv[i], ft_strlen(argv[i])) == 0
-            && curr[ft_strlen(argv[i])] == '=')
+            if (ft_strncmp(node->s, argv[i], ft_strlen(argv[i])) == 0 /* node->s[ft_strlen(argv[i])] == '='*/)
             {
-                next = env_;
-                while (*next != NULL)
+                if (head == NULL) // Node to remove is the first one
                 {
-                    *next = *(next + 1);
-                    next++;
+                    *env_list = node->next;
+                    free(node->s);
+                    free(node);
+                    node = *env_list;
                 }
-                break;
+                else
+                {
+                    head->next = node->next;
+                    free(node->s);
+                    free(node);
+                    node = head->next;
+                }
+                break; // No need to continue searching for this argument
             }
-            env_++;
+            head = node;
+            node = node->next;
         }
+
         i++;
     }
 }

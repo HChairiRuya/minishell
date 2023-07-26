@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:49:21 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 18:37:10 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/25 10:53:38 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,34 @@ int check_if_ex(t_env *env, char *argv)
             exist->s = ft_strdup(argv);
             return 1;
         }
+        //     // Free the memory for the entry we are delet
         //     free(exist->s);
         //     free(exist);
         exist = exist->next;
     }
-    return 0;
+    return (0);
 }
 
 void _pr_exp(t_env *env)
 {
-    t_env *tmp;
-    
-    tmp = env;
-	if (!env)
-		return ;
-    while (tmp != NULL)
+    while (env != NULL)
     {
-		if(!egal_val(tmp))
-			print_n(tmp);
+		if(!egal_val(env))
+			print_n(env);
 		else
-        	printf("declare -x %s\n", tmp->s);
-        tmp = tmp->next;
+        	printf("declare -x %s\n", env->s);
+        env = env->next;
     }
+}
+void print_exp_error(char *argv)
+{
+    write(0, "minishell: ", ft_strlen("minishell: "));
+    write(0, "export: ", ft_strlen("export: "));
+    write (0, "`", 1);
+	write(0, argv, ft_strlen(argv));
+    write (0, "'", 1);
+	write(0, ": ", 2);
+	write(0, "not a valid identifier\n", ft_strlen("not a valid identifier\n"));
 }
 
 void ft_export(int argc, char **argv, t_env *env)
@@ -115,22 +121,12 @@ void ft_export(int argc, char **argv, t_env *env)
 		while (i < argc)
 		{
             if (is_valid(argv[i]))
-                return ;
+                print_exp_error(argv[i]);
 			else if (check_if_ex(env, argv[i]) == 1) // check if it already exists
-				return ;
+				;
 			else
 				add_node_to_env(env, argv[i]);
 			i++;
 		}
     }
-}
-
-void print_exp_error(char *argv)
-{
-    write(0, "minishell", ft_strlen("minishell"));
-	write(0, ": ", 2);
-    write(0, "export", ft_strlen("export"));
-	write(0, argv, ft_strlen(argv));
-	write(0, ": ", 2);
-	write(0, "not a valid identifier\n", ft_strlen("not a valid identifier\n"));
 }

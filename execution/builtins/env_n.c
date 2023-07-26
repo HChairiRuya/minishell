@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 15:30:58 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 19:36:11 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/25 09:53:40 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void add_node_to_env(t_env *env, char *s)
     if (new_node)
     {
         if (env == NULL)
-            env = new_node;
+            g_all.env = new_node;
         else
         {
             last = env;

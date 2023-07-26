@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:16:23 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/24 18:06:10 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:29:13 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	initial(char **envr)
 	g_all.h = 0;
 	g_all.dup_z = dup(0);
 	g_all.dup_o = dup(1);
+	g_all.envr = envr;
 	save_env(&g_all.env, envr);
 }

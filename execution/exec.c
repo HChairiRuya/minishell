@@ -14,10 +14,12 @@
 
 int check_com(char *path)
 {
-	if (!access(path, F_OK))
+	if (!access(path, R_OK))
 	{
 		if (!access(path, X_OK))
 			return (1);
+		else
+			return (2);
 	}
 	return (0);
 }
@@ -26,6 +28,7 @@ int iterate(t_path *path, char *args)
 {
 	char	**token;
 	char	*full_path;
+	char	*str;
 	int		flag;
 	int		i;
 

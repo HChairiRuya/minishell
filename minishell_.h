@@ -6,9 +6,10 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 19:47:28 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:56:09 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_HE
 # define MINISHELL_HE
@@ -37,7 +38,7 @@ char	*ft_strcat(char *dst, const char *src);
 char	*get_full_path(char *token, char *args);
 int		forking(const char *cmd, char **args);
 int		iterate(t_path *path, char *args);
-int 	check_com(char *path);
+int check_com(char *path);
 int		ft_strcmp(char *s1, char *s2);
 int		executin(t_cmd *cmd, char **argv);
 void	ft_echo(int argc, char **argv);
@@ -61,10 +62,30 @@ void builtins(int argc, char **argv);
 int if_bt_found(char **argv);
 void ft_cd(char **argv, t_env *env);
 void ft_export(int argc, char **argv, t_env *env);
-void ft_unset(int argc, char **argv);
 void ft_exit_e(int argc, char **argv);
 int set_ex_s(int val);
+void ft_unset(int argc, char **argv, t_env **env_list);
 void add_node_to_env(t_env *env, char *s);
 void _pr_exp(t_env *env);
 void pr_env(t_env *env);
+void pr_err(char *args);
+
 #endif
+
+// void per_error(char *args)
+// {
+// 	write (0, g_all.cmd->data[0], ft_strlen(g_all.cmd->data[0]));
+//     write (0, ": ", ft_strlen("cd: "));
+//     write (0, args, ft_strlen(args));
+//     write (0, ": ", 2);
+//     write (0, "Permission denied\n", ft_strlen("Permission denied\n"));
+// }
+
+// void per_error_f(char *args)
+// {
+//     write (0, g_all.cmd->data[0], ft_strlen(g_all.cmd->data[0]));
+// 	write (0, ": ", 2);
+//     write (0, args, ft_strlen(args));
+//     write (0, ": ", 2);
+//     write (0, "No such file or directory\n", ft_strlen("No such file or directory\n"));
+// }
