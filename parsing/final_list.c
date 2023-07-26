@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:22:49 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 18:15:52 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 14:16:38 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_count(t_nodes *node)
 	count = 0;
 	while (node && node->type != PIPES)
 	{
-		if (node && node->type < 5 && node->valeur[0])
+		if (node && node->type < 5 /*&& node->valeur[0]*/)
 			count++;
 		node = node->next;
 	}
@@ -62,7 +62,7 @@ void	fill_data(t_nodes **node, char **data)
 	i = 0;
 	while ((*node) && (*node)->type != PIPES)
 	{
-		if ((*node) && (*node)->type < 5 && (*node)->valeur[0])
+		if ((*node) && (*node)->type < 5 /*&& (*node)->valeur[0]*/)
 			data[i++] = ft_strdup((*node)->valeur);
 		(*node) = (*node)->next;
 	}

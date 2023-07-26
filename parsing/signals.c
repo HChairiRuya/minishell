@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:51:12 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/26 11:33:30 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:21:13 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	sig_ctrl(int sig)
 		}
 		else
 		{
+			g_all.status_val = 
 			close(0);
 			printf("\n");
 			g_all.h = 1;

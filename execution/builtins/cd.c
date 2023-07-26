@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:04:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/25 16:48:26 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:05:46 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void ft_previous()
 
 void ft_home()
 {
-    char *get_h;
+	char	*get_h;
 
     get_h = getenv("HOME");
     replace(g_all.env, get_h);
@@ -91,20 +91,20 @@ char* joiin_(char *path, char *h)
 
 void pr_err(char *args)
 {
-    write (0, "minishell: ", ft_strlen("minishell: "));
-    write (0, "cd: ", ft_strlen("cd: "));
-    write (0, args, ft_strlen(args));
-    write (0, ": ", 2);
-    write (0, "No such file or directory\n", ft_strlen("No such file or directory\n"));
+    write (2, "minishell: ", ft_strlen("minishell: "));
+    write (2, "cd: ", ft_strlen("cd: "));
+    write (2, args, ft_strlen(args));
+    write (2, ": ", 2);
+    write (2, "No such file or directory\n", ft_strlen("No such file or directory\n"));
 }
 
 void pr_errorno(char *args)
 {
-    write (0, "minishell: ", ft_strlen("minishell: "));
-    write (0, "cd: ", ft_strlen("cd: "));
-    write (0, args, ft_strlen(args));
-    write (0, ": ", 2);
-    write (0, "Not a directory\n", ft_strlen("Not a directory\n"));
+    write (2, "minishell: ", ft_strlen("minishell: "));
+    write (2, "cd: ", ft_strlen("cd: "));
+    write (2, args, ft_strlen(args));
+    write (2, ": ", 2);
+    write (2, "Not a directory\n", ft_strlen("Not a directory\n"));
 }
 
 void ft_cd(char **argv, t_env *env)

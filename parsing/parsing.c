@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:16:23 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/26 11:29:13 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:09:28 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,20 @@ void	suite_parsing(void)
 	// system("leaks minishell");
 }
 
-void	ft_exit(void)
-{
-	free(g_all.line);
-	g_all_clear();
-	lstclear_env();
-	g_all_clear_cmd();
-	exit(0); // Ctrl+D (EOF) is detected when readline returns NULL,
-}
-
 void	ft_readline(void)
 {
 	g_all.line = readline("minishell> ");
 	if (!g_all.line)
+	{
+        printf("exit\n");	
 		ft_exit();
+	}
 	if (g_all.line == NULL)
 		return ;
 	if (g_all.line[0])
 		add_history(g_all.line);
 	split_function();
+	// voir_nodes();
 }
 
 void	initial(char **envr)

@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:12:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/25 18:15:44 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 13:15:58 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void pr_error(char *args)
     write (0, "No such file or directory\n", ft_strlen("No such file or directory\n"));
 }
 
-void builtins(int argc, char **argv)
+void	builtins(int argc, char **argv)
 {
 	if (ft_strcmp(argv[0], "pwd") == 0)
 		ft_pwd();
@@ -36,12 +36,16 @@ void builtins(int argc, char **argv)
 	else if (ft_strcmp(argv[0], "export") == 0)
 		ft_export(argc, argv, g_all.env);
 	else if(ft_strcmp(argv[0], "unset") == 0)
-		ft_unset(argc, argv, &g_all.env);
+		ft_unset(argv, &g_all.env);
 	else if (ft_strcmp(argv[0], "exit") == 0)
+		ft_exit_e(argc, argv);
+	else if (ft_strcmp(argv[0], "unset") == 0)
+		ft_unset(argv, &g_all.env);
+	else if (ft_strcmp(argv[0], "exit") == 0 && argc == 1)
 		ft_exit_e(argc, argv);
 }
 
-int if_bt_found(char **argv)
+int	if_bt_found(char **argv)
 {
 	if (!ft_strcmp(argv[0], "pwd") || !ft_strcmp(argv[0], "echo")
 		|| !ft_strcmp(argv[0], "exit") || !ft_strcmp(argv[0], "env")
@@ -50,21 +54,3 @@ int if_bt_found(char **argv)
 		return (1);
 	return (0);
 }
-
-// void per_error(char *args)
-// {
-// 	write (0, g_all.cmd->data[0], ft_strlen(g_all.cmd->data[0]));
-//     write (0, ": ", ft_strlen("cd: "));
-//     write (0, args, ft_strlen(args));
-//     write (0, ": ", 2);
-//     write (0, "Perrrmission denied\n", ft_strlen("Perrrmission denied\n"));
-// }
-
-// void per_error_f(char *args)
-// {
-//     write (0, g_all.cmd->data[0], ft_strlen(g_all.cmd->data[0]));
-// 	write (0, ": ", 2);
-//     write (0, args, ft_strlen(args));
-//     write (0, ": ", 2);
-//     write (0, "No such file or directoryy\n", ft_strlen("No such file or directoryy\n"));
-// }

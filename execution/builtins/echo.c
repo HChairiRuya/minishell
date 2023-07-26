@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:03:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/24 13:26:44 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:48:26 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ int ft_cmp(char *str)
     return (0);
 }
 
-void ft_echo(int argc, char **argv)
+void	ft_echo(int argc, char **argv)
 {
+	int	no_nl;
+	int	i;
     char *n;
-    int no_nl;
-	int i;
+
 
 	i = 1;
 	no_nl = 0;
+
     n = NULL;
     while (argv[i])
     {

@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/26 10:15:20 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 12:12:56 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,9 @@ void	ft_readline(void);
 void	suite_parsing(void);
 void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env);
 void	free_all(void);
-#endif
+int		is_valid(char *s);
+void	ft_exit_e(int argc, char **argv);
+int		count_ac(void);
+void	ft_exit(void);
 
-// void print_err(t_cmd *cmd)
-// {
-// 	write(0, "minishell", ft_strlen("minishell"));
-// 	write(0, ": ", 2);
-// 	perror(cmd->data[0]);
-// 	exit (127);
-// }
+#endif

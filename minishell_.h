@@ -6,33 +6,30 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/25 18:56:09 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 12:08:41 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef MINISHELL_HE
+# ifndef MINISHELL_HE
 # define MINISHELL_HE
 
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-#include "./parsing/minishell.h"
+# include <stdio.h>
+#include <sys/wait.h>
+# include <string.h>
+# include <dirent.h>
+# include <errno.h>
+# include "./parsing/minishell.h"
 // #include "./libft/libft.h"
 
-#define SUCCESS 0
-#define FAILURE 127
-
-typedef struct s_path
+typedef struct	s_path
 {
-	char **splitted;
-	char **all_args;
-	char *found;
-	int (*pipes_fd)[2];
-	int n_pipes;
-	int n_args;
-	int r_val;
-}t_path;
+	char	**splitted;
+	char	**all_args;
+	char	*found;
+	int		(*pipes_fd)[2];
+	int		n_pipes;
+	int		n_args;
+}	t_path ;
 
 char	*ft_strcat(char *dst, const char *src);
 char	*get_full_path(char *token, char *args);
@@ -64,28 +61,12 @@ void ft_cd(char **argv, t_env *env);
 void ft_export(int argc, char **argv, t_env *env);
 void ft_exit_e(int argc, char **argv);
 int set_ex_s(int val);
-void ft_unset(int argc, char **argv, t_env **env_list);
+void ft_unset(char **argv, t_env **env_list);
 void add_node_to_env(t_env *env, char *s);
 void _pr_exp(t_env *env);
 void pr_env(t_env *env);
+void ft_exit_e(int argc, char **argv);
+int	count_ac(void);
 void pr_err(char *args);
 
 #endif
-
-// void per_error(char *args)
-// {
-// 	write (0, g_all.cmd->data[0], ft_strlen(g_all.cmd->data[0]));
-//     write (0, ": ", ft_strlen("cd: "));
-//     write (0, args, ft_strlen(args));
-//     write (0, ": ", 2);
-//     write (0, "Permission denied\n", ft_strlen("Permission denied\n"));
-// }
-
-// void per_error_f(char *args)
-// {
-//     write (0, g_all.cmd->data[0], ft_strlen(g_all.cmd->data[0]));
-// 	write (0, ": ", 2);
-//     write (0, args, ft_strlen(args));
-//     write (0, ": ", 2);
-//     write (0, "No such file or directory\n", ft_strlen("No such file or directory\n"));
-// }

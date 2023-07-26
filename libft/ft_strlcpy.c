@@ -33,11 +33,9 @@ size_t	ft_strlcpy(char *dst, char *src, size_t size)
 
 char	*ft_strcpy(char *dst, char *src)
 {
-	size_t	length;
 	size_t	i;
 
 	i = 0;
-	length = ft_strlen(src);
 	while (src[i])
 	{		
 		dst[i] = src[i];

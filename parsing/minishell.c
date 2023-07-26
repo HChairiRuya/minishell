@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/26 10:38:50 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:22:16 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ int	main(int ac, char **av, char **envr)
 {
 	(void)av;
 	parsing(ac, envr);
-	return (0);
+	return (g_all.status_val);
 }
