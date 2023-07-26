@@ -3,6 +3,8 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*                                                 +#+#+#+#+#+   +#+           */
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 22:26:34 by fbelahse          #+#    #+#             */
@@ -14,10 +16,12 @@
 
 int check_com(char *path)
 {
-	if (!access(path, F_OK))
+	if (!access(path, R_OK))
 	{
 		if (!access(path, X_OK))
 			return (1);
+		else
+			return (2);
 	}
 	return (0);
 }
@@ -26,6 +30,7 @@ int iterate(t_path *path, char *args)
 {
 	char	**token;
 	char	*full_path;
+	char	*str;
 	int		flag;
 	int		i;
 
@@ -43,7 +48,6 @@ int iterate(t_path *path, char *args)
 		if (check_com(full_path) == 1
 			&& ft_strncmp(token[i], args, ft_strlen(token[i])))
 		{
-			// free(path->found); // test free cas "$USER" $USER $@kee
 			path->found = full_path;
 			flag = 1;
 			break;
@@ -56,48 +60,4 @@ int iterate(t_path *path, char *args)
 		i++;
 	}
 	return (flag);
-}
-
-int forking(const char *cmd, char **args)
-{
-	pid_t child;
-
-	child = fork();
-	if (child == -1)
-	{
-		perror("fork");
-		return (2);
-	}
-	if (child == 0)
-	{
-		execve(cmd, args, NULL);
-		perror("execve");
-		return (1);
-	}
-	else
-		waitpid(child, NULL, 0);
-	return (0);
-}
-
-int executin(t_cmd *cmd, char **argv)
-{
-	t_path *pt;
-	char *path;
-
-	pt = NULL;
-	pt = malloc(sizeof(t_path));
-	if (pt == NULL)
-		return (1);
-	pt->found = NULL;
-	path = getenv("PATH");
-	pt->splitted = ft_split(path, ':');
-	if (iterate(pt, cmd->data[0]) == 1)
-	{
-	   if (pt->found != NULL)
-		   return (forking(pt->found, cmd->data));
-	   else
-		   return (1);
-	}
-	free(pt);
-	return (0);
 }

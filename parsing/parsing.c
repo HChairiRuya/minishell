@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:16:23 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/26 15:33:09 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 21:44:37 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,23 @@ void	suite_parsing(void)
 	pipe_node(g_all.env);
 	// print_data();
 	// voir_nodes();
-}
-
-void	ft_exit(void)
-{
-	free(g_all.line);
-	g_all_clear();
-	lstclear_env();
-	g_all_clear_cmd();
-	exit(0); // Ctrl+D (EOF) is detected when readline returns NULL,
+	// system("leaks minishell");
 }
 
 void	ft_readline(void)
 {
 	g_all.line = readline("minishell> ");
 	if (!g_all.line)
+	{
+        printf("exit\n");	
 		ft_exit();
+	}
 	if (g_all.line == NULL)
 		return ;
 	if (g_all.line[0])
 		add_history(g_all.line);
 	split_function();
+	// voir_nodes();
 }
 
 void	initial(char **envr)
@@ -49,5 +45,6 @@ void	initial(char **envr)
 	g_all.h = 0;
 	g_all.dup_z = dup(0);
 	g_all.dup_o = dup(1);
+	g_all.envr = envr;
 	save_env(&g_all.env, envr);
 }

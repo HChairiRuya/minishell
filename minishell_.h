@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/25 17:56:27 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 21:40:32 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strcat(char *dst, const char *src);
 char	*get_full_path(char *token, char *args);
 int		forking(const char *cmd, char **args);
 int		iterate(t_path *path, char *args);
-int 	check_com(char *path);
+int check_com(char *path);
 int		ft_strcmp(char *s1, char *s2);
 int		executin(t_cmd *cmd, char **argv);
 void	ft_echo(int argc, char **argv);
@@ -44,7 +44,7 @@ void	for_last(t_path *path, int fd);
 void for_last(t_path *path, int fd);
 int cr_pipes(t_path *path);
 void close_pipes(t_path *path);
-void duplicate(int fd, t_path *path, int last);
+// void duplicate(int fd, t_path *path, int last);
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i);
 int pipin(int argc);
 int start(t_path *pt);
@@ -57,13 +57,12 @@ int	count_ac();
 int	count_nd();
 void builtins(int argc, char **argv);
 int if_bt_found(char **argv);
-void ft_cd(char **argv);
+void ft_cd(char **argv, t_env *env);
 void ft_export(int argc, char **argv, t_env *env);
+void ft_exit_e(int argc, char **argv);
+int set_ex_s(int val);
 void ft_unset(char **argv, t_env **env_list);
 void add_node_to_env(t_env *env, char *s);
 void _pr_exp(t_env *env);
 void pr_env(t_env *env);
-//
-void free_t_path(t_path *path);
-
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/25 10:08:38 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 12:12:56 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_all
 	struct s_nodes		*head;
 	struct s_env		*env;
 	struct s_cmd		*cmd;
+	char				**envr;
 	pid_t				*child;
 }	t_all;
 
@@ -125,4 +126,8 @@ void	suite_parsing(void);
 void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env);
 void	free_all(void);
 int		is_valid(char *s);
+void	ft_exit_e(int argc, char **argv);
+int		count_ac(void);
+void	ft_exit(void);
+
 #endif
