@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:51:12 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/27 11:14:38 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/27 12:24:59 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sig_ctrl(int sig)
 	{
 		if (!g_all.k)
 		{
-			rl_replace_line("", 0);
+			// rl_replace_line("", 0);
 			printf("\n");
 			rl_on_new_line();
 			rl_redisplay();

@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:18:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 09:52:27 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:32:05 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,29 @@ char *get_full_path(char *token, char *args)
     first = ft_strjoin(token, "/", 0);
     second = ft_strjoin(first, args, 1);
     return (second);
+}
+
+void    wait_pid(t_path *path)
+{
+    unsigned char    *stat;
+    int                status;
+    int                i;
+	int					ex_code;
+
+    i = -1;
+    while (++i < path->n_args)
+    {
+        waitpid(g_all.child[i], &status, 0);
+        stat = (unsigned char *)&status;
+        if (stat[0])
+            g_all.status_val = stat[0] + 128;
+        else
+            g_all.status_val = stat[1];
+    }
+	if (WIFEXITED(status))
+	{
+		ex_code = WEXITSTATUS(status);
+		if (ex_code != 0)
+			g_all.status_val = ex_code;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 11:18:04 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/27 12:32:22 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ char *find_path(t_env *env);
 void replace(t_env *env, char *value);
 void pr_err_no_file(char *args);
 void pr_err_not_a_dir(char *args);
+void    wait_pid(t_path *path);
 
 #endif

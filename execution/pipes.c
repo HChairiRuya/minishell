@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 12:21:59 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:37:48 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,42 +74,13 @@ void ft_free_split(char **split)
 	}
 }
 
-void    wait_pid(t_path *path)
-{
-    unsigned char    *stat;
-    int                status;
-    int                i;
-	int					ex_code;
-
-    i = -1;
-    while (++i < path->n_args)
-    {
-        if (waitpid(g_all.child[i], &status, 0) == -1)
-            ft_putstr_fd("wait Error\n", 1);
-        stat = (unsigned char *)&status;
-        if (stat[0])
-            g_all.status_val = stat[0] + 128;
-        else
-            g_all.status_val = stat[1];
-    }
-	if (WIFEXITED(status))
-	{
-		ex_code = WEXITSTATUS(status);
-		if (ex_code != 0)
-			g_all.status_val = ex_code;
-	}
-}
-
 int start(t_path *pt)
 {
 	t_cmd *cmd;
 	int i;
-	int ex_code;
 	char *path;
 
 	i = 0;
-	ex_code = 0;
-	cmd = NULL;
 	cmd = g_all.cmd;
 	path = find_path(g_all.env);
 	pt->splitted = ft_split(path, ':');
@@ -129,7 +100,6 @@ int start(t_path *pt)
 		i++;
 		cmd = cmd->next;
 	}
-	i = -1;
 	close_pipes(pt);
 	wait_pid(pt);
 	free(pt);
@@ -161,6 +131,5 @@ int execution(int argc)
 	// free(g_all.child); // Free the memory allocated for g_all.child  // free test
 	// free(path); // Free the memory allocated for path // free test
 	}
-	
 	return (0);
 }
