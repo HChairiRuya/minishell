@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/27 09:59:21 by fbelahse         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/26 21:42:43 by hchairi          ###   ########.fr       */
+>>>>>>> 55da1db02f3631edd8963cb930ced6a6b7a6ac21
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +96,17 @@ int start(t_path *pt)
 	if (cr_pipes(pt) == 1)
 	{
 		perror("cr_pipes");
+<<<<<<< HEAD
+=======
+		ft_free_split(pt->splitted); //free test split
+>>>>>>> 55da1db02f3631edd8963cb930ced6a6b7a6ac21
 		return (1);
 	}
 	while (cmd)
 	{
 		iterate(pt, cmd->data[0]);
 		forking_for_pipe(pt, cmd, i);
+		free(pt->found); // free test
 		if (g_all.child[i] == 0)
 			break ;
 		i++;
