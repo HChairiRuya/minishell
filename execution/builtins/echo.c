@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:03:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/26 11:48:26 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 11:01:57 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_echo(int argc, char **argv)
 	int	no_nl;
 	int	i;
     char *n;
-
 
 	i = 1;
 	no_nl = 0;

@@ -6,7 +6,11 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/07/27 09:54:28 by fbelahse         ###   ########.fr       */
+=======
 /*   Updated: 2023/07/26 21:44:21 by hchairi          ###   ########.fr       */
+>>>>>>> 55da1db02f3631edd8963cb930ced6a6b7a6ac21
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +63,7 @@ void	parsing(int argc, char **envr)
 			continue ;
 		}
 		suite_parsing();
-		int exit_status = pipin(count_nd());
+		execution(count_nd());
 		free_all();
 		// system("leaks minishell | tail -2");
 	}

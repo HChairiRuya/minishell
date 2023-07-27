@@ -26,22 +26,14 @@ int check_com(char *path)
 	return (0);
 }
 
-int iterate(t_path *path, char *args)
+int check(char **token, t_path *path, char *args)
 {
-	char	**token;
-	char	*full_path;
-	char	*str;
-	int		flag;
-	int		i;
+	int i;
+	int flag;
+	char *full_path;
 
 	i = 0;
 	flag = 0;
-	token = path->splitted;
-	if (ft_strchr(args, '/') != NULL)
-    {
-        path->found = args;
-        return (1);
-    }
 	while (token && token[i] != NULL)
 	{
 		full_path = get_full_path(token[i], args);
@@ -60,4 +52,22 @@ int iterate(t_path *path, char *args)
 		i++;
 	}
 	return (flag);
+}
+
+int iterate(t_path *path, char *args)
+{
+	char	**token;
+	int		i;
+	int		rt_val;
+
+	i = 0;
+	rt_val = 0;
+	token = path->splitted;
+	if (ft_strchr(args, '/') != NULL)
+    {
+        path->found = args;
+        return (1);
+    }
+	rt_val = check(token, path, args);
+	return (rt_val);
 }
