@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:12:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 09:27:52 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:51:44 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void pr_error_nf(char *args)
 
 void	builtins(int argc, char **argv)
 {
+    g_all.status_val = 0;
 	if (ft_strcmp(argv[0], "pwd") == 0)
 		ft_pwd();
 	else if (ft_strcmp(argv[0], "echo") == 0)

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 12:54:25 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/27 16:39:12 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,13 @@ void    wait_pid(t_path *path)
     i = -1;
     while (++i < path->n_args)
     {
-        if (waitpid(g_all.child[i], &status, 0) == -1)
-            ft_putstr_fd("wait Error\n", 1);
+        waitpid(g_all.child[i], &status, 0);
         stat = (unsigned char *)&status;
         if (stat[0])
             g_all.status_val = stat[0] + 128;
         else
             g_all.status_val = stat[1];
     }
-	// if (WIFEXITED(status))
-	// {
-	// 	ex_code = WEXITSTATUS(status);
-	// 	if (ex_code != 0)
-	// 		g_all.status_val = ex_code;
-	// }
 }
 
 int start(t_path *pt)
@@ -108,8 +101,8 @@ int start(t_path *pt)
 	ex_code = 0;
 	cmd = NULL;
 	cmd = g_all.cmd;
-	path = find_path(g_all.env);
-	pt->splitted = ft_split(path, ':');
+	path = find_path(g_all.env);//free me later
+	pt->splitted = ft_split(path, ':'); //
 	if (if_bt_found(cmd->data) && count_nd() == 1)
 	{
         builtins(count_ac(), cmd->data);
@@ -125,7 +118,6 @@ int start(t_path *pt)
 	{
 		iterate(pt, cmd->data[0]);
 		forking_for_pipe(pt, cmd, i);
-		free(pt->found); // free test
 		if (g_all.child[i] == 0)
 			break ;
 		i++;
@@ -158,11 +150,10 @@ int execution(int argc)
 			free(path); // Free path in case of allocation failure
 			return (0);
 		}
-	start(path);
-	free(g_all.child);
+		start(path);
+		free(g_all.child);
 	// free(g_all.child); // Free the memory allocated for g_all.child  // free test
 	// free(path); // Free the memory allocated for path // free test
 	}
-	
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:04:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 09:25:15 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:58:37 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void ft_home()
     replace(g_all.env, get_h);
     if (chdir(get_h) != 0)
     {
-        perror ("chdipr");
+        perror ("chdir");
         return ;
     }  
 }
@@ -63,7 +63,7 @@ char* joiin_(char *path, char *h)
     char *sec;
 
     first = ft_strjoin(path, "/", 0);
-    sec = ft_strjoin(first, h, 0);
+    sec = ft_strjoin(first, h, 1);
     return (sec);
 }
 
@@ -73,6 +73,7 @@ void ft_cd(char **argv, t_env *env)
     char *n_path;
 
     path = getenv("OLDPWD");
+    n_path = NULL;
     if (argv[1] == NULL || ft_strcmp(argv[1], "~") == 0)
         ft_home();
     else if (ft_strcmp(argv[1], "-") == 0)
@@ -92,4 +93,5 @@ void ft_cd(char **argv, t_env *env)
             return ;
         }
     }
+    free(n_path);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:35:20 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 09:18:11 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:38:49 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,31 @@ char *find_path(t_env *env)
 {
     char **key_value;
 	char *path;
+	int i;
 
+	i = 0;
     while (env)
     {
         key_value = ft_split(env->s, '=');
         if (!ft_strncmp(key_value[0], "PATH", ft_strlen(env->s)))
 		{
             path = key_value[1];
+			i = 0;
+			while (key_value[i])
+			{
+				free(key_value[i]);
+				i++;
+			}
+			free(key_value);
 			break;
 		}
+		i = 0;
+		while (key_value[i])
+		{
+			free(key_value[i]);
+			i++;
+		}
+		free(key_value);
         env = env->next;
     }
 	return (path);
