@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 12:09:20 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:21:59 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,40 @@ void ft_free_split(char **split)
 	}
 }
 
+void    wait_pid(t_path *path)
+{
+    unsigned char    *stat;
+    int                status;
+    int                i;
+	int					ex_code;
+
+    i = -1;
+    while (++i < path->n_args)
+    {
+        if (waitpid(g_all.child[i], &status, 0) == -1)
+            ft_putstr_fd("wait Error\n", 1);
+        stat = (unsigned char *)&status;
+        if (stat[0])
+            g_all.status_val = stat[0] + 128;
+        else
+            g_all.status_val = stat[1];
+    }
+	if (WIFEXITED(status))
+	{
+		ex_code = WEXITSTATUS(status);
+		if (ex_code != 0)
+			g_all.status_val = ex_code;
+	}
+}
+
 int start(t_path *pt)
 {
 	t_cmd *cmd;
 	int i;
-	int status;
 	int ex_code;
 	char *path;
 
 	i = 0;
-	status = 0;
 	ex_code = 0;
 	cmd = NULL;
 	cmd = g_all.cmd;
@@ -107,17 +131,9 @@ int start(t_path *pt)
 	}
 	i = -1;
 	close_pipes(pt);
-	while (++i < pt->n_args)
-		waitpid(g_all.child[i], &status, 0);
-	g_all.status_val = 0;
-	if (WIFEXITED(status))
-	{
-		ex_code = WEXITSTATUS(status);
-		if (ex_code != 0)
-			g_all.status_val = ex_code;
-	}
+	wait_pid(pt);
 	free(pt);
-	return (g_all.status_val);
+	return (0);
 }
 
 int execution(int argc)
@@ -146,5 +162,5 @@ int execution(int argc)
 	// free(path); // Free the memory allocated for path // free test
 	}
 	
-	return (g_all.status_val);
+	return (0);
 }
