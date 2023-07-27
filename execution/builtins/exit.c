@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:45:15 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/26 16:08:50 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 11:51:16 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,29 @@ void pr_erro_t(char *argv)
     write (0, "numeric argument required\n", ft_strlen("numeric argument required\n"));
 }
 
-void	ft_exit(void)
+void	ft_exit(int var)
 {
 	free(g_all.line);
 	g_all_clear();
 	lstclear_env();
 	g_all_clear_cmd();
-	exit(0);
+	exit(var);
 }
 
 void ft_exit_e(int argc, char **argv)
 {
 	int i;
+    int var;
 
 	i = 0;
+    var = g_all.status_val;
     if (argc == 1 || (argc == 2 && ft_isdigit(argv[1][0])))
-	{
         printf("exit\n");
-        ft_exit();
-    }
 	else if (!ft_isdigit(argv[1][0]))
 	{
         printf ("exit\n");
         pr_erro_t(argv[1]);
-        ft_exit();
+        var = 255;
     }
 	else if (argc > 2 && ft_isdigit(argv[1][0]))
 	{
@@ -59,4 +58,5 @@ void ft_exit_e(int argc, char **argv)
         pr_erro_o();
         return ;
     }
+    ft_exit(var);
 }

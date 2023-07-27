@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:16:23 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/26 21:44:37 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/27 11:53:34 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_readline(void)
 	if (!g_all.line)
 	{
         printf("exit\n");	
-		ft_exit();
+		ft_exit(g_all.status_val);
 	}
 	if (g_all.line == NULL)
 		return ;
