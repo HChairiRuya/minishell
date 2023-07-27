@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/26 18:22:16 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 09:54:28 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	parsing(int argc, char **envr)
 			continue ;
 		}
 		suite_parsing();
-		int exit_status = pipin(count_nd());
+		execution(count_nd());
 		free_all();
 	}
 }

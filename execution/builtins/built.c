@@ -6,13 +6,13 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:12:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/26 13:15:58 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 09:27:52 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell_.h"
 
-void pr_error(char *args)
+void pr_error_nf(char *args)
 {
 	write (0, "env: ", ft_strlen("env: "));
     write (0, args, ft_strlen(args));
@@ -30,7 +30,7 @@ void	builtins(int argc, char **argv)
 		if(argc == 1)
 			pr_env(g_all.env);
 		else
-			pr_error(argv[1]);
+			pr_error_nf(argv[1]);
 	else if (ft_strcmp(argv[0], "cd") == 0)
 		ft_cd(argv, g_all.env);
 	else if (ft_strcmp(argv[0], "export") == 0)

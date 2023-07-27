@@ -6,113 +6,20 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/26 19:18:11 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 09:59:21 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_.h"
 
-void free_pipes(t_path *path)
-{
-	int i;
-
-	i = 0;
-	if (path->pipes_fd)
-	{
-		while (i < path->n_pipes)
-		{
-			if (path->pipes_fd[i])
-				free(path->pipes_fd[i]);
-			i++;
-		}
-		free(path->pipes_fd);
-		path->pipes_fd = NULL;
-	}
-}
-
-int cr_pipes(t_path *path)
-{
-    int i;
-
-    i = 0;
-    path->pipes_fd = malloc(path->n_pipes * sizeof(int *));
-    if (path->pipes_fd == NULL)
-        return (1);
-    while (i < path->n_pipes)
-    {
-        if (pipe(path->pipes_fd[i]) == -1)
-        {
-            perror("pipe");
-            free_pipes(path);
-            return (1);
-        }
-        i++;
-    }
-    return (0);
-}
-
-void close_pipes(t_path *path)
-{
-	int i;
-	t_cmd *tmp;
-	
-	i = 0;
-	tmp = g_all.cmd;
-	while (i < path->n_pipes)
-	{
-		close(path->pipes_fd[i][0]);
-		close(path->pipes_fd[i][1]);
-		i++;
-	}
-	while (tmp)
-	{
-		if (tmp->in != 0)
-			close(tmp->in);
-		if (tmp->out != 1)
-			close(tmp->out);
-		tmp = tmp->next;
-	}
-}
-
 void dupps(int fd, t_path *path, t_cmd *cmd)
 {
 	if (fd == 0 && fd != path->n_args - 1)
-	{
-		if (dup2(path->pipes_fd[fd][1], STDOUT_FILENO) == -1)
-		{
-			perror("dup2");
-			return;
-		}
-		close(path->pipes_fd[fd][0]);
-		close(path->pipes_fd[fd][1]);
-	}
+		dup_first(path, fd);
 	if (fd > 0 && fd < path->n_args - 1)
-	{
-		if (dup2(path->pipes_fd[fd - 1][0], STDIN_FILENO) == -1)
-		{
-			perror("dup2");
-			return;
-		}
-		close(path->pipes_fd[fd - 1][0]);
-		close(path->pipes_fd[fd - 1][1]);
-		if (dup2(path->pipes_fd[fd][1], STDOUT_FILENO) == -1)
-		{
-			perror("dup2");
-			return;
-		}
-		close(path->pipes_fd[fd][0]);
-		close(path->pipes_fd[fd][1]);
-	}
+		dup_middle(path, fd);
 	if (fd == path->n_args - 1 && fd != 0)
-	{
-		if (dup2(path->pipes_fd[fd - 1][0], STDIN_FILENO) == -1)
-		{
-			perror("dup2");
-			return;
-		}
-		close(path->pipes_fd[fd - 1][0]);
-		close(path->pipes_fd[fd - 1][1]);
-	}
+		dup_end(path, fd);
 	if (cmd->in != 0)
 	{
 		dup2(cmd->in, STDIN_FILENO);
@@ -122,24 +29,6 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 	{
 		dup2(cmd->out, STDOUT_FILENO);
 		close(cmd->out);
-	}
-}
-
-void print_err(t_cmd *cmd, char *args)
-{
-	write(2, "minishell", ft_strlen("minishell"));
-	write(2, ": ", 2);
-	if (check_com(args) == 2)
-	{
-		perror(cmd->data[0]);
-		exit (126);
-	}
-	else
-	{
-		write (2, cmd->data[0], ft_strlen(cmd->data[0]));
-		write (2, ": ", 2);
-		write (2, "command not found\n", ft_strlen("command not found\n"));
-		exit (127);
 	}
 }
 
@@ -185,24 +74,6 @@ void ft_free_split(char **split)
 	}
 }
 
-char *find_path(t_env *env)
-{
-    char **key_value;
-	char *path;
-
-    while (env)
-    {
-        key_value = ft_split(env->s, '=');
-        if (!ft_strncmp(key_value[0], "PATH", ft_strlen(env->s)))
-		{
-            path = key_value[1];
-			break;
-		}
-        env = env->next;
-    }
-	return (path);
-}
-
 int start(t_path *pt)
 {
 	t_cmd *cmd;
@@ -221,7 +92,6 @@ int start(t_path *pt)
 	if (cr_pipes(pt) == 1)
 	{
 		perror("cr_pipes");
-		// ft_free_split(pt->splitted); //free test split
 		return (1);
 	}
 	while (cmd)
@@ -248,7 +118,7 @@ int start(t_path *pt)
 	return (g_all.status_val);
 }
 
-int pipin(int argc)
+int execution(int argc)
 {
 	t_path *path;
 	int ex_st;
