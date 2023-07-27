@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:37:08 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/27 11:52:12 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/27 13:08:19 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_all
 	struct s_cmd		*cmd;
 	char				**envr;
 	pid_t				*child;
+	int					fde;
 }	t_all;
 
 typedef struct s_nodes
@@ -129,5 +130,5 @@ int		is_valid(char *s);
 void	ft_exit_e(int argc, char **argv);
 int		count_ac(void);
 void	ft_exit(int var);
-
+void	rm_quotes(void);
 #endif

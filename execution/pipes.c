@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 11:43:12 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/27 12:54:25 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,11 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
-	if (if_bt_found(cmd->data) && count_nd() == 1)
-	{
-        builtins(count_ac(), cmd->data);
-		return (0);
-	}
 	g_all.child[i] = fork();
 	if (g_all.child[i] == 0)
 	{
+		if (!cmd->data[0])
+			exit (0) ;
 		if (if_bt_found(cmd->data) == 1)
 		{
 			dupps(i, pt, cmd);
@@ -92,12 +89,12 @@ void    wait_pid(t_path *path)
         else
             g_all.status_val = stat[1];
     }
-	if (WIFEXITED(status))
-	{
-		ex_code = WEXITSTATUS(status);
-		if (ex_code != 0)
-			g_all.status_val = ex_code;
-	}
+	// if (WIFEXITED(status))
+	// {
+	// 	ex_code = WEXITSTATUS(status);
+	// 	if (ex_code != 0)
+	// 		g_all.status_val = ex_code;
+	// }
 }
 
 int start(t_path *pt)
@@ -113,6 +110,12 @@ int start(t_path *pt)
 	cmd = g_all.cmd;
 	path = find_path(g_all.env);
 	pt->splitted = ft_split(path, ':');
+	if (if_bt_found(cmd->data) && count_nd() == 1)
+	{
+        builtins(count_ac(), cmd->data);
+		free(pt);
+		return (0);
+	}
 	if (cr_pipes(pt) == 1)
 	{
 		perror("cr_pipes");

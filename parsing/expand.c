@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:07:44 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/26 18:05:06 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:22:02 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,50 +46,6 @@ int	check_node(t_nodes *node)
 	else
 		i = 1;
 	return (i);
-}
-
-void	rm_quotes(void)
-{
-	t_nodes	*node;
-
-	node = g_all.head;
-	if (node && node->next && node->quotes == 0
-		&& (node->type == D_Q || node->type == S_Q))
-	{
-		if (node->next->type == node->type)
-		{
-			free(node->valeur);
-			node->valeur = ft_strdup("");
-			node->type = STRING;
-			free_node_exp(node);
-			node = node->next;
-		}
-		else
-		{
-			node = g_all.head->next;
-			free(g_all.head->valeur);
-			free(g_all.head);
-			g_all.head = node;
-		}
-	}
-	while (node && node->next)
-	{
-		if (node && node->next && node->next->quotes == 0
-			&& (node->next->type == D_Q || node->next->type == S_Q))
-		{
-			if (node->next->next && node->next->next->type == node->next->type)
-			{
-				free(node->next->valeur);
-				node->next->valeur = ft_strdup("");
-				node->next->type = STRING;
-				free_node_exp(node->next);
-			}
-			else
-				free_node_exp(node);
-		}
-		else if (node->next)
-			node = node->next;
-	}
 }
 
 t_nodes	*cas_expand(t_nodes *head, char *expand_val, t_nodes *save, int i)
