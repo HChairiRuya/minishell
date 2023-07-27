@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/26 21:42:43 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/26 22:54:41 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,26 @@ char *find_path(t_env *env)
 	return (path);
 }
 
+void    wait_pid(t_path *path)
+{
+    unsigned char    *stat;
+    int                status;
+    int                np;
+    int                i;
+
+    i = -1;
+    while (++i < path->n_args)
+    {
+        if (waitpid(g_all.child[i], &status, 0) == -1)
+            ft_putstr_fd("wait Error\n", 1);
+        stat = (unsigned char *)&status;
+        if (stat[0])
+            g_all.status_val = stat[0] + 128;
+        else
+            g_all.status_val = stat[1];
+    }
+} //FOR TMRW
+
 int start(t_path *pt)
 {
 	t_cmd *cmd;
@@ -248,6 +268,8 @@ int start(t_path *pt)
 	free(pt);
 	return (g_all.status_val);
 }
+
+
 
 int pipin(int argc)
 {
