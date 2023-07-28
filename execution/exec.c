@@ -63,7 +63,7 @@ int iterate(t_path *path, char *args)
 	token = path->splitted;
 	if (ft_strchr(args, '/') != NULL)
     {
-        path->found = args;
+        path->found = ft_strdup(args);
         return (1);
     }
 	rt_val = check(token, path, args);
