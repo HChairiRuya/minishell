@@ -45,10 +45,8 @@ int check(char **token, t_path *path, char *args)
 			break;
 		}
 		else
-		{
 			path->found = NULL;
-			free(full_path);
-		}
+		free(full_path);
 		i++;
 	}
 	return (flag);

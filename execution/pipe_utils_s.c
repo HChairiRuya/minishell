@@ -12,24 +12,6 @@
 
 #include "../minishell_.h"
 
-void free_pipes(t_path *path)
-{
-	int i;
-
-	i = 0;
-	if (path->pipes_fd)
-	{
-		while (i < path->n_pipes)
-		{
-			if (path->pipes_fd[i])
-				free(path->pipes_fd[i]);
-			i++;
-		}
-		free(path->pipes_fd);
-		path->pipes_fd = NULL;
-	}
-}
-
 int cr_pipes(t_path *path)
 {
     int i;
@@ -43,7 +25,6 @@ int cr_pipes(t_path *path)
         if (pipe(path->pipes_fd[i]) == -1)
         {
             perror("pipe");
-            free_pipes(path);
             return (1);
         }
         i++;
@@ -64,7 +45,7 @@ void print_err(t_cmd *cmd, char *args)
 	{
 		write (2, cmd->data[0], ft_strlen(cmd->data[0]));
 		write (2, ": ", 2);
-		write (2, "command not found\n", ft_strlen("command not found\n"));
+		write (2, "commandd not found\n", ft_strlen("commandd not found\n"));
 		exit (127);
 	}
 }

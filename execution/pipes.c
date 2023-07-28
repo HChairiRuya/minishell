@@ -32,7 +32,7 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 	}
 }
 
-int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
+void forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
 	g_all.child[i] = fork();
 	if (g_all.child[i] == 0)
@@ -54,7 +54,6 @@ int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 				print_err(cmd, pt->found);
 		}
     }
-    return (0);
 }
 
 void ft_free_split(char **split)
@@ -76,7 +75,6 @@ void    wait_pid(t_path *path)
     unsigned char    *stat;
     int                status;
     int                i;
-	int					ex_code;
 
     i = -1;
     while (++i < path->n_args)
@@ -99,19 +97,21 @@ int start(t_path *pt)
 
 	i = 0;
 	ex_code = 0;
-	cmd = NULL;
 	cmd = g_all.cmd;
 	path = find_path(g_all.env);//free me later
 	pt->splitted = ft_split(path, ':'); //
 	if (if_bt_found(cmd->data) && count_nd() == 1)
 	{
+		pt->pipes_fd = NULL;
         builtins(count_ac(), cmd->data);
-		free(pt);
+		free(path);
 		return (0);
 	}
 	if (cr_pipes(pt) == 1)
 	{
 		perror("cr_pipes");
+		ft_free_split(pt->splitted);
+		free(path);
 		return (1);
 	}
 	while (cmd)
@@ -120,13 +120,14 @@ int start(t_path *pt)
 		forking_for_pipe(pt, cmd, i);
 		if (g_all.child[i] == 0)
 			break ;
+		free(pt->found);
 		i++;
 		cmd = cmd->next;
 	}
 	i = -1;
 	close_pipes(pt);
-	wait_pid(pt);
-	free(pt);
+	wait_pid(pt); 
+	free(path);
 	return (0);
 }
 
@@ -147,13 +148,14 @@ int execution(int argc)
 		g_all.child = malloc(sizeof(pid_t) * path->n_pipes);
 		if (!g_all.child)// free test
 		{
-			free(path); // Free path in case of allocation failure
+			free(path);
 			return (0);
 		}
 		start(path);
+		free(path->pipes_fd);
+		ft_free_split(path->splitted);
+		free(path);
 		free(g_all.child);
-	// free(g_all.child); // Free the memory allocated for g_all.child  // free test
-	// free(path); // Free the memory allocated for path // free test
 	}
 	return (0);
 }

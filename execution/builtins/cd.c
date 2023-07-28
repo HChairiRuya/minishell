@@ -90,8 +90,9 @@ void ft_cd(char **argv, t_env *env)
                 pr_err_not_a_dir(argv[1]);
             else 
                 pr_err_no_file(argv[1]);
+            free(n_path);
             return ;
         }
+        free(n_path);
     }
-    free(n_path);
 }

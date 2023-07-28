@@ -24,7 +24,6 @@
 typedef struct	s_path
 {
 	char	**splitted;
-	char	**all_args;
 	char	*found;
 	int		(*pipes_fd)[2];
 	int		n_pipes;
@@ -44,7 +43,7 @@ void	for_last(t_path *path, int fd);
 void for_last(t_path *path, int fd);
 int cr_pipes(t_path *path);
 void close_pipes(t_path *path);
-int forking_for_pipe(t_path *pt, t_cmd *cmd, int i);
+void forking_for_pipe(t_path *pt, t_cmd *cmd, int i);
 int execution(int argc);
 int start(t_path *pt);
 int	ft_count(t_nodes *node);
