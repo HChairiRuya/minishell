@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:18:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 16:06:42 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/28 19:57:54 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void print_err(t_cmd *cmd, char *args)
 	{
 		write (2, cmd->data[0], ft_strlen(cmd->data[0]));
 		write (2, ": ", 2);
-		write (2, "commandd not found\n", ft_strlen("commandd not found\n"));
+		write (2, "command not found\n", ft_strlen("command not found\n"));
 		exit (127);
 	}
 }

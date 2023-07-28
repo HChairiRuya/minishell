@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:03:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 15:19:07 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/28 22:47:35 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ft_echo(int argc, char **argv)
     i = 0;
     while (argv[i])
     {
+        ft_putstr_fd("test\n", 1);
         printf("%s", argv[i]);
         if (argv[i + 1])
             printf(" ");

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 15:17:37 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/28 22:55:01 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 		{
 			dupps(i, pt, cmd);
 			close_pipes(pt);
-			builtins(count_ac(), g_all.cmd->data);
+			builtins(count_ac(), cmd->data);
 			exit (0);
 		}
 		else
@@ -102,8 +102,13 @@ int start(t_path *pt)
 	pt->splitted = ft_split(path, ':'); //
 	if (if_bt_found(cmd->data) && count_nd() == 1)
 	{
+		dupps(0, pt, cmd);
 		pt->pipes_fd = NULL;
         builtins(count_ac(), cmd->data);
+		close(0);
+		close(1);
+		dup2(g_all.dup_z, 0);
+		dup2(g_all.dup_o, 1);
 		free(path);
 		return (0);
 	}
@@ -146,7 +151,7 @@ int execution(int argc)
 	{
 		path->n_pipes = path->n_args - 1;
 		g_all.child = malloc(sizeof(pid_t) * path->n_pipes);
-		if (!g_all.child)// free test
+		if (!g_all.child)
 		{
 			free(path);
 			return (0);

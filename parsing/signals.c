@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:51:12 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/27 15:16:51 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/28 19:48:49 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	sig_ctrl(int sig)
 {
 	if (sig == SIGQUIT)
+	{
+		rl_on_new_line();
 		rl_redisplay();
+	}
 	else if (sig == SIGINT)
 	{
 		if (!g_all.k)

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 15:55:00 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/28 21:58:41 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void free_pipes(t_path *path);
 int cr_pipes(t_path *path);
 void print_err(t_cmd *cmd, char *args);
 char *find_path(t_env *env);
-void replace(t_env *env, char *value);
+void replace(char *s, char *eq, t_env *env, char *value);
 void pr_err_no_file(char *args);
 void pr_err_not_a_dir(char *args);
 
