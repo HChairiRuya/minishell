@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 12:37:48 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:57:49 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,11 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 
 int forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
-	if (if_bt_found(cmd->data) && count_nd() == 1)
-	{
-        builtins(count_ac(), cmd->data);
-		return (0);
-	}
 	g_all.child[i] = fork();
 	if (g_all.child[i] == 0)
 	{
+		if (!cmd->data[0])
+			exit (0) ;
 		if (if_bt_found(cmd->data) == 1)
 		{
 			dupps(i, pt, cmd);
@@ -74,6 +71,32 @@ void ft_free_split(char **split)
 	}
 }
 
+void    wait_pid(t_path *path)
+{
+    unsigned char    *stat;
+    int                status;
+    int                i;
+	int					ex_code;
+
+    i = -1;
+    while (++i < path->n_args)
+    {
+        if (waitpid(g_all.child[i], &status, 0) == -1)
+            ft_putstr_fd("wait Error\n", 1);
+        stat = (unsigned char *)&status;
+        if (stat[0])
+            g_all.status_val = stat[0] + 128;
+        else
+            g_all.status_val = stat[1];
+    }
+	// if (WIFEXITED(status))
+	// {
+	// 	ex_code = WEXITSTATUS(status);
+	// 	if (ex_code != 0)
+	// 		g_all.status_val = ex_code;
+	// }
+}
+
 int start(t_path *pt)
 {
 	t_cmd *cmd;
@@ -84,6 +107,12 @@ int start(t_path *pt)
 	cmd = g_all.cmd;
 	path = find_path(g_all.env);
 	pt->splitted = ft_split(path, ':');
+	if (if_bt_found(cmd->data) && count_nd() == 1)
+	{
+        builtins(count_ac(), cmd->data);
+		free(pt);
+		return (0);
+	}
 	if (cr_pipes(pt) == 1)
 	{
 		perror("cr_pipes");

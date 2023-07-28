@@ -6,90 +6,90 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:04:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 09:25:15 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:30:57 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell_.h"
 
-void ft_dash()
+void	ft_dash(void)
 {
-    char *get_old;
+	char	*get_old;
 
-    get_old = getenv("OLDPWD");
-    replace(g_all.env, get_old);
-    if (get_old == NULL)
-    {
-        printf("Previous directory not set.\n");
-        return;
-    }
-    if (chdir(get_old) != 0)
-    {
-        perror("chdir");
-        return ;
-    }
-    printf("%s\n", get_old);
+	get_old = getenv("OLDPWD");
+	replace(g_all.env, get_old);
+	if (get_old == NULL)
+	{
+		printf ("Previous directory not set.\n");
+		return ;
+	}
+	if (chdir(get_old) != 0)
+	{
+		perror("chdir");
+		return ;
+	}
+	printf("%s\n", get_old);
 }
 
-void ft_previous()
+void	ft_previous(void)
 {
-    char *pre;
+	char	*pre;
 
-    pre = "..";
-    replace (g_all.env, pre);
-    if (chdir(pre) != 0)
-    {
-        perror("chdir");
-        return;
-    }
+	pre = "..";
+	replace (g_all.env, pre);
+	if (chdir(pre) != 0)
+	{
+		perror("chdir");
+		return ;
+	}
 }
 
-void ft_home()
+void	ft_home(void)
 {
 	char	*get_h;
 
-    get_h = getenv("HOME");
-    replace(g_all.env, get_h);
-    if (chdir(get_h) != 0)
-    {
-        perror ("chdipr");
-        return ;
-    }  
+	get_h = getenv("HOME");
+	replace(g_all.env, get_h);
+	if (chdir(get_h) != 0)
+	{
+		perror ("chdipr");
+		return ;
+	}
 }
 
-char* joiin_(char *path, char *h)
+char	*joiin_(char *path, char *h)
 {
-    char *first;
-    char *sec;
+	char	*first;
+	char	*sec;
 
-    first = ft_strjoin(path, "/", 0);
-    sec = ft_strjoin(first, h, 0);
-    return (sec);
+	first = ft_strjoin(path, "/", 0);
+	sec = ft_strjoin(first, h, 0);
+	return (sec);
 }
 
-void ft_cd(char **argv, t_env *env)
+void	ft_cd(char **argv, t_env *env)
 {
-    char *path;
-    char *n_path;
+	char	*path;
+	char	*n_path;
 
-    path = getenv("OLDPWD");
-    if (argv[1] == NULL || ft_strcmp(argv[1], "~") == 0)
-        ft_home();
-    else if (ft_strcmp(argv[1], "-") == 0)
-        ft_dash();
-    else if (ft_strcmp(argv[1], "~-") == 0)
-        ft_previous();
-    else
-    {
-        n_path = joiin_(path, argv[1]);
-        replace(g_all.env, n_path);
-        if (chdir(argv[1]) != 0)
-        {
-            if (errno == ENOTDIR)
-                pr_err_not_a_dir(argv[1]);
-            else 
-                pr_err_no_file(argv[1]);
-            return ;
-        }
-    }
+	path = getenv("OLDPWD");
+	if (argv[1] == NULL || ft_strcmp(argv[1], "~") == 0)
+		ft_home();
+	else if (ft_strcmp(argv[1], "-") == 0)
+		ft_dash();
+	else if (ft_strcmp(argv[1], "~-") == 0)
+		ft_previous();
+	else
+	{
+		n_path = joiin_(path, argv[1]);
+		replace(g_all.env, n_path);
+		if (chdir(argv[1]) != 0)
+		{
+			if (errno == ENOTDIR)
+				pr_err_not_a_dir(argv[1]);
+			else
+				pr_err_no_file(argv[1]);
+			return ;
+		}
+	}
 }
