@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:16:23 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/27 13:16:08 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/27 15:16:14 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_readline(void)
 	g_all.line = readline("minishell> ");
 	if (!g_all.line)
 	{
-        printf("exit\n");	
+		printf("exit\n");
 		ft_exit(g_all.status_val);
 	}
 	if (g_all.line == NULL)
@@ -35,7 +35,6 @@ void	ft_readline(void)
 	if (g_all.line[0])
 		add_history(g_all.line);
 	split_function();
-	// voir_nodes();
 }
 
 void	initial(char **envr)

@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:35:20 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 09:18:11 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:12:27 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,20 @@ char *find_path(t_env *env)
 {
     char **key_value;
 	char *path;
+	int i;
 
+	i = 0;
     while (env)
     {
         key_value = ft_split(env->s, '=');
         if (!ft_strncmp(key_value[0], "PATH", ft_strlen(env->s)))
 		{
             path = key_value[1];
+			free_val(key_value);
+			free(key_value);
 			break;
 		}
+		free_val(key_value);
         env = env->next;
     }
 	return (path);

@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_utils_s.c                                     :+:      :+:    :+:   */
+/*   pipe_utils_II.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:18:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 15:01:17 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:20:33 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_.h"
-
-void free_pipes(t_path *path)
-{
-	int i;
-
-	i = 0;
-	if (path->pipes_fd)
-	{
-		while (i < path->n_pipes)
-		{
-			if (path->pipes_fd[i])
-				free(path->pipes_fd[i]);
-			i++;
-		}
-		free(path->pipes_fd);
-		path->pipes_fd = NULL;
-	}
-}
 
 int cr_pipes(t_path *path)
 {
@@ -96,4 +78,22 @@ void    wait_pid(t_path *path)
         else
             g_all.status_val = stat[1];
     }
+}
+
+int built_pipes(t_cmd *cmd, t_path *pt, char *path)
+{
+    if (if_bt_found(cmd->data) && count_nd() == 1)
+	{
+		pt->pipes_fd = NULL;
+        builtins(count_ac(), cmd->data);
+		free(path);
+		return (0);
+	}
+	if (cr_pipes(pt) == 1)
+	{
+		perror("cr_pipes");
+		ft_free_split(pt->splitted);
+		free(path);
+		return (1);
+	}
 }

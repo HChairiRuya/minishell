@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 22:11:25 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/27 13:17:25 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/27 15:15:45 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_nodes	*get_next(t_nodes *node)
 	return (node);
 }
 
-void fd_error(char *args, t_cmd *cmd)
+void	fd_error(char *args, t_cmd *cmd)
 {
 	g_all.fde = 1;
 	write(2, "minishell", ft_strlen("minishell"));

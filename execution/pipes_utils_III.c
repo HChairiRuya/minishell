@@ -6,28 +6,11 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:05:30 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 13:14:37 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:15:44 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_.h"
-
-int hi(t_cmd *cmd, t_path *path)
-{
-	if (if_bt_found(cmd->data) && count_nd() == 1)
-	{
-        builtins(count_ac(), cmd->data);
-		free(path);
-		return (0);
-	}
-	if (cr_pipes(path) == 1)
-	{
-		perror("cr_pipes");
-		// ft_free_split(path->splitted); //free test split
-		return (1);
-	}
-	return (1);
-}
 
 void end(t_path *path)
 {
@@ -36,46 +19,31 @@ void end(t_path *path)
 	free(path);
 }
 
-// void	ft_echo(int argc, char **argv)
-// {
-// 	int	no_nl;
-// 	int	i;
-//     char *n;
+void free_val(char *key_value)
+{
+	int i;
 
-// 	i = 1;
-// 	no_nl = 0;
+	i = 0;
+	while (key_value[i])
+	{
+		if (i != 1)
+			free(key_value[i]);
+		i++;
+	}
+	free(key_value);
+}
 
-//     n = NULL;
-//     while (argv[i])
-//     {
-//         n = ft_strchr(argv[i], 'n');
-//         if (argc >= 2 && ft_strcmp_ch(argv[i][0], '-') == 0
-//         && argv[i][0] == '-' && argv[i][1] == 'n')
-//         {
-//             if (ft_cmp(n) == 1)
-//                 break;
-//             else
-//             {
-//                 no_nl = 1;
-//                 argv++;
-//                 argc--;
-//             }
-//             continue;
-//         }
-//         else
-//             break;
-//         i++;
-//         n = NULL;
-//     }
-//     argv++;
-//     i = 0;
-//     while (argv[i])
-//     {
-//         printf("%s", argv[i]);
-//         if (argv[i + 1])
-//             printf(" ");
-//         i++;
-//     }
-//     if (!no_nl)
-//         printf("\n");
-// }
+void ft_free_split(char **split)
+{
+	if (split)
+	{
+		size_t i = 0;
+		while (split[i])
+		{
+			free(split[i]);
+			i++;
+		}
+		free(split);
+	}
+}
+

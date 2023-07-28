@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:12:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 15:27:19 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:01:17 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	pr_error_nf(char *args)
 
 void	builtins(int argc, char **argv)
 {
+    g_all.status_val = 0;
 	if (ft_strcmp(argv[0], "pwd") == 0)
 		ft_pwd();
 	else if (ft_strcmp(argv[0], "echo") == 0)

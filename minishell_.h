@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 13:55:33 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:20:38 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 typedef struct	s_path
 {
 	char	**splitted;
-	char	**all_args;
 	char	*found;
 	int		(*pipes_fd)[2];
 	int		n_pipes;
@@ -44,7 +43,7 @@ void	for_last(t_path *path, int fd);
 void for_last(t_path *path, int fd);
 int cr_pipes(t_path *path);
 void close_pipes(t_path *path);
-int forking_for_pipe(t_path *pt, t_cmd *cmd, int i);
+void forking_for_pipe(t_path *pt, t_cmd *cmd, int i);
 int execution(int argc);
 int start(t_path *pt);
 int	ft_count(t_nodes *node);
@@ -78,8 +77,10 @@ void replace(t_env *env, char *value);
 void pr_err_no_file(char *args);
 void pr_err_not_a_dir(char *args);
 void    wait_pid(t_path *path);
-int hi(t_cmd *cmd, t_path *path);
 void end(t_path *path);
+void free_val(char *key_value);
+void ft_free_split(char **split);
+int built_pipes(t_cmd *cmd, t_path *pt, char *path);
 
 // void	change(int *no_nl, char ***argv, int *argc);
 
