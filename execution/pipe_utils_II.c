@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:18:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 12:32:05 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:01:17 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,4 @@ void    wait_pid(t_path *path)
         else
             g_all.status_val = stat[1];
     }
-	if (WIFEXITED(status))
-	{
-		ex_code = WEXITSTATUS(status);
-		if (ex_code != 0)
-			g_all.status_val = ex_code;
-	}
 }

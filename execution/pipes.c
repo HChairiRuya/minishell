@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 14:57:49 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/28 14:57:50 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,32 +71,6 @@ void ft_free_split(char **split)
 	}
 }
 
-void    wait_pid(t_path *path)
-{
-    unsigned char    *stat;
-    int                status;
-    int                i;
-	int					ex_code;
-
-    i = -1;
-    while (++i < path->n_args)
-    {
-        if (waitpid(g_all.child[i], &status, 0) == -1)
-            ft_putstr_fd("wait Error\n", 1);
-        stat = (unsigned char *)&status;
-        if (stat[0])
-            g_all.status_val = stat[0] + 128;
-        else
-            g_all.status_val = stat[1];
-    }
-	// if (WIFEXITED(status))
-	// {
-	// 	ex_code = WEXITSTATUS(status);
-	// 	if (ex_code != 0)
-	// 		g_all.status_val = ex_code;
-	// }
-}
-
 int start(t_path *pt)
 {
 	t_cmd *cmd;
@@ -107,31 +81,22 @@ int start(t_path *pt)
 	cmd = g_all.cmd;
 	path = find_path(g_all.env);
 	pt->splitted = ft_split(path, ':');
-	if (if_bt_found(cmd->data) && count_nd() == 1)
-	{
-        builtins(count_ac(), cmd->data);
-		free(pt);
+	if (hi(cmd, pt) == 0)
 		return (0);
-	}
-	if (cr_pipes(pt) == 1)
+	else
 	{
-		perror("cr_pipes");
-		ft_free_split(pt->splitted); //free test split
-		return (1);
+		while (cmd)
+		{
+			iterate(pt, cmd->data[0]);
+			forking_for_pipe(pt, cmd, i);
+			free(pt->found);
+			if (g_all.child[i] == 0)
+				break ;
+			i++;
+			cmd = cmd->next;
+		}
+		end(pt);
 	}
-	while (cmd)
-	{
-		iterate(pt, cmd->data[0]);
-		forking_for_pipe(pt, cmd, i);
-		free(pt->found); // free test
-		if (g_all.child[i] == 0)
-			break ;
-		i++;
-		cmd = cmd->next;
-	}
-	close_pipes(pt);
-	wait_pid(pt);
-	free(pt);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 12:32:22 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/28 13:55:33 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,9 @@ void replace(t_env *env, char *value);
 void pr_err_no_file(char *args);
 void pr_err_not_a_dir(char *args);
 void    wait_pid(t_path *path);
+int hi(t_cmd *cmd, t_path *path);
+void end(t_path *path);
+
+// void	change(int *no_nl, char ***argv, int *argc);
 
 #endif

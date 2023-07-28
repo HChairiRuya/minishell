@@ -1,6 +1,6 @@
 NAME= minishell
 CC= cc
-FLAGS= -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS= -Wall -Wextra -Werror #-fsanitize=address -g
 
 SRC = ./parsing/minishell.c ./parsing/utils.c ./parsing/depart.c ./parsing/change_type.c ./parsing/env.c ./parsing/expand.c \
 	./parsing/link.c ./parsing/syntaxe_err.c ./parsing/division.c ./parsing/suite_div.c ./parsing/ft_free.c ./parsing/s_expand.c \
@@ -11,7 +11,8 @@ SRC = ./parsing/minishell.c ./parsing/utils.c ./parsing/depart.c ./parsing/chang
 	./execution/builtins/env_n.c ./execution/builtins/built.c \
 	./execution/builtins/cd.c ./execution/builtins/export.c \
 	./execution/builtins/unset.c ./execution/builtins/exit.c \
-	./execution/pipe_utils_s.c ./execution/builtins/cd_utils.c
+	./execution/pipe_utils_II.c ./execution/builtins/cd_utils.c \
+	./execution/pipes_utils_III.c
 
 HEADERS_DIRECTORY = ./
 HEADERS_LIST = minishell.h
