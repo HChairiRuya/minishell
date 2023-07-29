@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:05:30 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 12:13:02 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 15:08:48 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	free_val(char **key_value)
 	i = 0;
 	while (key_value[i])
 	{
-		if (i != 1)
-			free(key_value[i]);
+		free(key_value[i]);
 		i++;
 	}
 	free(key_value);

@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 12:34:11 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 15:08:23 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ int	start_exec(t_path *pt, t_cmd *cmd, char *path)
 	int	i;
 
 	i = 0;
-	cmd = g_all.cmd;
-	path = find_path(g_all.env);
-	pt->splitted = ft_split(path, ':');
 	if (cr_pipes(pt) == 1)
 	{
 		perror("cr_pipes");

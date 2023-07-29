@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:23:54 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 10:29:00 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:32:05 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	replace(char *s, char *eq, t_env *env, char *value)
 {
 	char	**key_value;
-	int		i;
 
-	i = 0;
 	while (env)
 	{
 		key_value = ft_split(env->s, '=');
@@ -29,11 +27,11 @@ void	replace(char *s, char *eq, t_env *env, char *value)
 				env->s = "";
 				env->s = ft_strjoin(env->s, eq, 0);
 				env->s = ft_strjoin(env->s, value, 1);
-				i = 0;
 				free_val(key_value);
 				break ;
 			}
 		}
+		free_val(key_value);
 		env = env->next;
 	}
 }

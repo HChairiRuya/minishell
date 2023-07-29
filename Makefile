@@ -1,6 +1,6 @@
 NAME= minishell
 CC= cc
-FLAGS= -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS= -Wall -Wextra -Werror #-fsanitize=address -g
 
 SRC = ./parsing/minishell.c ./parsing/utils.c ./parsing/depart.c ./parsing/change_type.c ./parsing/env.c ./parsing/expand.c \
 	./parsing/link.c ./parsing/syntaxe_err.c ./parsing/division.c ./parsing/suite_div.c ./parsing/ft_free.c ./parsing/s_expand.c \
