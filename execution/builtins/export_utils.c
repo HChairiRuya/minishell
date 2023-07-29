@@ -1,50 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes_utils_III.c                                  :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 15:05:30 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 20:37:38 by fbelahse         ###   ########.fr       */
+/*   Created: 2023/07/28 15:58:41 by fbelahse          #+#    #+#             */
+/*   Updated: 2023/07/28 16:00:59 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell_.h"
+#include "../../minishell_.h"
 
-void	end(t_path *path)
+void	print_exp_error(char *argv)
 {
-	close_pipes(path);
-	wait_pid(path);
-	free(path);
-}
-
-void	free_val(char **key_value)
-{
-	int	i;
-
-	i = 0;
-	while (key_value[i])
-	{
-		if (i != 1)
-			free(key_value[i]);
-		i++;
-	}
-	free(key_value);
-}
-
-void	ft_free_split(char **split)
-{
-	size_t	i;
-
-	if (split)
-	{
-		i = 0;
-		while (split[i])
-		{
-			free(split[i]);
-			i++;
-		}
-		free(split);
-	}
+	write(0, "minishell: ", ft_strlen("minishell: "));
+	write(0, "export: ", ft_strlen("export: "));
+	write (0, "`", 1);
+	write(0, argv, ft_strlen(argv));
+	write (0, "'", 1);
+	write(0, ": ", 2);
+	write(0, "not a valid identifier\n", ft_strlen("not a valid identifier\n"));
+	g_all.status_val = 1;
 }

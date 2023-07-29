@@ -11,8 +11,8 @@ SRC = ./parsing/minishell.c ./parsing/utils.c ./parsing/depart.c ./parsing/chang
 	./execution/builtins/env_n.c ./execution/builtins/built.c \
 	./execution/builtins/cd.c ./execution/builtins/export.c \
 	./execution/builtins/unset.c ./execution/builtins/exit.c \
-	./execution/pipe_utils_II.c ./execution/builtins/cd_utils.c \
-	./execution/pipes_utils_III.c
+	./execution/pipe_utils_II.c\
+	./execution/pipes_utils_III.c ./execution/builtins/export_utils.c
 
 HEADERS_DIRECTORY = ./
 HEADERS_LIST = minishell.h

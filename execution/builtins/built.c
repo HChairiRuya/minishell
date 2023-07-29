@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:12:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 15:01:17 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:45:02 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	pr_error_nf(char *args)
 	write (2, ": ", 2);
 	write (2, "No such file or directory\n",
 		ft_strlen("No such file or directory\n"));
+	g_all.status_val = 127;
 }
 
 void	builtins(int argc, char **argv)
 {
-    g_all.status_val = 0;
+	g_all.status_val = 0;
 	if (ft_strcmp(argv[0], "pwd") == 0)
 		ft_pwd();
 	else if (ft_strcmp(argv[0], "echo") == 0)
@@ -39,10 +40,6 @@ void	builtins(int argc, char **argv)
 		ft_cd(argv, g_all.env);
 	else if (ft_strcmp(argv[0], "export") == 0)
 		ft_export(argc, argv, g_all.env);
-	else if (ft_strcmp(argv[0], "unset") == 0)
-		ft_unset(argv, &g_all.env);
-	else if (ft_strcmp(argv[0], "exit") == 0)
-		ft_exit_e(argc, argv);
 	else if (ft_strcmp(argv[0], "unset") == 0)
 		ft_unset(argv, &g_all.env);
 	else if (ft_strcmp(argv[0], "exit") == 0 && argc == 1)

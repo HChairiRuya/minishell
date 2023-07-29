@@ -6,13 +6,13 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 15:23:28 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:36:10 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_.h"
 
-void dupps(int fd, t_path *path, t_cmd *cmd)
+void	dupps(int fd, t_path *path, t_cmd *cmd)
 {
 	if (fd == 0 && fd != path->n_args - 1)
 		dup_first(path, fd);
@@ -32,18 +32,18 @@ void dupps(int fd, t_path *path, t_cmd *cmd)
 	}
 }
 
-void forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
+void	forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 {
 	g_all.child[i] = fork();
 	if (g_all.child[i] == 0)
 	{
 		if (!cmd->data[0])
-			exit (0) ;
+			exit (0);
 		if (if_bt_found(cmd->data) == 1)
 		{
 			dupps(i, pt, cmd);
 			close_pipes(pt);
-			builtins(count_ac(), g_all.cmd->data);
+			builtins(count_ac(), cmd->data);
 			exit (0);
 		}
 		else
@@ -53,40 +53,21 @@ void forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
 			if (execve(pt->found, cmd->data, g_all.envr) == -1)
 				print_err(cmd, pt->found);
 		}
-    }
+	}
 }
 
-
-
-void    wait_pid(t_path *path)
+int	start_exec(t_path *pt, t_cmd *cmd, char *path)
 {
-    unsigned char    *stat;
-    int                status;
-    int                i;
-
-    i = -1;
-    while (++i < path->n_args)
-    {
-        waitpid(g_all.child[i], &status, 0);
-        stat = (unsigned char *)&status;
-        if (stat[0])
-            g_all.status_val = stat[0] + 128;
-        else
-            g_all.status_val = stat[1];
-    }
-}
-
-int start(t_path *pt)
-{
-	t_cmd *cmd;
-	int i;
-	char *path;
+	int	i;
 
 	i = 0;
-	cmd = g_all.cmd;
-	path = find_path(g_all.env);
-	pt->splitted = ft_split(path, ':');
-	built_pipes(cmd, pt, path);
+	if (cr_pipes(pt) == 1)
+	{
+		perror("cr_pipes");
+		ft_free_split(pt->splitted);
+		free(path);
+		return (1);
+	}
 	while (cmd)
 	{
 		iterate(pt, cmd->data[0]);
@@ -97,20 +78,38 @@ int start(t_path *pt)
 		i++;
 		cmd = cmd->next;
 	}
-	i = -1;
+	return (0);
+}
+
+int	start(t_path *pt)
+{
+	t_cmd	*cmd;
+	char	*path;
+	int		i;
+
+	i = 0;
+	cmd = g_all.cmd;
+	path = find_path(g_all.env);
+	pt->splitted = ft_split(path, ':');
+	if (if_bt_found(cmd->data) && count_nd() == 1)
+	{
+		pt->pipes_fd = NULL;
+		builtins(count_ac(), cmd->data);
+		free(path);
+		return (1);
+	}
+	start_exec(pt, cmd, path);
 	close_pipes(pt);
-	wait_pid(pt); 
+	wait_pid(pt);
 	free(path);
 	return (0);
 }
 
-int execution(int argc)
+int	execution(int argc)
 {
-	t_path *path;
-	int ex_st;
+	t_path	*path;
 
 	path = NULL;
-	ex_st = 0;
 	path = malloc(sizeof(t_path));
 	if (!path)
 		return (0);
@@ -119,7 +118,7 @@ int execution(int argc)
 	{
 		path->n_pipes = path->n_args - 1;
 		g_all.child = malloc(sizeof(pid_t) * path->n_pipes);
-		if (!g_all.child)// free test
+		if (!g_all.child)
 		{
 			free(path);
 			return (0);

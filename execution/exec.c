@@ -4,17 +4,15 @@
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
-/*                                                 +#+#+#+#+#+   +#+           */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 22:26:34 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/25 12:13:12 by hchairi          ###   ########.fr       */
+/*   Created: 2023/07/28 20:41:29 by fbelahse          #+#    #+#             */
+/*   Updated: 2023/07/28 20:41:31 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_.h"
 
-int check_com(char *path)
+int	check_com(char *path)
 {
 	if (!access(path, R_OK))
 	{
@@ -26,11 +24,11 @@ int check_com(char *path)
 	return (0);
 }
 
-int check(char **token, t_path *path, char *args)
+int	check(char **token, t_path *path, char *args)
 {
-	int i;
-	int flag;
-	char *full_path;
+	char	*full_path;
+	int		flag;
+	int		i;
 
 	i = 0;
 	flag = 0;
@@ -42,7 +40,7 @@ int check(char **token, t_path *path, char *args)
 		{
 			path->found = full_path;
 			flag = 1;
-			break;
+			break ;
 		}
 		else
 			path->found = NULL;
@@ -52,7 +50,7 @@ int check(char **token, t_path *path, char *args)
 	return (flag);
 }
 
-int iterate(t_path *path, char *args)
+int	iterate(t_path *path, char *args)
 {
 	char	**token;
 	int		i;
@@ -62,10 +60,10 @@ int iterate(t_path *path, char *args)
 	rt_val = 0;
 	token = path->splitted;
 	if (ft_strchr(args, '/') != NULL)
-    {
-        path->found = ft_strdup(args);
-        return (1);
-    }
+	{
+		path->found = ft_strdup(args);
+		return (1);
+	}
 	rt_val = check(token, path, args);
 	return (rt_val);
 }

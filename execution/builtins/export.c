@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:49:21 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/27 17:51:31 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/28 16:00:35 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,20 @@ void	_pr_exp(t_env *env)
 		env = env->next;
 	}
 }
-void print_exp_error(char *argv)
-{
-    write(0, "minishell: ", ft_strlen("minishell: "));
-    write(0, "export: ", ft_strlen("export: "));
-    write (0, "`", 1);
-	write(0, argv, ft_strlen(argv));
-    write (0, "'", 1);
-	write(0, ": ", 2);
-	write(0, "not a valid identifier\n", ft_strlen("not a valid identifier\n"));
-}
 
-void ft_export(int argc, char **argv, t_env *env)
+void	ft_export(int argc, char **argv, t_env *env)
 {
 	int	i;
+
 	if (argc == 1)
 		_pr_exp(env);
 	else
 	{
 		i = 1;
-		
 		while (i < argc)
 		{
-            if (is_valid(argv[i]))
-                print_exp_error(argv[i]);
+			if (is_valid(argv[i]))
+				print_exp_error(argv[i]);
 			else if (check_if_ex(env, argv[i]) == 1)
 				;
 			else
