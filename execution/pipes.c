@@ -129,8 +129,8 @@ int	execution(int argc)
 			return (0);
 		}
 		start(path);
-		free(path->pipes_fd);
 		ft_free_split(path->splitted);
+		free(path->pipes_fd);
 		free(g_all.child);
 	}
 	free(path);

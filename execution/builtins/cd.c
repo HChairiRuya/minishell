@@ -22,6 +22,7 @@ void	ft_home(void)
 	if (!get_h)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		free(s);
 		g_all.status_val = 1;
 	}
 	else if (chdir(get_h) != 0)
