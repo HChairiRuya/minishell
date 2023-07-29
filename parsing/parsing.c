@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 15:16:23 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/28 17:59:38 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:51:40 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ void	suite_parsing(void)
 	change_type();
 	global_expand(g_all.env);
 	pipe_node(g_all.env);
-	// print_data();
-	// voir_nodes();
-	// system("leaks minishell");
 }
 
 void	ft_readline(void)

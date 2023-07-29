@@ -6,65 +6,38 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:04:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 20:44:14 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:31:59 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell_.h"
 
-void	ft_dash(void)
-{
-	char	*get_old;
-
-	get_old = getenv("OLDPWD");
-	replace(g_all.env, get_old);
-	if (get_old == NULL)
-	{
-		printf ("Previous directory not set.\n");
-		return ;
-	}
-	if (chdir(get_old) != 0)
-	{
-		perror("chdir");
-		return ;
-	}
-	printf("%s\n", get_old);
-}
-
-void	ft_previous(void)
-{
-	char	*pre;
-
-	pre = "..";
-	replace (g_all.env, pre);
-	if (chdir(pre) != 0)
-	{
-		perror("chdir");
-		return ;
-	}
-}
-
 void	ft_home(void)
 {
 	char	*get_h;
+	char	*s;
 
-	get_h = getenv("HOME");
-	replace(g_all.env, get_h);
-	if (chdir(get_h) != 0)
+	s = getcwd(NULL, 0);
+	get_h = get_node_value(g_all.env, "HOME");
+	if (!get_h)
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		g_all.status_val = 1;
+	}
+	else if (chdir(get_h) != 0)
 	{
 		perror ("chdir");
+		free(get_h);
+		free(s);
 		return ;
 	}
-}
-
-char	*joiin_(char *path, char *h)
-{
-	char	*first;
-	char	*sec;
-
-	first = ft_strjoin(path, "/", 0);
-	sec = ft_strjoin(first, h, 1);
-	return (sec);
+	else
+	{
+		replace("PWD", "PWD=", g_all.env, get_h);
+		replace("OLDPWD", "OLDPWD=", g_all.env, s);
+		free(get_h);
+		free(s);
+	}
 }
 
 void	ft_cd(char **argv, t_env *env)
@@ -72,17 +45,11 @@ void	ft_cd(char **argv, t_env *env)
 	char	*path;
 	char	*n_path;
 
-	path = getenv("OLDPWD");
 	if (argv[1] == NULL || ft_strcmp(argv[1], "~") == 0)
 		ft_home();
-	else if (ft_strcmp(argv[1], "-") == 0)
-		ft_dash();
-	else if (ft_strcmp(argv[1], "~-") == 0)
-		ft_previous();
 	else
 	{
-		n_path = joiin_(path, argv[1]);
-		replace(g_all.env, n_path);
+		path = getcwd(NULL, 0);
 		if (chdir(argv[1]) != 0)
 		{
 			if (errno == ENOTDIR)
@@ -90,8 +57,13 @@ void	ft_cd(char **argv, t_env *env)
 			else
 				pr_err_no_file(argv[1]);
 			free(n_path);
+			free(path);
 			return ;
 		}
+		n_path = getcwd(NULL, 0);
+		replace ("PWD", "PWD=", g_all.env, n_path);
+		replace ("OLDPWD", "OLDPWD=", g_all.env, path);
 		free(n_path);
+		free(path);
 	}
 }

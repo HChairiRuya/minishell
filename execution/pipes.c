@@ -6,7 +6,7 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 20:36:10 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:32:40 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int	start_exec(t_path *pt, t_cmd *cmd, char *path)
 	int	i;
 
 	i = 0;
+	cmd = g_all.cmd;
+	path = find_path(g_all.env);
+	pt->splitted = ft_split(path, ':');
 	if (cr_pipes(pt) == 1)
 	{
 		perror("cr_pipes");
@@ -93,10 +96,15 @@ int	start(t_path *pt)
 	pt->splitted = ft_split(path, ':');
 	if (if_bt_found(cmd->data) && count_nd() == 1)
 	{
+		dupps(0, pt, cmd);
 		pt->pipes_fd = NULL;
 		builtins(count_ac(), cmd->data);
+		close(0);
+		close(1);
+		dup2(g_all.dup_z, 0);
+		dup2(g_all.dup_o, 1);
 		free(path);
-		return (1);
+		return (0);
 	}
 	start_exec(pt, cmd, path);
 	close_pipes(pt);

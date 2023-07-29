@@ -6,27 +6,31 @@
 /*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:23:54 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 20:44:39 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:29:00 by fbelahse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell_.h"
 
-void	replace(t_env *env, char *value)
+void	replace(char *s, char *eq, t_env *env, char *value)
 {
 	char	**key_value;
+	int		i;
 
+	i = 0;
 	while (env)
 	{
 		key_value = ft_split(env->s, '=');
-		if (!ft_strncmp(key_value[0], "PWD", ft_strlen(env->s)))
+		if (!ft_strncmp(key_value[0], s, ft_strlen(env->s)))
 		{
 			if (ft_strncmp(key_value[1], value, ft_strlen(env->s)))
 			{
 				free(env->s);
 				env->s = "";
-				env->s = ft_strjoin(env->s, "PWD=", 0);
-				env->s = ft_strjoin(env->s, value, 0);
+				env->s = ft_strjoin(env->s, eq, 0);
+				env->s = ft_strjoin(env->s, value, 1);
+				i = 0;
+				free_val(key_value);
 				break ;
 			}
 		}
