@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 22:16:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 16:28:55 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 17:17:24 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	to_unset(t_env *env, char *arg)
 {
 	t_env	*tmp;
-	
+
 	tmp = NULL;
 	while (env)
 	{
-		if(!ft_strncmp(arg, env->s, ft_strlen(arg)))
+		if (!ft_strncmp(arg, env->s, ft_strlen(arg)))
 		{
 			if (env->s[ft_strlen(arg)] == '=')
 			{

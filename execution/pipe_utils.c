@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:35:20 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 12:17:21 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 17:16:06 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ char	*find_path(t_env *env)
 	int		i;
 
 	i = 0;
-	if(!env)
-		return NULL;
+	if (!env)
+		return (NULL);
 	while (env)
 	{
 		key_value = ft_split(env->s, '=');
