@@ -82,6 +82,8 @@ char	*find_path(t_env *env)
 	int		i;
 
 	i = 0;
+	if(!env)
+		return NULL;
 	while (env)
 	{
 		key_value = ft_split(env->s, '=');
