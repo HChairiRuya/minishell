@@ -26,8 +26,7 @@ void	free_val(char **key_value)
 	i = 0;
 	while (key_value[i])
 	{
-		if (i != 1)
-			free(key_value[i]);
+		free(key_value[i]);
 		i++;
 	}
 	free(key_value);

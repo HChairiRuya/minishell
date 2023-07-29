@@ -61,9 +61,6 @@ int	start_exec(t_path *pt, t_cmd *cmd, char *path)
 	int	i;
 
 	i = 0;
-	cmd = g_all.cmd;
-	path = find_path(g_all.env);
-	pt->splitted = ft_split(path, ':');
 	if (cr_pipes(pt) == 1)
 	{
 		perror("cr_pipes");
@@ -132,8 +129,8 @@ int	execution(int argc)
 			return (0);
 		}
 		start(path);
-		free(path->pipes_fd);
 		ft_free_split(path->splitted);
+		free(path->pipes_fd);
 		free(g_all.child);
 	}
 	free(path);

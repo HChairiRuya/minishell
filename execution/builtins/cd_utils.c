@@ -34,6 +34,7 @@ void	replace(char *s, char *eq, t_env *env, char *value)
 				break ;
 			}
 		}
+		free_val(key_value);
 		env = env->next;
 	}
 }
