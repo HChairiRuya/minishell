@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:04:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 22:43:15 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 09:34:44 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void ft_home()
     }
 }
 
-void ft_cd(char **argv, t_env *env)
+void	ft_cd(char **argv, t_env *env)
 {
-    char *path;
-    char *n_path;
+	char	*path;
+	char	*n_path;
 
     if (argv[1] == NULL || ft_strcmp(argv[1], "~") == 0)
         ft_home();

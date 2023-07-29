@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:26:41 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 21:58:41 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 09:30:30 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,12 @@ char *find_path(t_env *env);
 void replace(char *s, char *eq, t_env *env, char *value);
 void pr_err_no_file(char *args);
 void pr_err_not_a_dir(char *args);
+void    wait_pid(t_path *path);
+void end(t_path *path);
+void free_val(char *key_value);
+void ft_free_split(char **split);
+int built_pipes(t_cmd *cmd, t_path *pt, char *path);
+
+// void	change(int *no_nl, char ***argv, int *argc);
 
 #endif

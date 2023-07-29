@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 22:55:01 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 09:32:54 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,7 @@ void forking_for_pipe(t_path *pt, t_cmd *cmd, int i)
     }
 }
 
-void ft_free_split(char **split)
-{
-	if (split)
-	{
-		size_t i = 0;
-		while (split[i])
-		{
-			free(split[i]);
-			i++;
-		}
-		free(split);
-	}
-}
+
 
 void    wait_pid(t_path *path)
 {
@@ -92,11 +80,9 @@ int start(t_path *pt)
 {
 	t_cmd *cmd;
 	int i;
-	int ex_code;
 	char *path;
 
 	i = 0;
-	ex_code = 0;
 	cmd = g_all.cmd;
 	path = find_path(g_all.env);//free me later
 	pt->splitted = ft_split(path, ':'); //

@@ -11,7 +11,8 @@ SRC = ./parsing/minishell.c ./parsing/utils.c ./parsing/depart.c ./parsing/chang
 	./execution/builtins/env_n.c ./execution/builtins/built.c \
 	./execution/builtins/cd.c ./execution/builtins/export.c \
 	./execution/builtins/unset.c ./execution/builtins/exit.c \
-	./execution/pipe_utils_s.c 
+	./execution/pipe_utils_II.c ./execution/builtins/cd_utils.c \
+	./execution/pipes_utils_III.c
 
 HEADERS_DIRECTORY = ./
 HEADERS_LIST = minishell.h
@@ -24,7 +25,7 @@ OBJ = $(SRC:.c=.o)
 all : lib $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(INCLUDES) $(FLAGS) $(OBJ) ./libft/libft.a  -o $@ -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
+	$(CC) $(INCLUDES) $(FLAGS) $(OBJ) ./libft/libft.a  -o $@ -lreadline #-L/Users/$(USER)/.brew/opt/readline/lib
 
 %.o : %.c $(HEADERS)
 	$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ 

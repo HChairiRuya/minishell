@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:23:54 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 21:55:14 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 09:34:19 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void replace(char *s, char *eq, t_env *env, char *value)
 {
-    char **key_value;
-    int i;
+	char	**key_value;
 
     while (env)
     {
@@ -38,18 +37,11 @@ void replace(char *s, char *eq, t_env *env, char *value)
                 break ;
             }
         }
-        i = 0;
-        while (key_value[i])
-        {
-            free(key_value[i]);
-            i++;
-        }
-        free(key_value);
         env = env->next;
     }
 }
 
-void pr_err_no_file(char *args)
+void	pr_err_no_file(char *args)
 {
     write (2, "minishell: ", ft_strlen("minishell: "));
     write (2, "cd: ", ft_strlen("cd: "));
@@ -59,7 +51,7 @@ void pr_err_no_file(char *args)
     g_all.status_val = 1;
 }
 
-void pr_err_not_a_dir(char *args)
+void	pr_err_not_a_dir(char *args)
 {
     write (2, "minishell: ", ft_strlen("minishell: "));
     write (2, "cd: ", ft_strlen("cd: "));
