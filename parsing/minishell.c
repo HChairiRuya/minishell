@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/29 09:31:12 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 13:08:56 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,12 @@ void	parsing(int argc, char **envr)
 			g_all_clear();
 			continue ;
 		}
-		suite_parsing();
-		if (!g_all.fde)
-			execution(count_nd());
+		else
+		{
+			suite_parsing();
+			if (!g_all.fde)
+				execution(count_nd());
+		}
 		free_all();
 	}
 }

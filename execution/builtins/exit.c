@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 16:45:15 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 09:51:41 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:41:20 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	ft_exit_e(int argc, char **argv)
 	i = 0;
 	var = g_all.status_val;
 	if (argc == 1 || (argc == 2 && ft_isdigit(argv[1][0])))
+	{
 		printf("exit\n");
+		var = ft_atoi(argv[1]);
+	}
 	else if (!ft_isdigit(argv[1][0]))
 	{
 		printf ("exit\n");

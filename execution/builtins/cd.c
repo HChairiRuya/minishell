@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:04:55 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 10:31:59 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:58:53 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	ft_cd(char **argv, t_env *env)
 				pr_err_not_a_dir(argv[1]);
 			else
 				pr_err_no_file(argv[1]);
-			free(n_path);
 			free(path);
 			return ;
 		}

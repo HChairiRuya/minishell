@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:46 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 10:32:40 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:34:11 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ int	execution(int argc)
 		start(path);
 		free(path->pipes_fd);
 		ft_free_split(path->splitted);
-		free(path);
 		free(g_all.child);
 	}
+	free(path);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:12:56 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 20:45:02 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:30:54 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	builtins(int argc, char **argv)
 		ft_export(argc, argv, g_all.env);
 	else if (ft_strcmp(argv[0], "unset") == 0)
 		ft_unset(argv, &g_all.env);
-	else if (ft_strcmp(argv[0], "exit") == 0 && argc == 1)
+	else if (ft_strcmp(argv[0], "exit") == 0)
 		ft_exit_e(argc, argv);
 }
 

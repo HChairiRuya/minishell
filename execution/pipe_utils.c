@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:35:20 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/28 20:43:28 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:17:21 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	*find_path(t_env *env)
 	while (env)
 	{
 		key_value = ft_split(env->s, '=');
+		path = NULL;
 		if (!ft_strncmp(key_value[0], "PATH", ft_strlen(env->s)))
 		{
 			if (key_value[1])

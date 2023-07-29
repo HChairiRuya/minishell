@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 12:01:07 by hchairi           #+#    #+#             */
-/*   Updated: 2022/10/28 19:43:31 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 12:09:57 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	count_w(char *s, char c)
 
 	i = 0;
 	count = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
 		while (s[i] == c && s[i])

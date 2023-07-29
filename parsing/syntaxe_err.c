@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 13:06:01 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 15:45:59 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 13:40:21 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int	ft_pipe(t_nodes *node)
 		{
 			if (node->quotes == 0 && node->type == PIPES)
 				return (1);
-			if ((node->quotes == 0 && node->type != PIPES))
+			if (node->next && (node->quotes == 0 && node->type == SPACES
+					&& node->next->type == PIPES))
+				return (1);
+			if (node->quotes == 0 && node->type != PIPES)
 				return (0);
 			node = node->next;
 		}
@@ -81,7 +84,7 @@ int	syntaxe_err(void)
 	t_nodes	*node;
 
 	node = g_all.head;
-	if (node && (node->type == PIPES || quotes(node)))
+	if (node && ((node->type == PIPES) || quotes(node)))
 		return (1);
 	while (node != NULL && node->next != NULL)
 	{

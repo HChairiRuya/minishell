@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 12:41:27 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/22 12:53:34 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 13:35:18 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	wr_expand(char *l, t_nodes *node, t_env	*env, int fd)
 				exp = get_node_value(env, to_expand);
 				ft_putstr_fd(exp, fd);
 			}
+			i--;
 		}
-		else
+		else if (i < ft_strlen(l))
 			write(fd, &l[i], 1);
 	}
 }
@@ -73,7 +74,7 @@ void	fd_dup(int *d, t_cmd *cmd, int *fd)
 	*d = dup(0);
 	dup2(g_all.dup_z, 0);
 	g_all.k = 1;
-	cmd->in = fd[1];
+	cmd->in = fd[0];
 }
 
 void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env)
@@ -97,6 +98,7 @@ void	herdoc(t_nodes	*node, t_cmd *cmd, char *del, t_env *env)
 			break ;
 		}
 		wr_expand(l, node, env, pipefd[1]);
+		write(pipefd[1], "\n", 1);
 		free(l);
 	}
 	g_all.k = 0;

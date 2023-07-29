@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_utils_III.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:05:30 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 10:11:29 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:13:02 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ void	free_val(char **key_value)
 	free(key_value);
 }
 
-void	ft_free_split(char **split)
+void	ft_free_split(char **tab)
 {
-	size_t	i;
+	int	i;
 
-	if (split)
+	if (tab)
 	{
 		i = 0;
-		while (split[i])
+		while (tab[i])
 		{
-			free(split[i]);
+			free(tab[i]);
 			i++;
 		}
-		free(split);
+		free(tab);
 	}
 }

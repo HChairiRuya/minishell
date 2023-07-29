@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelahse <fbelahse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:41:29 by fbelahse          #+#    #+#             */
-/*   Updated: 2023/07/29 10:52:58 by fbelahse         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:33:50 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ int	check(char **token, t_path *path, char *args)
 
 	i = 0;
 	flag = 0;
+	path->found = NULL;
 	while (token && token[i] != NULL)
 	{
 		full_path = get_full_path(token[i], args);
 		if (check_com(full_path) == 1
 			&& ft_strncmp(token[i], args, ft_strlen(token[i])))
 		{
-			path->found = full_path;
+			path->found = ft_strdup(full_path);
 			flag = 1;
+			free(full_path);
 			break ;
 		}
-		else
-			path->found = NULL;
 		free(full_path);
 		i++;
 	}
