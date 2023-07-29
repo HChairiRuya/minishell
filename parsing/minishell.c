@@ -6,7 +6,7 @@
 /*   By: hchairi <hchairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:35:19 by hchairi           #+#    #+#             */
-/*   Updated: 2023/07/29 15:32:24 by hchairi          ###   ########.fr       */
+/*   Updated: 2023/07/29 16:10:18 by hchairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	parsing(int argc, char **envr)
 				execution(count_nd());
 		}
 		free_all();
+		// system("leaks minishell | tail -2");
 	}
 }
 
