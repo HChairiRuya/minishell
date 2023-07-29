@@ -3,4 +3,5 @@ minishell
 *.a
 .DS_Store
 file
-*.txt
+*.txt\
+.vscode

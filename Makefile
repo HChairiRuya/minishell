@@ -33,6 +33,8 @@ $(NAME) : $(OBJ)
 lib : 
 	make -C libft
 
+bonus: all
+
 clean :
 	make clean -C libft
 	rm -f $(OBJ)
@@ -40,6 +42,7 @@ clean :
 fclean : clean
 	make fclean -C libft
 	rm -f $(NAME)
+	
 
 re : fclean all
 
