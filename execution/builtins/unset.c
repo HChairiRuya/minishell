@@ -12,7 +12,6 @@
 
 #include "../../minishell_.h"
 
-
 void	to_unset(t_env *env, char *arg)
 {
 	t_env	*tmp;
@@ -40,10 +39,8 @@ void	to_unset(t_env *env, char *arg)
 	}
 }
 
-
 void	ft_unset(char **argv, t_env **env_list)
 {
-	// t_env	*node;
 	int		i;
 
 	i = 1;
